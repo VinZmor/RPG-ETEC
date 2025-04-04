@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEC RPG</title>
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!-- Cabeçalho da página -->
+    <header>
+        <!-- Navbar com a logo -->
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/img4.png') }}" alt="Logo da ETEC RPG" class="logo" />
+        </div>
+        <!-- Menu de Navegação (Exemplo) -->
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Bloco de conteúdo -->
+    <main>
+        {% block content %}
+        <!-- O conteúdo das outras páginas será injetado aqui -->
+        {% endblock %}
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; Feito pelos estudantes: </p>
+    </footer>
+</body>
+
+</html>

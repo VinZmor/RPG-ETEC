@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Inicial</title>
-</head>
-<body
-background: url('/static/images/img2.png') no-repeat center center fixed;
->
-
-
+{% extends 'base.html' %}
+{% block content %}
     <div>
         <h3>Campanha</h3>
     <img src="/static/images/img3.png" alt="">
@@ -24,5 +14,5 @@ background: url('/static/images/img2.png') no-repeat center center fixed;
     <h3>Tutorial</h3>
 <img src="/static/images/img3.png" alt="">
 </div>
-</body>
-</html>
+
+{% endblock content %}
