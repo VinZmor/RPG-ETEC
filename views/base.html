@@ -1,42 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETEC RPG</title>
-    <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>RPG ETEC</title>
 </head>
-
-<body>
-    <!-- Cabeçalho da página -->
+<body class="q">
+    <!-- CABEÇALHO DA PÁGINA-->
     <header>
-        <!-- Navbar com a logo -->
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/img4.png') }}" alt="Logo da ETEC RPG" class="logo" />
-        </div>
-        <!-- Menu de Navegação (Exemplo) -->
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
-                <li><a href="{{ url_for('contato') }}">Contato</a></li>
-            </ul>
-        </nav>
+        <img class="logo" src="{{url_for('static', filename='images/img4.png')}}" alt="">
     </header>
 
-    <!-- Bloco de conteúdo -->
-    <main>
-        {% block content %}
-        <!-- O conteúdo das outras páginas será injetado aqui -->
-        {% endblock %}
-    </main>
+    {% block content %}
+    <!-- Aqui irá o conteúdo das outras páginas -->
+     {% endblock content %}
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; Feito pelos estudantes: </p>
-    </footer>
+    <!-- RODAPÉ DA PÁGINA-->
+     <footer>
+        <hr>
+        <p style="text-align: center;"> Esse projeto foi feito pelos estudantes: Vinícius Zezília, Larissa Vassão e Matheus Leme</p>
+     </footer>
 </body>
-
 </html>
