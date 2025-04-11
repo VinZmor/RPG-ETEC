@@ -1,16 +1,32 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
 
-<div class="container">
-  <h2>Logar em Conta</h2>
-  
-  <input type="email" placeholder="Digite seu e-mail" />
-  <input type="password" placeholder="Digite sua senha" />
-  <p>
-    <a href="/views/telaCadastro.html" class="link">Esqueceu a senha?</a>
-  </p>
-  <button type="submit" >INICIAR SESSÃO</button>
-  <p>Não tem conta?</p>
-  <button>CRIAR CONTA</button>
-</div>
+{% block content %}
+<body class="bck">
+  <div class="container">
+    <h2>Logar em Conta</h2>
+    
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label for="email">Digite seu e-mail</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
+      </div>
 
+      <div class="form-group">
+        <label for="senha">Digite sua senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required />
+      </div>
+
+      <p>
+        <a href="/views/telaRedefinirSenha.html" class="link">Esqueceu a senha?</a>
+      </p>
+
+      <button type="submit">INICIAR SESSÃO</button>
+    </form>
+
+    <p>Não tem conta?</p>
+    <a href="/views/telaCadastro.html" class="link">
+      <button>CRIAR CONTA</button>
+    </a>
+  </div>
+</body>
 {% endblock content %}
