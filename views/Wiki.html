@@ -1,19 +1,154 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-  <title>RPGlogia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RPG ETEC</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+  </style>
 </head>
+<body class="bg-gray-900 font-sans text-gray-900" style="font-family: 'Open Sans', sans-serif">
+  <div class="min-h-screen flex flex-col md:flex-row max-w-[1200px] mx-auto p-4 md:p-6 gap-6">
 
-<body>
-  
-  <!--Navbar, usando bootstrap-->
+    <!-- Sidebar -->
+    <nav id="sidebar" class="bg-yellow-300 rounded-md w-full md:w-72 p-4 flex flex-col text-sm leading-tight select-none">
+      <span class="font-extrabold mb-3 text-sm">REGRAS</span>
 
+      <!-- Main Item -->
+      <a href="#" data-id="make-characters" class="nav-item border-b border-yellow-400 mb-1 pb-1 text-blue-800 hover:underline cursor-pointer">
+        RPG
+      </a>
 
+      <!-- Dropdown: Character Creation -->
+      <div class="border-b border-yellow-400 mb-1 pb-1">
+        <button
+          type="button"
+          class="w-full flex justify-between items-center text-blue-800 hover:underline focus:outline-none"
+          data-toggle="character-creation"
+          aria-expanded="false"
+          aria-controls="character-creation-sub"
+        >
+          Character Creation
+          <i class="fas fa-plus text-sm transition-transform duration-200"></i>
+        </button>
+        <div id="character-creation-sub" class="hidden pl-4 mt-1 flex flex-col space-y-1" role="region" aria-label="Character Creation Subtopics">
+          <a href="#" data-id="char-creation-1" class="text-blue-800 hover:underline text-sm cursor-pointer">Overview</a>
+          <a href="#" data-id="char-creation-2" class="text-blue-800 hover:underline text-sm cursor-pointer">Step 1</a>
+          <a href="#" data-id="char-creation-3" class="text-blue-800 hover:underline text-sm cursor-pointer">Step 2</a>
+        </div>
+      </div>
+    </nav>
 
+    <!-- Main Content -->
+    <main id="content" class="bg-white rounded-md p-6 flex-1 max-w-full overflow-auto text-sm leading-relaxed">
+      
+      <!-- Section: Make Characters -->
+      <section data-content="make-characters" class="content-section hidden">
+        
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">RPG</h1>
+        <p class="mb-4 text-gray-700">Um jogo de RPG (Role-Playing Game), traduzido para jogo interpretativo, tem uma estrutura relativamente simples. O Mestre funciona como o narrador de história, e geralmente deve ser o participante mais experiente (caso haja um). É ele quem irá dar a premissa da história antes dos personagens serem feitos, estabelecer a situação inicial e os principais conflitos da história. Os jogadores são os protagonistas desta história, e são eles quem tomam as decisões, superam desafios e crescem junto de seus personagens. Enquanto jogam, todos devem manter em mente a própria diversão, e a de seus companheiros. Caso todos do grupo sejam iniciantes, é recomendado utilizar uma das campanhas prefeitas do sistema.
+        </p>
+      </section>
+
+      <!-- Section: Character Creation Subtopics -->
+      <section data-content="char-creation-1" class="content-section hidden">
+        
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Character Creation Overview</h1>
+        <p class="mb-4 text-gray-700">Overview of the character creation process.</p>
+      </section>
+
+      <section data-content="char-creation-2" class="content-section hidden">
+        
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Character Creation Step 1</h1>
+        <p class="mb-4 text-gray-700">Details for step 1 of character creation.</p>
+      </section>
+
+      <section data-content="char-creation-3" class="content-section hidden">
+      
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Character Creation Step 2</h1>
+        <p class="mb-4 text-gray-700">Details for step 2 of character creation.</p>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Toggle submenus
+    document.querySelectorAll("nav button[data-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.getAttribute("data-toggle") + "-sub";
+        const target = document.getElementById(targetId);
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+
+        document.querySelectorAll("nav div[id$='-sub']").forEach(sub => sub.classList.add("hidden"));
+        document.querySelectorAll("nav button[data-toggle]").forEach(button => {
+          button.setAttribute("aria-expanded", "false");
+          button.querySelector("i").style.transform = "rotate(0deg)";
+        });
+
+        if (!expanded) {
+          target.classList.remove("hidden");
+          btn.setAttribute("aria-expanded", "true");
+          btn.querySelector("i").style.transform = "rotate(45deg)";
+        }
+      });
+    });
+
+    // Show corresponding content
+    function showContent(id) {
+      document.querySelectorAll(".content-section").forEach(section => {
+        section.classList.toggle("hidden", section.getAttribute("data-content") !== id);
+      });
+    }
+
+    // Navigation click handler
+    document.querySelectorAll(".nav-item, nav div[id$='-sub'] a").forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = el.getAttribute("data-id");
+        if (!id) return;
+
+        showContent(id);
+
+        // Reset styles
+        document.querySelectorAll(".nav-item, nav div[id$='-sub'] a").forEach(navEl => {
+          navEl.classList.remove("font-semibold", "underline", "bg-yellow-400", "rounded");
+        });
+
+        el.classList.add("font-semibold", "underline", "bg-yellow-400", "rounded");
+
+        // Highlight parent toggle if subitem clicked
+        const parent = el.closest("div[id$='-sub']");
+        if (parent) {
+          const parentId = parent.id.replace("-sub", "");
+          const parentBtn = document.querySelector(`button[data-toggle="${parentId}"]`);
+          if (parentBtn) {
+            parentBtn.classList.add("font-semibold", "underline", "bg-yellow-400", "rounded");
+          }
+        } else {
+          // Reset all toggle buttons
+          document.querySelectorAll("nav button[data-toggle]").forEach(btn => {
+            btn.classList.remove("font-semibold", "underline", "bg-yellow-400", "rounded");
+          });
+        }
+      });
+    });
+
+    // Optional: highlight default item if needed
+    // const defaultNav = document.querySelector('.nav-item[data-id="make-characters"]');
+    // if (defaultNav) {
+    //   defaultNav.classList.add("font-semibold", "underline", "bg-yellow-400", "rounded");
+    //   showContent("make-characters");
+    // }
+  </script>
 </body>
-
 </html>
