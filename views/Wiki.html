@@ -14,7 +14,7 @@
 
   <style>
     body {
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'montserrat', sans-serif;
     }
   </style>
 </head>
@@ -42,8 +42,14 @@
             <li><a href="#" data-id="glossario" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Glossário</a></li>
             <li><a href="#" data-id="bestiario" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Bestiário</a></li>
           </ul>
+        <li>
+          <a href="#" data-id="antepassados" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+            Antepassados
+          </a>  
+          <ul id="antepassados-sub" class="ml-4 mt-1 hidden space-y-1">
+<!--Usar for, esse vai ser o modelo padrão e ele puxará no banco de dados. Porvavelmente usarei for e python-->
+            <li><a href="#" data-id={{id-bg}} class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">f{{conteudo}}</a></li>
         </li>
-      </ul>
     </nav>
 
     <!-- Main Content -->
