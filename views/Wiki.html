@@ -2,158 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RPG ETEC</title>
-
-<!--Os subtópicos serão puxados do banco de dados-->
-
-<!--Os tópicos são escritos manualmente numa espécie de sumario-->
-
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
   <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
   </style>
 </head>
-<body class="bg-gray-900 font-sans text-gray-900" style="font-family: 'Open Sans', sans-serif">
+<body class="bg-gray-900 text-gray-900">
   <div class="min-h-screen flex flex-col md:flex-row max-w-[1200px] mx-auto p-4 md:p-6 gap-6">
 
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-yellow-300 rounded-md w-full md:w-72 p-4 flex flex-col text-sm leading-tight select-none">
-      <span class="font-extrabold mb-3 text-sm">REGRAS</span>
-
-      <!-- Main Item -->
-      <a href="#" data-id="make-characters" class="nav-item border-b border-yellow-400 mb-1 pb-1 text-blue-800 hover:underline cursor-pointer">
-        RPG
-      </a>
-
-      <!-- Dropdown: Character Creation -->
-      <div class="border-b border-yellow-400 mb-1 pb-1">
-        <button
-          type="button"
-          class="w-full flex justify-between items-center text-blue-800 hover:underline focus:outline-none"
-          data-toggle="character-creation"
-          aria-expanded="false"
-          aria-controls="character-creation-sub"
-        >
-          Character Creation
-          <i class="fas fa-plus text-sm transition-transform duration-200"></i>
-        </button>
-        <div id="character-creation-sub" class="hidden pl-4 mt-1 flex flex-col space-y-1" role="region" aria-label="Character Creation Subtopics">
-          <a href="#" data-id="char-creation-1" class="text-blue-800 hover:underline text-sm cursor-pointer">Overview</a>
-          <a href="#" data-id="char-creation-2" class="text-blue-800 hover:underline text-sm cursor-pointer">Step 1</a>
-          <a href="#" data-id="char-creation-3" class="text-blue-800 hover:underline text-sm cursor-pointer">Step 2</a>
-        </div>
-      </div>
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="bg-yellow-300 rounded-md w-full md:w-72 p-4 text-sm leading-tight select-none">
+      <span class="block font-extrabold mb-3 text-sm">Vale Místico</span>
+      <ul class="space-y-1">
+        <li>
+          <a href="#" data-id="introducao" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+            Introdução
+          </a>
+          <ul id="introducao-sub" class="ml-4 mt-1 hidden space-y-1">
+            <li><a href="#" data-id="rpg" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">RPG</a></li>
+            <li><a href="#" data-id="interpretacao" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Interpretação</a></li>
+            <li><a href="#" data-id="seuPersonagem" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Seu Personagem</a></li>
+            <li><a href="#" data-id="narrando" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Narrando</a></li>
+            <li><a href="#" data-id="ficha" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Preenchendo sua Ficha</a></li>
+            <li><a href="#" data-id="equipamento" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Equipamento</a></li>
+            <li><a href="#" data-id="levelUp" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Subindo de Nível</a></li>
+            <li><a href="#" data-id="habilidades" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Habilidades</a></li>
+            <li><a href="#" data-id="regra" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Regras</a></li>
+            <li><a href="#" data-id="glossario" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Glossário</a></li>
+            <li><a href="#" data-id="bestiario" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Bestiário</a></li>
+          </ul>
+        </li>
+      </ul>
     </nav>
 
     <!-- Main Content -->
-    <main id="content" class="bg-white rounded-md p-6 flex-1 max-w-full overflow-auto text-sm leading-relaxed">
-      
-      <!-- Section: Make Characters -->
-      <section data-content="make-characters" class="content-section hidden">
-        
+    <main id="content" class="bg-white rounded-md p-6 flex-1 overflow-auto text-sm leading-relaxed">
+
+      <!-- Sections -->
+      <section data-content="rpg" class="content-section hidden">
         <h1 class="text-3xl font-extrabold text-blue-800 mb-4">RPG</h1>
-        <p class="mb-4 text-gray-700">Um jogo de RPG (Role-Playing Game), traduzido para jogo interpretativo, tem uma estrutura relativamente simples. O Mestre funciona como o narrador de história, e geralmente deve ser o participante mais experiente (caso haja um). É ele quem irá dar a premissa da história antes dos personagens serem feitos, estabelecer a situação inicial e os principais conflitos da história. Os jogadores são os protagonistas desta história, e são eles quem tomam as decisões, superam desafios e crescem junto de seus personagens. Enquanto jogam, todos devem manter em mente a própria diversão, e a de seus companheiros. Caso todos do grupo sejam iniciantes, é recomendado utilizar uma das campanhas prefeitas do sistema.
+        <p class="mb-4 text-gray-700">
+          Um jogo de RPG (Role-Playing Game), traduzido para jogo interpretativo, tem uma estrutura relativamente simples. O Mestre funciona como o narrador de história, e geralmente deve ser o participante mais experiente. É ele quem dará a premissa da história antes dos personagens serem feitos, estabelecerá a situação inicial e os principais conflitos. Os jogadores são os protagonistas e tomam decisões, superam desafios e crescem junto de seus personagens. É importante manter a diversão de todos.
         </p>
       </section>
 
-      <!-- Section: Character Creation Subtopics -->
-      <section data-content="char-creation-1" class="content-section hidden">
-        
-        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Character Creation Overview</h1>
-        <p class="mb-4 text-gray-700">Overview of the character creation process.</p>
+      <section data-content="interpretacao" class="content-section hidden">
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Interpretação</h1>
+        <p class="mb-4 text-gray-700">
+          Vale Místico é um jogo de interpretação antes de tudo. O foco da história é sempre nos personagens dos jogadores. O mestre deve conectar história e personagens para garantir diversão mútua.
+        </p>
       </section>
 
-      <section data-content="char-creation-2" class="content-section hidden">
-        
-        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Character Creation Step 1</h1>
-        <p class="mb-4 text-gray-700">Details for step 1 of character creation.</p>
+      <section data-content="seuPersonagem" class="content-section hidden">
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Seu Personagem</h1>
+        <p class="mb-4 text-gray-700">
+          Todo jogador deve criar um personagem, definindo personalidade e história. Anote detalhes na ficha, que contém também a parte mecânica (números) do personagem.
+        </p>
       </section>
 
-      <section data-content="char-creation-3" class="content-section hidden">
-      
-        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Character Creation Step 2</h1>
-        <p class="mb-4 text-gray-700">Details for step 2 of character creation.</p>
+      <section data-content="narrando" class="content-section hidden">
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Narrando</h1>
+        <p class="mb-4 text-gray-700">
+          O mestre deve focar no clima da cena: lento e misterioso para terror, frenético para ação. Incentive jogadores a narrar ações e discutir entre si. Em combate, descreva vividamente as ações, não apenas números.
+        </p>
+        <h2 class="text-2xl font-extrabold text-red-800 mb-2">Exemplo de jogo</h2>
+        <p class="mb-4 text-gray-700">
+          <strong>Mestre:</strong> Vocês entram na cabana abandonada, a madeira do chão range. Rolem testes de procurar com percepção.<br>
+          <strong>Jogador 1:</strong> 2.<br>
+          <strong>Jogador 2:</strong> 7.<br>
+          <strong>Jogador 3:</strong> Quero ficar de vigia na porta.<br>
+          <strong>Mestre:</strong> Tudo bem, role percepção.<br>
+          <strong>J3:</strong> 5.<br>
+          <strong>Mestre:</strong> Você não vê nada fora do comum. Jogador 2, você vê algo se mover lá fora.<br>
+          <strong>J2:</strong> Sussurro: “Tem algo ali!” e vou silenciosamente.<br>
+          <strong>J1:</strong> Empunho meu bastão e sigo.
+        </p>
       </section>
+
+      <section data-content="ficha" class="content-section hidden">
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Preenchendo sua Ficha</h1>
+        <p class="mb-4 text-gray-700">Siga estes passos ao criar seu personagem:</p>
+        <ol class="list-decimal ml-6 mb-4 text-gray-700 space-y-2">
+          <li><strong>Biografia:</strong> Nome, idade, história. Importante para vida do personagem.</li>
+          <li><strong>Antepassado:</strong> Define equipamento inicial e bônus de perícias.</li>
+          <li><strong>Atributos:</strong> Capacidades físicas e mentais. 1 = pessoa comum.</li>
+          <li><strong>Vida, Mental e Energia:</strong>
+            <ul class="list-disc ml-6">
+              <li><strong>Vida:</strong> 9 + Fortitude.</li>
+              <li><strong>Mental:</strong> 9 + Vontade.</li>
+              <li><strong>Energia:</strong> Base 10.</li>
+            </ul>
+          </li>
+          <li><strong>Perícias:</strong> 3 + INT pontos para distribuir, máximo 3 em cada. Pode reduzir para ganhar pontos.</li>
+        </ol>
+      </section>
+
+      <section data-content="equipamento" class="content-section hidden">
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Equipamento</h1>
+        <p class="mb-4 text-gray-700">Inclui todos os itens que você carrega durante a aventura.</p>
+        <h2 class="text-xl font-bold text-blue-700 mb-2">Créditos</h2>
+        <p class="mb-4 text-gray-700">Você tem um atributo "Crédito" em vez de dinheiro exato. Equipamento inicial não pode ultrapassar Créditos (7 + bônus de antepassado).</p>
+        <h2 class="text-xl font-bold text-blue-700 mb-2">Volume</h2>
+        <p class="mb-4 text-gray-700">Capacidade = 3 + Força. Itens com "L" = leves (5 = 1 volume), "-" = desprezível.</p>
+        <h2 class="text-xl font-bold text-blue-700 mb-2">Celular e Veículos</h2>
+        <p class="mb-4 text-gray-700">Todo personagem tem um celular. Veículo é opcional, conforme decisão do mestre.</p>
+      </section>
+
+      <section data-content="levelUp" class="content-section hidden">
+        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Subindo de Nível</h1>
+        <p class="mb-4 text-gray-700">Ao subir de nível, distribua novos pontos de atributo e perícia, escolha novas habilidades e atualize sua ficha.</p>
+      </section>
+
     </main>
   </div>
 
-  <!-- Scripts -->
+  <!-- JavaScript -->
   <script>
-    // Toggle submenus
-    document.querySelectorAll("nav button[data-toggle]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const targetId = btn.getAttribute("data-toggle") + "-sub";
-        const target = document.getElementById(targetId);
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-
-        document.querySelectorAll("nav div[id$='-sub']").forEach(sub => sub.classList.add("hidden"));
-        document.querySelectorAll("nav button[data-toggle]").forEach(button => {
-          button.setAttribute("aria-expanded", "false");
-          button.querySelector("i").style.transform = "rotate(0deg)";
-        });
-
-        if (!expanded) {
-          target.classList.remove("hidden");
-          btn.setAttribute("aria-expanded", "true");
-          btn.querySelector("i").style.transform = "rotate(45deg)";
-        }
-      });
-    });
-
-    // Show corresponding content
     function showContent(id) {
-      document.querySelectorAll(".content-section").forEach(section => {
-        section.classList.toggle("hidden", section.getAttribute("data-content") !== id);
+      document.querySelectorAll('.content-section').forEach(sec => {
+        sec.classList.toggle('hidden', sec.getAttribute('data-content') !== id);
       });
     }
 
-    // Navigation click handler
-    document.querySelectorAll(".nav-item, nav div[id$='-sub'] a").forEach(el => {
-      el.addEventListener("click", (e) => {
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.addEventListener('click', e => {
         e.preventDefault();
-        const id = el.getAttribute("data-id");
+        const id = el.dataset.id;
         if (!id) return;
 
         showContent(id);
 
-        // Reset styles
-        document.querySelectorAll(".nav-item, nav div[id$='-sub'] a").forEach(navEl => {
-          navEl.classList.remove("font-semibold", "underline", "bg-yellow-400", "rounded");
+        document.querySelectorAll('.nav-item').forEach(nav => {
+          nav.classList.remove('font-semibold', 'underline', 'bg-yellow-400', 'rounded');
         });
+        el.classList.add('font-semibold', 'underline', 'bg-yellow-400', 'rounded');
 
-        el.classList.add("font-semibold", "underline", "bg-yellow-400", "rounded");
-
-        // Highlight parent toggle if subitem clicked
-        const parent = el.closest("div[id$='-sub']");
-        if (parent) {
-          const parentId = parent.id.replace("-sub", "");
-          const parentBtn = document.querySelector(`button[data-toggle="${parentId}"]`);
-          if (parentBtn) {
-            parentBtn.classList.add("font-semibold", "underline", "bg-yellow-400", "rounded");
-          }
-        } else {
-          // Reset all toggle buttons
-          document.querySelectorAll("nav button[data-toggle]").forEach(btn => {
-            btn.classList.remove("font-semibold", "underline", "bg-yellow-400", "rounded");
-          });
-        }
+        // Toggle submenus
+        document.querySelectorAll('nav ul[id$="-sub"]').forEach(sub => {
+          if (sub.id === `${id}-sub`) sub.classList.toggle('hidden');
+          else sub.classList.add('hidden');
+        });
       });
     });
-
-    // Optional: highlight default item if needed
-    // const defaultNav = document.querySelector('.nav-item[data-id="make-characters"]');
-    // if (defaultNav) {
-    //   defaultNav.classList.add("font-semibold", "underline", "bg-yellow-400", "rounded");
-    //   showContent("make-characters");
-    // }
   </script>
 </body>
 </html>
