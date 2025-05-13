@@ -26,9 +26,27 @@
       <span class="block font-extrabold mb-3 text-sm">Vale Místico</span>
       <ul class="space-y-1">
         <li>
-          <a href="#" data-id="introducao" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
-            Introdução
-          </a>
+         <a href="#" data-id="introducao" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Introdução
+</a>
+
+<a href="#" data-id="bestiario" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Bestiário
+</a>
+
+<a href="#" data-id="antepassados" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Antepassados
+</a>
+
+<a href="#" data-id="habilidades" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Habilidades
+</a>
+
+<a href="#" data-id="poderes" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Poderes
+</a>
+
+          
           <ul id="introducao-sub" class="ml-4 mt-1 hidden space-y-1">
             <li><a href="#" data-id="rpg" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">RPG</a></li>
             <li><a href="#" data-id="interpretacao" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Interpretação</a></li>
@@ -42,14 +60,48 @@
             <li><a href="#" data-id="glossario" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Glossário</a></li>
             <li><a href="#" data-id="bestiario" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Bestiário</a></li>
           </ul>
-        <li>
-          <a href="#" data-id="antepassados" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
-            Antepassados
-          </a>  
-          <ul id="antepassados-sub" class="ml-4 mt-1 hidden space-y-1">
-<!--Usar for, esse vai ser o modelo padrão e ele puxará no banco de dados. Porvavelmente usarei for e python-->
-            <li><a href="#" data-id={{id-bg}} class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">f{{conteudo}}</a></li>
-        </li>
+          <!--Por um sistema de for aqui-->
+       <!-- Antepassados -->
+<ul id="antepassados-sub" class="ml-4 mt-1 hidden space-y-1">
+  <li>
+    <a href="#" data-id="A" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+      NOME DO ANTEPASSADO
+    </a>
+  </li>
+</ul>
+
+<!-- Habilidades -->
+<ul id="habilidades-sub" class="ml-4 mt-1 hidden space-y-1">
+  <li>
+    <a href="#" data-id="B" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+      NOME DA HABILIDADE
+    </a>
+  </li>
+</ul>
+
+<!-- Poderes -->
+<ul id="poderes-sub" class="ml-4 mt-1 hidden space-y-1">
+  <li>
+    <a href="#" data-id="C" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+      NOME DO PODER
+    </a>
+  </li>
+</ul>
+
+<!-- Bestiário -->
+<ul id="bestiario-sub" class="ml-4 mt-1 hidden space-y-1">
+  <li>
+    <a href="#" data-id="D" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+      NOME DA CRIATURA
+    </a>
+  </li>
+</ul>
+
+
+          
+        
+               
+        
     </nav>
 
     <!-- Main Content -->
@@ -129,6 +181,58 @@
         <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Subindo de Nível</h1>
         <p class="mb-4 text-gray-700">Ao subir de nível, distribua novos pontos de atributo e perícia, escolha novas habilidades e atualize sua ficha.</p>
       </section>
+<section data-content="A" class="content-section hidden">
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">CRIATURA</h1>
+  <p class="mb-4 text-gray-700">
+    <strong>[VARIAVEL NOME]</strong><br>
+    [VARIAVEL DESCRIÇÃO]<br><br>
+
+    <strong>Perícias:</strong> [VARIAVEL]<br>
+    <strong>Equipamento:</strong> [VARIAVEL]<br>
+    <strong>Crédito:</strong> [VARIAVEL]
+  </p>
+</section>
+
+<section data-content="B" class="content-section hidden">
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Habilidade</h1>
+  <p class="mb-4 text-gray-700">
+    <strong>[[NOME HALIDADE]]</strong><br>
+    
+    [[DESCRIÇÃO]]
+  </p>
+</section>
+
+<section data-content="C" class="content-section hidden">
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Poder</h1>
+  <p class="mb-4 text-gray-700">
+    <strong>Nome</strong><br>
+    Requisito para aprender o poder<br><br>
+
+    <strong>Custo:</strong> O custo de usar esse poder<br>
+    <strong>Uso:</strong> O tempo para usar o poder (1 ação principal, 1 minuto, etc.)<br>
+    <strong>Descrição:</strong> A descrição do efeito do poder.
+  </p>
+</section>
+
+<section data-content="D" class="content-section hidden">
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">CRIATURA</h1>
+  <p class="mb-4 text-gray-700">
+    <strong>Nome</strong><br>
+    <strong>Descrição:</strong> [VARIAVEL]<br>
+    <strong>ND:</strong> [VARIAVEL]<br>
+    <strong>Atributos:</strong> [VARIAVEL]<br>
+    <strong>Perícias:</strong> [VARIAVEL]<br>
+    <strong>Velocidade:</strong> [VARIAVEL]<br>
+    <strong>Vida:</strong> [VARIAVEL]<br>
+    <strong>Mental:</strong> [VARIAVEL]<br>
+    <strong>Energia:</strong> [VARIAVEL]<br><br>
+
+    <strong>Ações Principais</strong><br>
+    <em>Ataque (X):</em> -
+  </p>
+</section>
+
+     
 
     </main>
   </div>
