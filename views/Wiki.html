@@ -220,25 +220,21 @@
   </p>
 </section>
 
-{% for bestiario in bestiariowiki %}
-<section data-content="D" class="content-section hidden">
-  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">CRIATURA</h1>
-  <p class="mb-4 text-gray-700">
-    <strong>Nome:</strong> {{ bestiario.nome }}<br>
-    <strong>Descrição:</strong> {{ bestiario.descricao }}<br>
-    <strong>ND:</strong> {{ bestiario.nd }}<br>
-    <strong>Atributos:</strong> {{ bestiario.atributos }}<br>
-    <strong>Perícias:</strong> {{ bestiario.pericias }}<br>
-    <strong>Velocidade:</strong> {{ bestiario.velocidade }}<br>
-    <strong>Vida:</strong> {{ bestiario.vida }}<br>
-    <strong>Mental:</strong> {{ bestiario.mental }}<br>
-    <strong>Energia:</strong> {{ bestiario.energia }}<br><br>
-
-    <strong>Ações Principais</strong><br>
-    <em>Ataque (X):</em> -
-  </p>
-</section>
-{% endfor %}
+{% for bestiario in rpgbestiario %}
+    <section class="content-section">
+        <h2>{{ bestiario.nome }}</h2>
+        <p>
+            <strong>Descrição:</strong> {{ bestiario.descricao }}<br>
+            <strong>ND:</strong> {{ bestiario.nd }}<br>
+            <strong>Atributos:</strong> {{ bestiario.atributos }}<br>
+            <strong>Perícias:</strong> {{ bestiario.pericias }}<br>
+            <strong>Velocidade:</strong> {{ bestiario.velocidade }}<br>
+            <strong>Vida:</strong> {{ bestiario.vida }}<br>
+            <strong>Mental:</strong> {{ bestiario.mental }}<br>
+            <strong>Energia:</strong> {{ bestiario.energia }}<br>
+        </p>
+    </section>
+    {% endfor %}
 
 
      

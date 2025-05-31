@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+db = SQLAlchemy()   
 
 class Bestiario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
