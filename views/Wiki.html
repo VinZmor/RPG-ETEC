@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,53 +44,12 @@
             <li><a href="#" data-id="bestiario" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">Bestiário</a></li>
           </ul>
 
+<!-- Parte do tópico dos bestiario  -->
+
 <a href="#" data-id="bestiario" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
   Bestiário
 </a>
 
-<a href="#" data-id="antepassados" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
-  Antepassados
-</a>
-
-<a href="#" data-id="habilidades" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
-  Habilidades
-</a>
-
-<a href="#" data-id="poderes" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
-  Poderes
-</a>
-
-          
-          
-          <!--Por um sistema de for aqui-->
-       <!-- Antepassados -->
-<ul id="antepassados-sub" class="ml-4 mt-1 hidden space-y-1">
-  <li>
-    <a href="#" data-id="A" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      NOME DO ANTEPASSADO
-    </a>
-  </li>
-</ul>
-
-<!-- Habilidades -->
-<ul id="habilidades-sub" class="ml-4 mt-1 hidden space-y-1">
-  <li>
-    <a href="#" data-id="B" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      NOME DA HABILIDADE
-    </a>
-  </li>
-</ul>
-
-<!-- Poderes -->
-<ul id="poderes-sub" class="ml-4 mt-1 hidden space-y-1">
-  <li>
-    <a href="#" data-id="C" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      NOME DO PODER
-    </a>
-  </li>
-</ul>
-
-<!-- Bestiário -->
 <ul id="bestiario-sub" class="ml-4 mt-1 hidden space-y-1">
   <li>
     <a href="#" data-id="D" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
@@ -99,17 +58,62 @@
   </li>
 </ul>
 
+<!-- Parte do tópico dos antecedentes  -->
 
-          
-        
-               
+<a href="#" data-id="antepassados" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Antepassados
+</a>
+
+<ul id="antepassados-sub" class="ml-4 mt-1 hidden space-y-1">
+  <li>
+    <a href="#" data-id="A" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+      NOME DO ANTEPASSADO
+    </a>
+  </li>
+</ul>
+
+<!-- Parte do tópico dos habilidades  -->
+
+<a href="#" data-id="habilidades" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Habilidades
+</a>
+  
+<ul id="habilidades-sub" class="ml-4 mt-1 hidden space-y-1">
+  <li>
+    <a href="#" data-id="B" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+      NOME DA HABILIDADE
+    </a>
+  </li>
+</ul>
+
+<!-- Parte do tópico dos poderes  -->
+
+<a href="#" data-id="poderes" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Poderes
+</a>
+
+<ul id="poderes-sub" class="ml-4 mt-1 hidden space-y-1">
+  <li>
+    <a href="#" data-id="C" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+      NOME DO PODER
+    </a>
+  </li>
+</ul>
+
+
+<!-- Bestiário -->
+
+
         
     </nav>
 
-    <!-- Main Content -->
+    <!-- Parte onde aparece as informações -->
+
     <main id="content" class="bg-white rounded-md p-6 flex-1 overflow-auto text-sm leading-relaxed">
 
-      <!-- Sections -->
+
+      <!-- As informações = ao data-content -->
+
       <section data-content="rpg" class="content-section hidden">
         <h1 class="text-3xl font-extrabold text-blue-800 mb-4">RPG</h1>
         <p class="mb-4 text-gray-700">
@@ -198,9 +202,9 @@
 <section data-content="B" class="content-section hidden">
   <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Habilidade</h1>
   <p class="mb-4 text-gray-700">
-    <strong>[[NOME HALIDADE]]</strong><br>
-    
-    [[DESCRIÇÃO]]
+    <strong>{{rpg.tituloHabilidade}}</strong><br>
+    <h2>{{rpg.condicao}}</h2><br>
+    {{rpg.descricaoHabilidade}}
   </p>
 </section>
 
@@ -216,23 +220,26 @@
   </p>
 </section>
 
+{% for bestiario in bestiariowiki %}
 <section data-content="D" class="content-section hidden">
   <h1 class="text-3xl font-extrabold text-blue-800 mb-4">CRIATURA</h1>
   <p class="mb-4 text-gray-700">
-    <strong>Nome</strong><br>
-    <strong>Descrição:</strong> [VARIAVEL]<br>
-    <strong>ND:</strong> [VARIAVEL]<br>
-    <strong>Atributos:</strong> [VARIAVEL]<br>
-    <strong>Perícias:</strong> [VARIAVEL]<br>
-    <strong>Velocidade:</strong> [VARIAVEL]<br>
-    <strong>Vida:</strong> [VARIAVEL]<br>
-    <strong>Mental:</strong> [VARIAVEL]<br>
-    <strong>Energia:</strong> [VARIAVEL]<br><br>
+    <strong>Nome:</strong> {{ bestiario.nome }}<br>
+    <strong>Descrição:</strong> {{ bestiario.descricao }}<br>
+    <strong>ND:</strong> {{ bestiario.nd }}<br>
+    <strong>Atributos:</strong> {{ bestiario.atributos }}<br>
+    <strong>Perícias:</strong> {{ bestiario.pericias }}<br>
+    <strong>Velocidade:</strong> {{ bestiario.velocidade }}<br>
+    <strong>Vida:</strong> {{ bestiario.vida }}<br>
+    <strong>Mental:</strong> {{ bestiario.mental }}<br>
+    <strong>Energia:</strong> {{ bestiario.energia }}<br><br>
 
     <strong>Ações Principais</strong><br>
     <em>Ataque (X):</em> -
   </p>
 </section>
+{% endfor %}
+
 
      
 
@@ -241,11 +248,16 @@
 
   <!-- JavaScript -->
   <script>
+
+    // Mostra apenas a seção de conteúdo cujo atributo data-content corresponde ao id passado.
+
     function showContent(id) {
       document.querySelectorAll('.content-section').forEach(sec => {
         sec.classList.toggle('hidden', sec.getAttribute('data-content') !== id);
       });
     }
+
+// Configura um clique para cada item do menu (.nav-item).
 
     document.querySelectorAll('.nav-item').forEach(el => {
       el.addEventListener('click', e => {
@@ -260,7 +272,8 @@
         });
         el.classList.add('font-semibold', 'underline', 'bg-yellow-400', 'rounded');
 
-        // Toggle submenus
+        // Quando clicar em uma opção elas somem
+
         document.querySelectorAll('nav ul[id$="-sub"]').forEach(sub => {
           if (sub.id === `${id}-sub`) sub.classList.toggle('hidden');
           
