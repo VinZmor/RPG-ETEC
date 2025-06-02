@@ -24,3 +24,30 @@ class Bestiario(db.Model):
         self.vida = vida
         self.mental = mental
         self.energia = energia
+
+class Antepassado(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    def _init_ (self, id):
+        self.id = id        
+        
+class Habilidade(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    def _init_ (self, id):
+        self.id = id        
+
+
+class Poder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    def _init_ (self, id):
+        self.id = id        
+
+
+class Equipamento(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    def _init_ (self, id):
+        self.id = id        
+

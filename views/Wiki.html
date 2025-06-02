@@ -51,11 +51,13 @@
 </a>
 
 <ul id="bestiario-sub" class="ml-4 mt-1 hidden space-y-1">
+  {% for bestiario in rpg_bestiario %}
   <li>
     <a href="#" data-id="D" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      NOME DA CRIATURA
+      {{ bestiario.nome }}
     </a>
   </li>
+   {% endfor %}
 </ul>
 
 <!-- Parte do tópico dos antecedentes  -->
@@ -65,11 +67,13 @@
 </a>
 
 <ul id="antepassados-sub" class="ml-4 mt-1 hidden space-y-1">
+  {% for antepassado in rpg_antepassado %}
   <li>
     <a href="#" data-id="A" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      NOME DO ANTEPASSADO
+      {{antepassado.id}}
     </a>
   </li>
+  {% endfor %}
 </ul>
 
 <!-- Parte do tópico dos habilidades  -->
@@ -79,11 +83,13 @@
 </a>
   
 <ul id="habilidades-sub" class="ml-4 mt-1 hidden space-y-1">
+  {% for habilidade in rpg_habilidade %}
   <li>
     <a href="#" data-id="B" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      NOME DA HABILIDADE
+      {{antepassado.id}}
     </a>
   </li>
+  {% endfor %}
 </ul>
 
 <!-- Parte do tópico dos poderes  -->
@@ -93,17 +99,13 @@
 </a>
 
 <ul id="poderes-sub" class="ml-4 mt-1 hidden space-y-1">
+  {% for poder in rpg_poder %}
   <li>
     <a href="#" data-id="C" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      NOME DO PODER
+      {{poder.id}}
     </a>
   </li>
 </ul>
-
-
-<!-- Bestiário -->
-
-
         
     </nav>
 
@@ -202,9 +204,9 @@
 <section data-content="B" class="content-section hidden">
   <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Habilidade</h1>
   <p class="mb-4 text-gray-700">
-    <strong>{{rpgbestiario.tituloHabilidade}}</strong><br>
-    <h2>{{rpgbestiario.condicao}}</h2><br>
-    {{rpgbestiario.descricaoHabilidade}}
+    <strong></strong><br>
+    <h2></h2><br>
+    
   </p>
 </section>
 
@@ -220,9 +222,9 @@
   </p>
 </section>
 
-{% for bestiario in rpgbestiario %}
-    <section class="content-section">
-        <h2>{{ bestiario.nome }}</h2>
+{% for bestiario in  rpg_bestiario %}
+    <section data-content="D" class="content-section">
+        <strong>{{ bestiario.nome }}</strong>
         <p>
             <strong>Descrição:</strong> {{ bestiario.descricao }}<br>
             <strong>ND:</strong> {{ bestiario.nd }}<br>
