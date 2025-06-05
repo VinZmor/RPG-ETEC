@@ -27,22 +27,49 @@ class Bestiario(db.Model):
 
 class Antepassado(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    
-    def _init_ (self, id):
+    pericia = db.Column(db.String(150))
+    equipamento = db.Column(db.String(150))
+    credito = db.Column(db.Integer)
+
+    def _init_ (self, id, pericia, equipamento, credito):
         self.id = id        
+        self.pericia = pericia
+        self.equipamento = equipamento
+        self.credito = credito
+        
         
 class Habilidade(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
-    def _init_ (self, id):
-        self.id = id        
-
-
-class Poder(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
     
     def _init_ (self, id):
         self.id = id        
+       
+class Equipamento(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = id.Column(db.String)
+    custo = id.Column(db.Integer)
+    descricao = id.Column(db.String)
+    
+    def _init_ (self, id, nome, custo, volume, descricao):
+        self.id = id    
+        self.nome = nome
+        self.custo = custo
+        self.descricao = descricao
+
+class Poder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150))
+    requisito = db.Column(db.String(150))
+    custo = db.Column(db.String(150))
+    descricao = db.Column(db.String(150))
+    
+    def _init_ (self, id, nome, requisito, custo, descricao):
+        self.id = id      
+        self.nome = nome 
+        self.requisito = requisito
+        self.custo = custo
+        self.descricao = descricao
 
 
 class Equipamento(db.Model):
