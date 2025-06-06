@@ -1,13 +1,16 @@
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()   
+db = SQLAlchemy()
+
 
 class Bestiario(db.Model):
+    __tablename__ = 'bestiario'
+
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(150))
+    nome = db.Column(db.String(150), nullable=False)
     descricao = db.Column(db.String(150))
     nd = db.Column(db.String(150))
-    atributos = db.Column(db.Integer) 
+    atributos = db.Column(db.Integer)
     pericias = db.Column(db.String(150))
     velocidade = db.Column(db.Integer)
     vida = db.Column(db.Integer)
@@ -25,56 +28,59 @@ class Bestiario(db.Model):
         self.mental = mental
         self.energia = energia
 
+
 class Antepassado(db.Model):
+    __tablename__ = 'antepassado'
+
     id = db.Column(db.Integer, primary_key=True)
     pericia = db.Column(db.String(150))
     equipamento = db.Column(db.String(150))
     credito = db.Column(db.Integer)
+    descricao = db.Column(db.String(150))
 
-    def _init_ (self, id, pericia, equipamento, credito):
-        self.id = id        
+    def __init__(self, pericia, equipamento, credito, descricao):
         self.pericia = pericia
         self.equipamento = equipamento
         self.credito = credito
-        
-        
+        self.descricao = descricao
+
+
 class Habilidade(db.Model):
+    __tablename__ = 'habilidade'
+
     id = db.Column(db.Integer, primary_key=True)
-    
-    
-    def _init_ (self, id):
-        self.id = id        
-       
+
+    def __init__(self):
+        pass
+
+
 class Equipamento(db.Model):
+    __tablename__ = 'equipamento'
+
     id = db.Column(db.Integer, primary_key=True)
-    nome = id.Column(db.String)
-    custo = id.Column(db.Integer)
-    descricao = id.Column(db.String)
-    
-    def _init_ (self, id, nome, custo, volume, descricao):
-        self.id = id    
+    nome = db.Column(db.String(30))
+    custo = db.Column(db.Integer)
+    volume = db.Column(db.Float(1,1))
+    descricao = db.Column(db.String(300))
+
+    def __init__(self, nome, custo, descricao, volume):
         self.nome = nome
         self.custo = custo
         self.descricao = descricao
+        self.volume = volume
+
 
 class Poder(db.Model):
+    __tablename__ = 'poder'
+
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150))
     requisito = db.Column(db.String(150))
     custo = db.Column(db.String(150))
     descricao = db.Column(db.String(150))
-    
-    def _init_ (self, id, nome, requisito, custo, descricao):
-        self.id = id      
-        self.nome = nome 
+
+    def __init__(self, nome, requisito, custo, descricao):
+        self.nome = nome
         self.requisito = requisito
         self.custo = custo
         self.descricao = descricao
-
-
-class Equipamento(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    
-    def _init_ (self, id):
-        self.id = id        
-

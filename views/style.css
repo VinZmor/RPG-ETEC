@@ -14,7 +14,16 @@ body {
 }
 
 
-
+main::-webkit-scrollbar {
+  width: 8px;
+}
+main::-webkit-scrollbar-thumb {
+  background-color: #eab308;
+  border-radius: 6px;
+}
+main::-webkit-scrollbar-track {
+  background-color: #374151;
+}
 
 /* Estilo do container */
 .container {

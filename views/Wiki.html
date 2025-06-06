@@ -1,29 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RPG ETEC</title>
+{% extends 'base.html' %}
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+{% block content %}
 
-  <style>
-    body {
-      font-family: 'montserrat', sans-serif;
-    }
-  </style>
-</head>
-<body class="bg-purple-900 text-gray-900">
-  <div class="min-h-screen flex flex-col md:flex-row max-w-[1200px] mx-auto p-4 md:p-6 gap-6">
+<div class="min-h-screen flex flex-col md:flex-row max-w-[1200px] mx-auto p-4 md:p-6 gap-6">
 
-    <!-- Sidebar Navigation -->
-    <nav id="sidebar" class="bg-yellow-300 rounded-md w-full md:w-72 p-4 text-sm leading-tight select-none">
-      <span class="block font-extrabold mb-3 text-sm">Vale Místico</span>
+<nav id="sidebar" class="bg-gray-900 rounded-md w-full md:w-72 p-4 text-sm leading-tight select-none">
+  <span class="block font-extrabold mb-3 text-yellow-400">Vale Místico</span>
       <ul class="space-y-1">
         <li>
          <a href="#" data-id="introducao" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
@@ -76,6 +58,20 @@
   {% endfor %}
 </ul>
 
+<!-- Parte do tópico dos antecedentes  -->
+
+<a href="#" data-id="equipamentos" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+  Equipamentos
+</a>
+
+<ul id="equipamentos-sub" class="ml-4 mt-1 hidden space-y-1">
+  {% for equipamento in rpg_equipamento %}
+  <li>
+    
+  </li>
+  {% endfor %}
+</ul>
+
 <!-- Parte do tópico dos habilidades  -->
 
 <a href="#" data-id="habilidades" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
@@ -86,7 +82,7 @@
   {% for habilidade in rpg_habilidade %}
   <li>
     <a href="#" data-id="B" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
-      {{antepassado.id}}
+      {{habilidade.id}}
     </a>
   </li>
   {% endfor %}
@@ -106,12 +102,11 @@
     </a>
   </li>
 </ul>
-        
+        {% endfor %}
     </nav>
 
-    <!-- Parte onde aparece as informações -->
 
-    <main id="content" class="bg-white rounded-md p-6 flex-1 overflow-auto text-sm leading-relaxed">
+<main id="content" class="rounded-md p-6 flex-1 overflow-auto text-sm leading-relaxed">
 
 
       <!-- As informações = ao data-content -->
@@ -194,62 +189,52 @@
 
 
        <!-- Coisas com variavesis -->
-
-       {% for antepassado in  rpg_antepassado %}
+{% for antepassado in rpg_antepassado %}
 <section data-content="A" class="content-section hidden">
-  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">{{antepassado.nome}}</h1>
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">{{ antepassado.pericia }}</h1>
   <p class="mb-4 text-gray-700">
-    <strong>{{antepassado.nome}}</strong><br>
-    <br><br>
-
-    <strong>Perícias:</strong> [{{antepassado.pericia}}]<br>
-    <strong>Equipamento:</strong> [{{antepassado.equipamento}}]<br>
-    <strong>Crédito:</strong> [{{antepassado.credito}}]
+    <strong>Descrição:</strong> {{ antepassado.descricao }}<br>
+    <strong>Perícia:</strong> {{ antepassado.pericia }}<br>
+    <strong>Equipamento:</strong> {{ antepassado.equipamento }}<br>
+    <strong>Crédito:</strong> {{ antepassado.credito }}
   </p>
 </section>
 {% endfor %}
 
 <section data-content="B" class="content-section hidden">
-  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Habilidade</h1>
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Habilidades</h1>
   <p class="mb-4 text-gray-700">
-    <strong></strong><br>
-    <h2></h2><br>
-    
+    <!-- Adicione conteúdo das habilidades aqui, se disponível -->
+    Nenhuma habilidade listada.
   </p>
 </section>
 
-{% for poder in  rpg_poder %}
+{% for poder in rpg_poder %}
 <section data-content="C" class="content-section hidden">
-  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Poder</h1>
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">{{ poder.nome }}</h1>
   <p class="mb-4 text-gray-700">
-    <strong>{{poder.nome}}</strong><br>
-    {{poder.requisito}}<br><br>
-
-    <strong>Custo:</strong>{{poder.custo}}<br>
-    <strong>Uso:</strong>{{poder.uso}}<br>
-    <strong>Descrição:</strong>{{poder.descricao}}
+    <strong>Requisito:</strong> {{ poder.requisito }}<br>
+    <strong>Custo:</strong> {{ poder.custo }}<br>
+    <strong>Descrição:</strong> {{ poder.descricao }}
   </p>
 </section>
 {% endfor %}
 
-{% for bestiario in  rpg_bestiario %}
-    <section data-content="D" class="content-section">
-        <strong>{{ bestiario.nome }}</strong>
-        <p>
-            <strong>Descrição:</strong> {{ bestiario.descricao }}<br>
-            <strong>ND:</strong> {{ bestiario.nd }}<br>
-            <strong>Atributos:</strong> {{ bestiario.atributos }}<br>
-            <strong>Perícias:</strong> {{ bestiario.pericias }}<br>
-            <strong>Velocidade:</strong> {{ bestiario.velocidade }}<br>
-            <strong>Vida:</strong> {{ bestiario.vida }}<br>
-            <strong>Mental:</strong> {{ bestiario.mental }}<br>
-            <strong>Energia:</strong> {{ bestiario.energia }}<br>
-        </p>
-    </section>
-    {% endfor %}
-
-
-     
+{% for bestiario in rpg_bestiario %}
+<section data-content="D" class="content-section hidden">
+  <h1 class="text-3xl font-extrabold text-blue-800 mb-4">{{ bestiario.nome }}</h1>
+  <p class="mb-4 text-gray-700">
+    <strong>Descrição:</strong> {{ bestiario.descricao }}<br>
+    <strong>ND:</strong> {{ bestiario.nd }}<br>
+    <strong>Atributos:</strong> {{ bestiario.atributos }}<br>
+    <strong>Perícias:</strong> {{ bestiario.pericias }}<br>
+    <strong>Velocidade:</strong> {{ bestiario.velocidade }}<br>
+    <strong>Vida:</strong> {{ bestiario.vida }}<br>
+    <strong>Mental:</strong> {{ bestiario.mental }}<br>
+    <strong>Energia:</strong> {{ bestiario.energia }}
+  </p>
+</section>
+{% endfor %}
 
     </main>
   </div>
@@ -289,5 +274,4 @@
       });
     });
   </script>
-</body>
-</html>
+{% endblock content %}
