@@ -8,7 +8,7 @@
   <span class="block font-extrabold mb-3 text-yellow-400">Vale Místico</span>
       <ul class="space-y-1">
         <li>
-         <a href="#" data-id="introducao" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+         <a href="#" data-id="introducao" class="nav-item block border-b b pb-1  hover:underline cursor-pointer">
   Introdução
 </a>
 
@@ -28,14 +28,14 @@
 
 <!-- Parte do tópico dos bestiario  -->
 
-<a href="#" data-id="bestiario" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+<a href="#" data-id="bestiario" class="nav-item block border-b   hover:underline cursor-pointer">
   Bestiário
 </a>
 
 <ul id="bestiario-sub" class="ml-4 mt-1 hidden space-y-1">
   {% for bestiario in rpg_bestiario %}
   <li>
-    <a href="#" data-id="D" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+    <a href="#" data-id="D" class="nav-item block pb-1 border-b  hover:underline cursor-pointer">
       {{ bestiario.nome }}
     </a>
   </li>
@@ -44,23 +44,21 @@
 
 <!-- Parte do tópico dos antecedentes  -->
 
-<a href="#" data-id="antepassados" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+<a href="#" data-id="antepassados" class="nav-item block border-b  pb-1 hover:underline cursor-pointer">
   Antepassados
 </a>
 
 <ul id="antepassados-sub" class="ml-4 mt-1 hidden space-y-1">
   {% for antepassado in rpg_antepassado %}
   <li>
-    <a href="#" data-id="A" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+    <a href="#" data-id="A" class="nav-item block pb-1 border-b   hover:underline cursor-pointer">
       {{antepassado.id}}
     </a>
   </li>
   {% endfor %}
 </ul>
 
-<!-- Parte do tópico dos antecedentes  -->
-
-<a href="#" data-id="equipamentos" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+<a href="#" data-id="equipamentos" class="nav-item block border-b hover:underline cursor-pointer">
   Equipamentos
 </a>
 
@@ -74,14 +72,14 @@
 
 <!-- Parte do tópico dos habilidades  -->
 
-<a href="#" data-id="habilidades" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+<a href="#" data-id="habilidades" class="nav-item block border-b  hover:underline cursor-pointer">
   Habilidades
 </a>
   
 <ul id="habilidades-sub" class="ml-4 mt-1 hidden space-y-1">
   {% for habilidade in rpg_habilidade %}
   <li>
-    <a href="#" data-id="B" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+    <a href="#" data-id="B" class="nav-item block pb-1 border-b  hover:underline cursor-pointer">
       {{habilidade.id}}
     </a>
   </li>
@@ -90,14 +88,14 @@
 
 <!-- Parte do tópico dos poderes  -->
 
-<a href="#" data-id="poderes" class="nav-item block border-b border-yellow-400 pb-1 text-blue-800 hover:underline cursor-pointer">
+<a href="#" data-id="poderes" class="nav-item block border-b  hover:underline cursor-pointer">
   Poderes
 </a>
 
 <ul id="poderes-sub" class="ml-4 mt-1 hidden space-y-1">
   {% for poder in rpg_poder %}
   <li>
-    <a href="#" data-id="C" class="nav-item block pb-1 border-b border-yellow-400 text-blue-800 hover:underline cursor-pointer">
+    <a href="#" data-id="C" class="nav-item block pb-1 border-b hover:underline cursor-pointer">
       {{poder.id}}
     </a>
   </li>
@@ -133,12 +131,12 @@
       </section>
 
       <section data-content="narrando" class="content-section hidden">
-        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Narrando</h1>
-        <p class="mb-4 text-gray-700">
+        <h1 class="text-3xl font-extrabold  mb-4">Narrando</h1>
+        <p class="mb-4">
           O mestre deve focar no clima da cena: lento e misterioso para terror, frenético para ação. Incentive jogadores a narrar ações e discutir entre si. Em combate, descreva vividamente as ações, não apenas números.
         </p>
-        <h2 class="text-2xl font-extrabold text-red-800 mb-2">Exemplo de jogo</h2>
-        <p class="mb-4 text-gray-700">
+        <h2 class="text-2xl font-extrabold  mb-2">Exemplo de jogo</h2>
+        <p class="mb-4">
           <strong>Mestre:</strong> Vocês entram na cabana abandonada, a madeira do chão range. Rolem testes de procurar com percepção.<br>
           <strong>Jogador 1:</strong> 2.<br>
           <strong>Jogador 2:</strong> 7.<br>
@@ -152,9 +150,9 @@
       </section>
 
       <section data-content="ficha" class="content-section hidden">
-        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Preenchendo sua Ficha</h1>
-        <p class="mb-4 text-gray-700">Siga estes passos ao criar seu personagem:</p>
-        <ol class="list-decimal ml-6 mb-4 text-gray-700 space-y-2">
+        <h1 class="text-3xl font-extrabold mb-4">Preenchendo sua Ficha</h1>
+        <p class="mb-4 ">Siga estes passos ao criar seu personagem:</p>
+        <ol class="list-decimal ml-6 mb-4  space-y-2">
           <li><strong>Biografia:</strong> Nome, idade, história. Importante para vida do personagem.</li>
           <li><strong>Antepassado:</strong> Define equipamento inicial e bônus de perícias.</li>
           <li><strong>Atributos:</strong> Capacidades físicas e mentais. 1 = pessoa comum.</li>
@@ -183,8 +181,8 @@
 
 
       <section data-content="levelUp" class="content-section hidden">
-        <h1 class="text-3xl font-extrabold text-blue-800 mb-4">Subindo de Nível</h1>
-        <p class="mb-4 text-gray-700">Ao subir de nível, distribua novos pontos de atributo e perícia, escolha novas habilidades e atualize sua ficha.</p>
+        <h1 class="text-3xl font-extrabold  mb-4">Subindo de Nível</h1>
+        <p class="mb-4 ">Ao subir de nível, distribua novos pontos de atributo e perícia, escolha novas habilidades e atualize sua ficha.</p>
       </section>
 
 
@@ -192,7 +190,7 @@
 {% for antepassado in rpg_antepassado %}
 <section data-content="A" class="content-section hidden">
   <h1 class="text-3xl font-extrabold text-blue-800 mb-4">{{ antepassado.pericia }}</h1>
-  <p class="mb-4 text-gray-700">
+  <p class="mb-4 ">
     <strong>Descrição:</strong> {{ antepassado.descricao }}<br>
     <strong>Perícia:</strong> {{ antepassado.pericia }}<br>
     <strong>Equipamento:</strong> {{ antepassado.equipamento }}<br>
