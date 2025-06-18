@@ -37,7 +37,7 @@
     }
 
     html[data-theme="light"] #bg {
-      background-color: #ffe066;
+      background-color: #9051b4;
       color: #000;
     }
 
@@ -107,16 +107,17 @@
     --bg-main: #ffffff;
     --bg-alt: #f8f9fa;
     --text-main: #000000;
-    --accent: #ffc107; /* amarelo */
+    
 
     transition: all 0.3s ease-in-out;
   }
 
-  body.dark {
+  body.dark,
+  #sidebar {
     --bg-main: #0a0a0f;
     --bg-alt: #1a1a2e;
     --text-main: #f1f1f1;
-    --accent: #7f3fbf; /* roxo */
+    --accent: #7f3fbf; 
   }
 
   body {
@@ -128,10 +129,11 @@
   .navbar,
   footer,
   header,
-  main,
-  #sidebar {
+  main
+   {
     background-color: var(--bg-alt);
     color: var(--text-main);
+
   }
 
   .nav-link,
