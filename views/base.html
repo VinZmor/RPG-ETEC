@@ -1,312 +1,169 @@
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>{% block title %}The Games - RPG ETEC{% endblock %}</title>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- Google Fonts -->
+  <!-- CSS & Fontes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Estilo customizado -->
-  
-<style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    /* Temas */
-    html[data-theme="light"] body {
-      background-color: #ffffff;
-      color: #000000;
-    }
-
-    html[data-theme="dark"] body {
-      background-color: #0A0A0F;
-      color: #f0eaff;
-    }
-
-    html[data-theme="light"] #bg {
-      background-color: #9051b4;
-      color: #000;
-    }
-
-    html[data-theme="dark"] #bg {
-      background-color: #7F3FBF;
-      color: #fff;
-    }
-
-    .nav-link {
-      font-weight: 500;
-    }
-
-    .nav-link:hover {
-      color: #6f42c1 !important;
-    }
-
-    .theme-switch {
-      cursor: pointer;
-    }
-
-    /* Botão switch moderno */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 24px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0;
-      right: 0; bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 24px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: #7F3FBF;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-
-    
-  :root {
-    --bg-main: #ffffff;
-    --bg-alt: #f8f9fa;
-    --text-main: #000000;
-    
-
-    transition: all 0.3s ease-in-out;
-  }
-
-  body.dark,
-  #sidebar {
-    --bg-main: #0a0a0f;
-    --bg-alt: #1a1a2e;
-    --text-main: #f1f1f1;
-    --accent: #7f3fbf; 
-  }
-
+  <style>
+ <style>
   body {
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  .navbar,
-  footer,
-  header,
-  main
-   {
-    background-color: var(--bg-alt);
-    color: var(--text-main);
-
+  [data-theme="light"] body {
+    background: #FAFAFC;
+    color: #222;
   }
 
-  .nav-link,
-  .navbar-brand {
-    color: var(--text-main) !important;
+  [data-theme="dark"] body {
+    background: #141418;
+    color: #f0eaff;
   }
 
-  .theme-toggle {
+  header {
+    background: linear-gradient(90deg, #6A2EA8, #884DD0); /* Roxos agradáveis */
+    padding: 3rem 0;
+    color: white;
+  }
+
+  .nav-link.active {
+    border-left: 4px solid #884DD0;
+    color: #884DD0 !important;
+    font-weight: bold;
+  }
+
+  /* Sidebar com fundo diferenciado e sombra leve para destaque */
+  .sidebar {
+    min-height: 100vh;
+    padding-top: 1rem;
+    background: #6A2EA8; /* Fundo roxo escuro para sidebar no tema claro */
+    color: white;
+    border-right: 3px solid #884DD0;
+    box-shadow: 2px 0 8px rgba(136, 77, 208, 0.3);
+  }
+
+  [data-theme="dark"] .sidebar {
+    background: #222033; /* Fundo escuro roxo */
+    border-color: #884DD0;
+    box-shadow: 2px 0 8px rgba(136, 77, 208, 0.6);
+  }
+
+  /* Área de conteúdo com fundo neutro para contraste */
+  .content-area {
+    background: #fff; /* branco no tema claro */
+    padding: 1.5rem;
+    min-height: 100vh;
+    color: #222;
+  }
+
+  [data-theme="dark"] .content-area {
+    background: #1f1b2e; /* roxo muito escuro */
+    color: #f0eaff;
+  }
+
+  .theme-switch {
     cursor: pointer;
-    font-size: 1.3rem;
-    color: var(--accent);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid currentColor;
+    border-radius: 50rem;
   }
 
-  .nav-item.active {
-    background-color: var(--accent);
-    color: #000;
-    border-radius: 5px;
-    padding: 2px 4px;
+  .navbar-brand.text-primary,
+  .offcanvas-title.text-primary,
+  .nav-link i {
+    color: #884DD0 !important;
   }
-  
-  /* CONTÊINER PRINCIPAL */
-#main-layout {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 3rem;
-  padding: 2rem 4rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
 
-/* SIDEBAR (Lista lateral) */
-#sidebar {
-  min-width: 220px;
-  padding: 1rem;
-  background-color: var(--bg-alt);
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-}
-
-#sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#sidebar li {
-  padding: 8px 0;
-  border-bottom: 1px solid var(--accent);
-}
-
-#sidebar li:first-child {
-  color: var(--accent);
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 2px solid var(--accent);
-}
-
-#sidebar a {
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-#sidebar a:hover {
-  color: var(--accent);
-}
-
-#sidebar a.active {
-  background-color: var(--accent);
-  color: #000;
-  padding: 4px 8px;
-  border-radius: 5px;
-  display: inline-block;
-}
-
-/* ÁREA DE CONTEÚDO */
-#content-area {
-  flex: 1;
-  max-width: 100%;
-}
-
-#content-area h2 {
-  font-size: 1.8rem;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-#content-area p {
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
+  .nav-link:hover {
+    background-color: rgba(136, 77, 208, 0.2); /* hover roxo suave */
+  }
 </style>
+
   
+</style>
+
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
-  <div class="container d-flex justify-content-between align-items-center">
-
+  <!-- Navbar superior -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm sticky-top">
+  <div class="container d-flex align-items-center">
     <!-- Logo -->
-    <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="#">
-      <i class="fas fa-dice-d20 me-2"></i>RPG ETEC
+    <a href="#" class="navbar-brand fw-bold text-primary d-flex align-items-center">
+      <i class="fa-solid fa-dice-d20 me-2"></i> RPG ETEC
     </a>
 
-    <!-- Switch de Tema -->
-    <label class="switch mb-0 ms-auto me-3">
-      <input type="checkbox" id="themeToggle">
-      <span class="slider"></span>
-    </label>
+    <!-- Botões -->
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <!-- Toggle Offcanvas -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- Tabs -->
-    <div class="d-flex gap-2 border-bottom border-secondary-subtle">
-      <a class="nav-link px-3 py-2 text-secondary hover:text-primary" href="{{ url_for('home') }}">
-        Home
-      </a>
-      <a class="nav-link px-3 py-2 text-primary border-bottom border-primary fw-semibold" href="{{ url_for('wiki') }}">
-        Site
-      </a>
+      <!-- Toggle de tema -->
+      <button id="themeToggle" class="theme-switch btn btn-outline-secondary btn-sm d-flex align-items-center" aria-label="Alternar tema">
+        <i class="fa-solid fa-moon me-1"></i> Tema
+      </button>
     </div>
-
   </div>
 </nav>
 
 
-  
-  <div class="tab-content hidden mt-6" id="tab2">
-    <h2 class="text-xl font-bold text-blue-700 mb-2">Regras</h2>
- </div>
-  <div class="tab-content hidden mt-6" id="tab3">
-    <h2 class="text-xl font-bold text-blue-700 mb-2">Habilidades</h2>
-  </div>
-</div>
-
-      
+  <!-- Sidebar offcanvas -->
+  <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-primary">Vale Místico</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
-  </nav>
+    <div class="offcanvas-body p-0">
+      <nav class="nav flex-column">
+        <!-- Seus links aqui -->
+        <a href="#" class="nav-link px-3 py-2 active"><i class="fa-solid fa-book-open me-2"></i> Introdução</a>
+        <a href="#" class="nav-link px-3 py-2"><i class="fa-solid fa-user-pen me-2"></i> Seu Personagem</a>
+        <!-- ... outras opções -->
+      </nav>
+    </div>
+  </div>
 
-  <header id="bg" class="text-center py-5 shadow-sm">
-    <div class="container">
+  <!-- Header -->
+  <header>
+    <div class="container text-center">
       <h1 class="display-4 fw-bold">Vale Místico</h1>
-
+      <p class="lead opacity-75">Explore o universo de RPG com informações, regras e guias completos.</p>
     </div>
   </header>
 
-  <main class="container my-5 flex-grow-1">
+  <!-- Conteúdo principal -->
+  <main class="container my-4 flex-grow-1">
     {% block content %}
+    <!-- aqui entra o conteúdo -->
     {% endblock %}
   </main>
 
-  <footer class="bg-white text-center py-4 mt-auto border-top shadow-sm">
-    <div class="container">
-      <p class="mb-1 text-muted">&copy; {{ current_year if current_year else "2025" }} Zezília. Todos os direitos reservados.</p>
-    </div>
+  <!-- Rodapé -->
+  <footer class="bg-body-tertiary text-center py-3 mt-auto border-top">
+    <small class="text-muted">&copy; {{ current_year if current_year else "2025" }} Zezília. Todos os direitos reservados.</small>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Inicializa tema com base no localStorage
-    const toggle = document.getElementById('themeToggle');
+    const themeButton = document.getElementById('themeToggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
-    toggle.checked = currentTheme === 'dark';
+    themeButton.innerHTML = currentTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
 
-    toggle.addEventListener('change', function () {
-      const theme = this.checked ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
+    themeButton.addEventListener('click', () => {
+      const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeButton.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
     });
   </script>
 </body>

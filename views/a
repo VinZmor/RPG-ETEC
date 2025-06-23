@@ -1,9 +1,0 @@
-<button class="navbar-toggler" type="button"  data-bs-target="#mainNavbar">
-        <div class="" id="mainNavbar">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
-        </ul>
-      </div>
-        <span class="navbar-toggler-icon"></span>
-      </button>
