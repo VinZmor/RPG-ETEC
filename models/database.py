@@ -6,11 +6,11 @@ class Antepassado(db.Model):
     __tablename__ = 'antepassado'
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    descricao = db.Column(db.Text)  # descrição geralmente longa
-    pericia = db.Column(db.String(200))  # até várias perícias
-    equipamento = db.Column(db.String(200))  # até vários equipamentos
-    credito = db.Column(db.Integer)
+    nome = db.Column(db.String(100))
+    descricao = db.Column(db.Text)  
+    pericia = db.Column(db.String(200))  
+    equipamento = db.Column(db.String(200)) 
+    credito = db.Column(db.String(50))
 
     def __init__(self, pericia, equipamento, credito, descricao, nome):
         self.nome = nome
@@ -24,10 +24,10 @@ class Equipamento(db.Model):
     __tablename__ = 'equipamento'
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    custo = db.Column(db.Integer)
-    volume = db.Column(db.Float)
-    descricao = db.Column(db.Text)  # descrição pode ser maior
+    nome = db.Column(db.String(100))
+    custo = db.Column(db.String(50))
+    volume = db.Column(db.String(50))
+    descricao = db.Column(db.Text)  
 
     def __init__(self, nome, custo, descricao, volume):
         self.nome = nome
@@ -40,8 +40,8 @@ class Habilidade(db.Model):
     __tablename__ = 'habilidade'
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    condicao = db.Column(db.String(200))  # pode descrever pré-requisitos
+    nome = db.Column(db.String(100))
+    condicao = db.Column(db.String(200))  
     descricao = db.Column(db.Text)
 
     def __init__(self, nome, condicao, descricao):
@@ -54,7 +54,7 @@ class Poder(db.Model):
     __tablename__ = 'poder'
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
+    nome = db.Column(db.String(100))
     requisito = db.Column(db.String(200))
     custo = db.Column(db.String(100))
     uso = db.Column(db.String(200))
@@ -72,11 +72,11 @@ class Bestiario(db.Model):
     __tablename__ = 'bestiario'
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    descricao = db.Column(db.Text)  # longo
-    nd = db.Column(db.String(50))  # nível de desafio
-    atributos = db.Column(db.String(200))  # lista curta
-    pericias = db.Column(db.String(200))  # lista curta
+    nome = db.Column(db.String(100))
+    descricao = db.Column(db.Text) 
+    nd = db.Column(db.String(50))  
+    atributos = db.Column(db.String(200))  
+    pericias = db.Column(db.String(200))  
     velocidade = db.Column(db.Integer)
     vida = db.Column(db.Integer)
     mental = db.Column(db.Integer)
