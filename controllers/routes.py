@@ -6,7 +6,7 @@ def init_app(app):
     @app.route('/')
     # Criando função no Python
     def home():
-        return render_template('base.html')
+        return render_template('home.html')
     
     @app.route('/wiki', methods=['GET'])
     @app.route('/wiki/<int:id>', methods=['GET'])
