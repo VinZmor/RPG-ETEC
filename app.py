@@ -1,27 +1,23 @@
-# Importando o Flask
+# Importando 
 from flask import Flask, render_template
 import pymysql.cursors
-# Importando as rotas que estão nos controllers
 from controllers import routes
-# Importando o PyMySQL
 import pymysql
-# Importando o Model
 from models.database import db
 
-# Carregando o Flask na variável app
+# Carregando o Flask 
 app = Flask(__name__, template_folder='views')
 
-# Define o nome do banco de dados
 DB_NAME = 'etec_rpg'
 app.config['DATABASE_NAME'] = DB_NAME
 
-# Passando o endereço do banco ao Flask
+# endereço do banco
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root@localhost/{DB_NAME}'
 
 # Chamando as rotas
 routes.init_app(app)
 
-# Iniciando o servidor no localhost, porta 5000, modo de depuração ativado
+# Iniciando o servidor
 if __name__ == '__main__':
     # Conectando ao MySQL e criando o banco de dados com suas tabelas
     connection = pymysql.connect(host='localhost',
@@ -31,7 +27,6 @@ if __name__ == '__main__':
                                  cursorclass=pymysql.cursors.DictCursor)
     try:
         with connection.cursor() as cursor:
-            # Executando a Query para criar o banco
             cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}")
             print("O banco de dados está criado!")
     except Exception as error:
@@ -44,5 +39,5 @@ if __name__ == '__main__':
     with app.test_request_context():
         db.create_all()
     
-    # Rodando o projeto:    
+    # Rodando o projeto    
     app.run(host='localhost', port=5000, debug=True)

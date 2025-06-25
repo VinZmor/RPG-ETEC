@@ -2,9 +2,9 @@ from flask import render_template, request, redirect, url_for
 from models.database import Bestiario, Antepassado, Habilidade, Poder, Equipamento, db
 
 def init_app(app):
-    # Criando a primeira rota do site
+    
     @app.route('/')
-    # Criando função no Python
+    
     def home():
         return render_template('home.html')
     
@@ -16,6 +16,7 @@ def init_app(app):
         rpg_habilidade = Habilidade.query.all()
         rpg_poder = Poder.query.all()
         rpg_equipamento = Equipamento.query.all() 
+        
         return render_template(
             'wiki.html',
             rpg_bestiario=rpg_bestiario,

@@ -9,13 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-  body {
+
+/*Estilos do Body*/
+body {
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: 'Montserrat';
 }
 
 [data-theme="light"] body {
-  background: #F8F4FF; /* lilás super claro */
+  background: #F8F4FF; 
   color: #2B213A;
 }
 
@@ -24,7 +26,7 @@
   color: #F0EAFB;
 }
 
-/* Navbar */
+/*Estilos do Navbar*/
 nav.navbar {
   background: linear-gradient(90deg, #7B2CBF, #9D4EDD);
   color: white;
@@ -35,7 +37,7 @@ nav.navbar {
   color: #F0EAFB;
 }
 
-/* Header */
+/*Estilos do Header*/
 header {
   background: linear-gradient(90deg, #7B2CBF, #9D4EDD);
   padding: 3rem 0;
@@ -46,10 +48,7 @@ header {
   background: linear-gradient(90deg, #3C096C, #7B2CBF);
 }
 
-
-
-
-/* Sidebar */
+/*Estilos do Sidebar*/
 .sidebar {
   background: #E0AAFF;
   border-right: 3px solid #9D4EDD;
@@ -64,7 +63,7 @@ header {
 
 #sidebar {
   padding: 10px;
-  border: 1px solid #000000 !important;
+  border: 1px solid #861ab8 !important;
   box-shadow: 2px 0 8px rgba(157, 78, 221, 0.3);
 }
 
@@ -75,11 +74,8 @@ header {
   box-shadow: 2px 0 8px rgba(123, 44, 191, 0.6);
   
 }
- /*#fundo { border: 2px solid #00c3ff !important;}
 
-
-
-/* Área de conteúdo */
+/*Estilos do Main*/
   content {
   background: #fff ;
   padding: 1.5rem;
@@ -118,11 +114,11 @@ header {
   color: #E0AAFF !important;
 }
 
-/* Estilos do rodapé */
+/* Estilos do Rodapé */
 
 footer.bg-body-tertiary {
   background: #F8F4FF !important;
-  border-top: 1px solid #0084ff !important;
+  border-top: 1px solid #7B2CBF !important;
   padding:  15px ;
   margin-top: auto;
 }
@@ -135,8 +131,6 @@ footer.bg-body-tertiary {
   
 }
 
-/* Estilos do texto do rodapé */
-
 small.text-muted {
   color: #000000 !important;
 }
@@ -144,9 +138,8 @@ small.text-muted {
 [data-theme="dark"] small.text-muted {
   color: white !important;
 }
-/* From Uiverse.io by JustCode14 */ 
-/* Theme Switch */
-/* The switch - the box around the slider */
+
+/* Estilos do Switch */
 .switch {
   font-size: 17px;
   position: relative;
@@ -157,14 +150,12 @@ small.text-muted {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -213,7 +204,7 @@ small.text-muted {
   left: 2.5em;
   top: 0.5em;
 }
-
+  
 .star_2 {
   left: 2.2em;
   top: 1.2em;
@@ -241,6 +232,10 @@ small.text-muted {
   opacity: 1;
 }
 
+
+.text-primary {
+  color: #08a4fc !important;
+}
 </style>
 
 
@@ -250,17 +245,19 @@ small.text-muted {
   <!-- Navbar superior -->
   <nav class="navbar  navbar-light bg-body-tertiary shadow-sm sticky-top">
   <div id="nav" class="container d-flex align-items-center">
+
     <!-- Logo -->
     <a href="#" class="navbar-brand fw-bold text-primary d-flex align-items-center">
       <i class="fa-solid fa-dice-d20 me-2"></i> RPG ETEC
     </a>
     <div class="ms-auto d-flex align-items-center gap-2">
-      <!-- Toggle Offcanvas -->
+
+      <!-- Botão das Rotas -->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- Toggle de Tema -->
-    <!-- From Uiverse.io by JustCode14 --> 
+    
+      <!-- Botão para trocar de tema -->
 <label class="switch">
   <input  id="themeCheckbox" type="checkbox" />
   <span class="slider">
@@ -284,7 +281,7 @@ small.text-muted {
 </nav>
 
 
-  <!-- Sidebar offcanvas -->
+  <!-- Sidebar das rotas -->
   <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title text-primary">Vale Místico</h5>
@@ -292,8 +289,8 @@ small.text-muted {
     </div>
     <div class="offcanvas-body p-0">
       <nav class="nav flex-column">
-        <!-- Seus links aqui -->
-        <a href="{{url_for('home')}}" class="nav-link px-3 py-2 active"><i class="fa-solid fa-home me-2"></i> Introdução</a>
+       
+        <a href="{{url_for('home')}}" class="nav-link px-3 py-2 active"><i class="fa-solid fa-home me-2"></i> Home</a>
         <a href="{{url_for('wiki')}}" class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Lista</a>
         
       </nav>
@@ -310,7 +307,7 @@ small.text-muted {
   
   <main class="container my-4 flex-grow-1">
     {% block content %}
-    <!-- aqui entra o conteúdo -->
+    <!-- aqui fica o conteúdo das outras delas -->
     {% endblock %}
   </main>
 
@@ -325,11 +322,11 @@ small.text-muted {
   const themeCheckbox = document.getElementById('themeCheckbox')
 const savedTheme = localStorage.getItem('theme') || 'light'
 
-// aplica o tema inicial
+//Aplica Tema
 document.documentElement.setAttribute('data-theme', savedTheme)
 themeCheckbox.checked = savedTheme === 'light'
 
-// alterna quando clicar
+//Altera Tema
 themeCheckbox.addEventListener('change', () => {
   const newTheme = themeCheckbox.checked ? 'light' : 'dark'
   document.documentElement.setAttribute('data-theme', newTheme)
