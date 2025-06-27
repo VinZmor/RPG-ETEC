@@ -246,7 +246,7 @@ small.text-muted {
   <div id="nav" class="container d-flex align-items-center">
 
     <!-- Logo -->
-    <a href="#" class="navbar-brand fw-bold text-primary d-flex align-items-center">
+    <a href="{{url_for('home')}}" class="navbar-brand fw-bold text-primary d-flex align-items-center">
       <i class="fa-solid fa-dice-d20 me-2"></i> RPG ETEC
     </a>
     <div class="ms-auto d-flex align-items-center gap-2">
@@ -289,7 +289,7 @@ small.text-muted {
     <div class="offcanvas-body p-0">
       <nav class="nav flex-column">
        
-        <a href="{{url_for('home')}}" class="nav-link px-3 py-2 active"><i class="fa-solid fa-home me-2"></i> Home</a>
+        <a href="{{url_for('home')}}" class="nav-link px-3 py-2"><i class="fa-solid fa-home me-2"></i> Home</a>
         <a href="{{url_for('wiki')}}" class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Lista</a>
         
       </nav>
@@ -312,7 +312,7 @@ small.text-muted {
 
   <!-- Rodapé -->
   <footer class="bg-body-tertiary text-center">
-    <small class="text-muted">&copy; {{ current_year if current_year else "2025" }} Zezília. Todos os direitos reservados.</small>
+    <small class="text-muted">&copy; {{ current_year if current_year else "2025" }} RPG ETEC. Todos os direitos reservados.</small>
   </footer>
 
   <!-- Parte do JavaScript -->
