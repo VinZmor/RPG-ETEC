@@ -1,5 +1,95 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>TESTE</h1>
+<main class="bg-gradient-to-b from-sky-50 to-white min-h-screen p-8 space-y-16">
+
+  <!-- Header -->
+  <header class="text-center space-y-4">
+    <h1 class="text-4xl font-extrabold text-sky-700">Plataforma RPG para Saúde Mental</h1>
+    <p class="text-lg text-slate-600 max-w-xl mx-auto">
+      Um ambiente gamificado que une a diversão do RPG com o cuidado da saúde mental,
+      alinhado ao <strong>ODS 3: Saúde e Bem-Estar</strong>.
+    </p>
+    <a href="#projeto" class="inline-block mt-4 px-6 py-2 bg-sky-600 text-white rounded-xl hover:bg-sky-500 transition">
+      Conheça o Projeto
+    </a>
+  </header>
+
+  <!-- Missão e Gamificação -->
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="p-6 rounded-xl shadow text-center bg-white hover:scale-105 transition">
+      <h3 class="font-bold text-xl text-sky-700 mb-2">Gamificação</h3>
+      <p class="text-slate-600">
+        RPG é uma ferramenta poderosa para melhorar o aprendizado, estimular o comportamento, desenvolver habilidades sociais
+        e promover o trabalho colaborativo, a criatividade e a interação.
+        <br>
+        <a class="text-sky-500 underline" href="https://www.unisale.edu.br" target="_blank">Fonte: Unisale, Cezar, 2023</a>
+      </p>
+    </div>
+    
+    <div class="p-6 rounded-xl shadow text-center bg-white hover:scale-105 transition">
+      <img class="w-24 h-24 mx-auto mb-4 rounded-full object-cover"
+           src="https://imgs.search.brave.com/svjTFQXtkn_9csBscjBkiSVwC9auBdANEYZqrakwVB4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3RpL2ZvdG9z/LWdyYXRpcy90Mi8x/NDkwODk3OS1lc3F1/aXpvZnJlbmlhLWNv/bS1zb2xpdGFyaW8t/ZS10cmlzdGUtbm8t/Y29uY2VpdG8tZGUt/ZGVwcmVzc2FvLWRl/LXNhdWRlLW1lbnRh/bC1tdWxoZXItZGVw/cmltaWRhLXNlbnRh/ZGEtY29udHJhLW8t/Y2hhby1lbS1jYXNh/LWNvbS1xdWFydG8t/ZXNjdXJvLXNlbnRp/bmRvLXNlLW1pc2Vy/YXZlbC1hcy1tdWxo/ZXJlcy1lc3Rhby1k/ZXByaW1pZGFzLW1l/ZHJvc2FzLWUtaW5m/ZWxpemVzLWZvdG8u/SlBH"
+           alt="Imagem sobre depressão">
+      <h3 class="font-bold text-xl text-sky-700 mb-2">Saúde Mental</h3>
+      <p class="text-slate-600 text-left text-sm">
+        <strong>Depressão Leve:</strong> Fadiga, insônia ou sono excessivo, alterações no apetite, dores leves.<br>
+        <strong>Moderada:</strong> Tristeza constante, desinteresse, irritabilidade, problemas de sono.<br>
+        <strong>Grave:</strong> Pensamentos suicidas, agitação, desesperança, dificuldade para tarefas simples.
+      </p>
+      <p class="mt-2 text-slate-500 text-sm">
+        🔗 <a class="text-sky-500 underline" href="https://clinicaohrpsiquiatria.com/estagios-da-depressao/" target="_blank">Estágios da depressão</a><br>
+        🔗 <a class="text-sky-500 underline" href="https://www.cnnbrasil.com.br/saude/pesquisas-apontam-aumento-nos-casos-de-depressao-no-brasil/" target="_blank">11,3% da população com depressão (2021)</a><br>
+        🔗 <a class="text-sky-500 underline" href="https://g1.globo.com/saude/noticia/2023/11/06/por-que-o-brasil-tem-a-populacao-mais-depressiva-da-america-latina.ghtml" target="_blank">5,8% dos brasileiros sofrem da doença</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Objetivos -->
+  <section class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow space-y-4">
+    <h2 class="text-2xl font-bold text-sky-700 text-center">Objetivos do Projeto</h2>
+    <ul class="list-disc list-inside text-slate-700 text-lg space-y-2">
+      <li>Criar um ambiente de apoio para pessoas com depressão leve ou moderada.</li>
+      <li>Desenvolver regras claras e mecânicas acessíveis para o jogo.</li>
+      <li>Oferecer um aplicativo mobile para facilitar o acesso e uso da plataforma.</li>
+    </ul>
+  </section>
+
+  <!-- Sistema -->
+  <section class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow space-y-4">
+    <h2 class="text-2xl font-bold text-sky-700 text-center">Sistema RPG (TTRPG)</h2>
+    <ul class="list-disc list-inside text-slate-700 text-lg space-y-2">
+      <li>Regras simples e intuitivas</li>
+      <li>Uso de apenas um dado comum de 6 lados</li>
+      <li>Inclui exemplos de jogo para iniciantes</li>
+    </ul>
+  </section>
+
+  <!-- Equipe -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 text-center text-sky-700">Nossa Equipe</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for nome, descricao in [('Larissa', 'Desenvolvedora principal da aplicação mobile'),
+                                 ('Vinícius', 'Desenvolvedor do website'),
+                                 ('Matheus', 'Desenvolvedor do sistema e mobile')] %}
+      <div class="p-4 rounded-xl shadow text-center bg-white">
+        <h3 class="font-bold text-lg text-sky-700">{{ nome }}</h3>
+        <p class="text-slate-600">{{ descricao }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Pesquisa -->
+  <section id="projeto" class="bg-sky-100 p-8 rounded-2xl shadow text-center max-w-4xl mx-auto">
+    <h2 class="text-xl font-bold text-sky-700 mb-4">Sobre a Pesquisa</h2>
+    <p class="text-slate-700 text-lg leading-relaxed">
+      Segundo Germano Henning (2021), a terapia analítico-comportamental com RPG e gamificação
+      pode auxiliar adolescentes a desenvolver habilidades sociais e combater sintomas depressivos.
+      Dados apontam que os casos de depressão chegaram a <strong>11,3% em 2021</strong>. Nosso projeto busca
+      criar um ambiente acessível e estruturado para o tratamento e melhora dessas condições.
+    </p>
+  </section>
+
+</main>
 {% endblock content %}

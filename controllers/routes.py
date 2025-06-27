@@ -8,8 +8,8 @@ def init_app(app):
     def home():
         return render_template('home.html')
     
-    @app.route('/wiki', methods=['GET'])
-    @app.route('/wiki/<int:id>', methods=['GET'])
+    @app.route('/wiki', methods=['GET', 'POST'])
+    @app.route('/wiki/<int:id>', methods=['GET', 'POST'])
     def wiki(id=None):
         rpg_bestiario = Bestiario.query.all()
         rpg_antepassado = Antepassado.query.all()
