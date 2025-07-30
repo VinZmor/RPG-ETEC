@@ -19,11 +19,12 @@
           <li class="nav-item"><a href="#" data-id="equipamento" class="nav-link">Equipamento</a></li>
           <li class="nav-item"><a href="#" data-id="levelUp" class="nav-link">Subindo de Nível</a></li>
           <li class="nav-item"><a href="#" data-id="habilidade" class="nav-link">Habilidades</a></li>
-          
           <li class="nav-item"><a href="#" data-id="glossario" class="nav-link">Glossário</a></li>
           <li class="nav-item"><a href="#" data-id="bestiario" class="nav-link">Bestiário</a></li>
         </ul>
       </li>
+
+---
 
       <li class="nav-item">
         <a href="#" data-id="bestiario" class="nav-link">Bestiário</a>
@@ -42,8 +43,8 @@
         <ul id="antepassados-sub" class="nav flex-column ms-3 d-none">
           {% for antepassado in rpg_antepassado %}
           <li class="nav-item">
-            <a href="#" data-id="A" class="nav-link">{{ antepassado.nome }}</a>
-          </li>
+          <a href="#" data-id="{{ antepassado.id }}" class="nav-link">{{ antepassado.nome }}</a>
+</li>
           {% endfor %}
         </ul>
       </li>
@@ -232,17 +233,17 @@
 <!--Aqui que entra as que tem variaveis -->
     
     {% for antepassado in rpg_antepassado %}
-        <section data-content="A" class="content-section d-none">
+        <section data-content="{{ antepassado.id }}" class="content-section d-none">
           <h1 class="h3 text-primary">{{ antepassado.nome }}</h1>
           <p><strong>Descrição:</strong> {{ antepassado.descricao }}</p>
           <p><strong>Perícias:</strong> {{ antepassado.pericia }}</p>
           <p><strong>Equipamento:</strong> {{ antepassado.equipamento }}</p>
-          <p><strong>Crédito:</strong> +{{ antepassado.credito }}</p>
+          <p><strong>Crédito:</strong> {{ antepassado.credito }}</p>
         </section>
     {% endfor %}
 
     {% for habilidade in rpg_habilidade %}
-    <section data-content="B" class="content-section d-none">
+    <section data-content="{{ habilidade.id }}" class="content-section d-none">
       <h1 class="h3 text-primary">{{ habilidade.nome }}</h1>
   <dl>
     <dt>Condição:</dt>
@@ -254,7 +255,7 @@
 {% endfor %}
 
     {% for poder in rpg_poder %}
-    <section data-content="C" class="content-section d-none">
+    <section data-content="{{ poder.id }}" class="content-section d-none">
       <h1 class="h3 text-primary">{{ poder.nome }}</h1>
       <p><strong>Requisito:</strong> {{ poder.requisito }}</p>
     </section>
