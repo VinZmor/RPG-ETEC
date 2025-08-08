@@ -23,16 +23,14 @@
           <li class="nav-item"><a href="#" data-id="bestiario" class="nav-link">Bestiário</a></li>
         </ul>
       </li>
-
----
-
+      
       <li class="nav-item">
         <a href="#" data-id="bestiario" class="nav-link">Bestiário</a>
         <ul id="bestiario-sub" class="nav flex-column ms-3 d-none">
 
           {% for bestiario in rpg_bestiario %}
           <li class="nav-item">
-            <a href="#" data-id="D" class="nav-link">{{ bestiario.nome }}</a>
+            <a href="#" data-id="{{ bestiario.id }}" class="nav-link">{{ bestiario.nome }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -54,7 +52,7 @@
         <ul id="equipamentos-sub" class="nav flex-column ms-3 d-none">
           {% for equipamento in rpg_equipamento %}
           <li class="nav-item">
-            <a href="#" class="nav-link">{{ equipamento.nome }}</a>
+            <a href="#" data-id="{{ equipamento.id }}" class="nav-link">{{ equipamento.nome }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -65,7 +63,7 @@
         <ul id="habilidades-sub" class="nav flex-column ms-3 d-none">
           {% for habilidade in rpg_habilidade %}
           <li class="nav-item">
-            <a href="#" data-id="B" class="nav-link">{{ habilidade.nome }}</a>
+            <a href="#" data-id="{{ habilidade.id }}" class="nav-link">{{ habilidade.nome }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -76,7 +74,7 @@
         <ul id="poderes-sub" class="nav flex-column ms-3 d-none">
           {% for poder in rpg_poder %}
           <li class="nav-item">
-            <a href="#" data-id="C" class="nav-link">{{ poder.nome }}</a>
+            <a href="#" data-id="{{ poder.id }}" class="nav-link">{{ poder.nome }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -264,7 +262,7 @@
     <!-- Lembrar de colocar os ataques e efeitos únicos -->
 
     <!--{% for bestiario in rpg_bestiario %}-->
-    <section data-content="D" class="content-section d-none">
+    <section data-content="{{ bestiario.id }}" class="content-section d-none">
       <h1 class="h3 text-primary">{{ bestiario.nome }}</h1> 
       <p><strong>Descrição:</strong> <br>{{ bestiario.descricao }}</p>
       <p><strong>ND:</strong> <br>{{ bestiario.nd }}</p>
