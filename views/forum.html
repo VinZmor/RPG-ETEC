@@ -1,32 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
-<h3>Fórum</h3> <button class="btn btn-dark">Novo Tópico</button>
+<main class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Fórum</h1>
+    <button class="btn btn-dark">Novo Tópico</button>
+  </div>
 
-<section>
-    <ol>
-        <li>
-            <div>
-                <h4> <a href="#"> DBD </a> </h4>
-                <br>
-                <div>
-                <p> Jogo de Terror </p>
-            </div>
-            </div>
-
-            <div><dl>
-                <dt>
-
-                </dt>
-                <dd></dd>
-            </dl></div>
-            <ul>
-                <li>Por Nome Legal</li>
-            </ul>
-        </li>
-    </ol>
-</section>
-
-</div>
+  <section class="forum-list">
+    <div class="row font-weight-bold border-bottom py-2">
+      <div class="col-md-6">Tópico</div>
+      <div class="col-md-2 text-center">Autor</div>
+      <div class="col-md-2 text-center">Respostas</div>
+      <div class="col-md-2 text-center">Última Atualização</div>
+    </div>
+    <div class="row py-3 border-bottom forum-item">
+      <div class="col-md-6">
+        <h4><a href="#">Kian Sabe</a></h4>
+        <small class="text-muted"> Tema: Ordem Paranormal </small>
+      </div>
+      <div class="col-md-2 text-center">Zeliz</div>
+      <div class="col-md-2 text-center">—</div>
+      <div class="col-md-2 text-center">—</div>
+    </div>
+    <!-- Repita blocos de .forum-item conforme necessário -->
+  </section>
+</main>
 {% endblock content %}
