@@ -8,22 +8,27 @@
   </div>
 
   <section class="forum-list">
+    
     <div class="row font-weight-bold border-bottom py-2">
       <div class="col-md-6">Tópico</div>
       <div class="col-md-2 text-center">Autor</div>
       <div class="col-md-2 text-center">Respostas</div>
       <div class="col-md-2 text-center">Última Atualização</div>
     </div>
+
+    
+    {% for lista in lista %}
     <div class="row py-3 border-bottom forum-item">
       <div class="col-md-6">
-        <h4><a href="#">Kian Sabe</a></h4>
-        <small class="text-muted"> Tema: Ordem Paranormal </small>
+        <h4><a href="#">{{ lista.topico }}</a></h4>
+        <small class="text-muted">Tema: {{ lista.tema }}</small>
       </div>
-      <div class="col-md-2 text-center">Zeliz</div>
+      <div class="col-md-2 text-center">{{ lista.autor }}</div>
       <div class="col-md-2 text-center">—</div>
-      <div class="col-md-2 text-center">—</div>
+      <div class="col-md-2 text-center">{{ lista.atualizacao or '—' }}</div>
     </div>
-    <!-- Repita blocos de .forum-item conforme necessário -->
+    {% endfor %}
+
   </section>
 </main>
 {% endblock content %}

@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from models.database import Bestiario, Antepassado, Habilidade, Poder, Equipamento, db
+from models.database import Bestiario, Antepassado, Habilidade, Poder, Equipamento, Forum, db
 
 def init_app(app):
     
@@ -28,4 +28,5 @@ def init_app(app):
 
     @app.route('/forum')
     def forum():
-     return render_template('forum.html')
+        lista = Forum.query.all()
+        return render_template('forum.html', lista=lista)

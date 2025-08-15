@@ -2,8 +2,18 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+class Forum(db.Model):
+    __tablename__ = 'lista'            # nome correto da tabela
+    id = db.Column(db.Integer, primary_key=True)   # adiciona chave primária obrigatória
+    topico = db.Column(db.String(20))
+    autor = db.Column(db.String(15))
+    tema = db.Column(db.String(30))
+    atualizacao = db.Column(db.Date)
+
+
 class Antepassado(db.Model):
     __tablename__ = 'antepassado'
+    
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))
