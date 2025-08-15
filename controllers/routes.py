@@ -30,3 +30,7 @@ def init_app(app):
     def forum():
         lista = Forum.query.all()
         return render_template('forum.html', lista=lista)
+    
+    @app.route('/forum/respostas')
+    def respostas():
+        return render_template('respostas.html', )

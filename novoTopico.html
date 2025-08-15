@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{{ url_for('forum') }}" method="POST" class="row g-3">
+    <div class="col-12">
+      <label for="observacao" class="form-label">Postar</label>
+      <textarea class="form-control" name="observacao" id="observacao" rows="3" placeholder="Observações adicionais" required></textarea>
+    </div>
+    
+    <div class="col-12 text-center mt-4">
+      <button type="submit" class="btn btn-warning px-5">Cadastrar</button>
+    </div>
+</form>
+{% endblock content %}

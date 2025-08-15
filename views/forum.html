@@ -4,7 +4,7 @@
 <main class="container my-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Fórum</h1>
-    <button class="btn btn-dark">Novo Tópico</button>
+    <a  class="btn btn-danger">Novo Tópico</a>
   </div>
 
   <section class="forum-list">
@@ -20,7 +20,7 @@
     {% for lista in lista %}
     <div class="row py-3 border-bottom forum-item">
       <div class="col-md-6">
-        <h4><a href="#">{{ lista.topico }}</a></h4>
+        <h4><a href="{{url_for('respostas')}}">{{ lista.topico }}</a></h4>
         <small class="text-muted">Tema: {{ lista.tema }}</small>
       </div>
       <div class="col-md-2 text-center">{{ lista.autor }}</div>
