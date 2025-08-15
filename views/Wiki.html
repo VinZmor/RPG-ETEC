@@ -41,7 +41,7 @@
         <ul id="antepassados-sub" class="nav flex-column ms-3 d-none">
           {% for antepassado in rpg_antepassado %}
           <li class="nav-item">
-          <a href="#" data-id="{{ antepassado.id }}" class="nav-link">{{ antepassado.nome }}</a>
+          <a href="#" data-id="{{ antepassado.id }}" data-name="{{ antepassado.nome }}" class="nav-link">{{ antepassado.nome }}</a>
 </li>
           {% endfor %}
         </ul>
@@ -231,7 +231,7 @@
 <!--Aqui que entra as que tem variaveis -->
     
     {% for antepassado in rpg_antepassado %}
-        <section data-content="{{ antepassado.id }}" class="content-section d-none">
+        <section data-content="{{ antepassado.nome }}" class="content-section d-none">
           <h1 class="h3 text-primary">{{ antepassado.nome }}</h1>
           <p><strong>Descrição:</strong> {{ antepassado.descricao }}</p>
           <p><strong>Perícias:</strong> {{ antepassado.pericia }}</p>
@@ -241,7 +241,7 @@
     {% endfor %}
 
     {% for habilidade in rpg_habilidade %}
-    <section data-content="{{ habilidade.id }}" class="content-section d-none">
+    <section data-content="{{ habilidade.nome }}" class="content-section d-none">
       <h1 class="h3 text-primary">{{ habilidade.nome }}</h1>
   <dl>
     <dt>Condição:</dt>
@@ -253,7 +253,7 @@
 {% endfor %}
 
     {% for poder in rpg_poder %}
-    <section data-content="{{ poder.id }}" class="content-section d-none">
+    <section data-content="{{ poder.nome }}" class="content-section d-none">
       <h1 class="h3 text-primary">{{ poder.nome }}</h1>
       <p><strong>Requisito:</strong> {{ poder.requisito }}</p>
     </section>
@@ -261,8 +261,8 @@
 
     <!-- Lembrar de colocar os ataques e efeitos únicos -->
 
-    <!--{% for bestiario in rpg_bestiario %}-->
-    <section data-content="{{ bestiario.id }}" class="content-section d-none">
+   {% for bestiario in rpg_bestiario %}
+    <section data-content="{{ bestiario.nome }}" class="content-section d-none">
       <h1 class="h3 text-primary">{{ bestiario.nome }}</h1> 
       <p><strong>Descrição:</strong> <br>{{ bestiario.descricao }}</p>
       <p><strong>ND:</strong> <br>{{ bestiario.nd }}</p>
@@ -273,46 +273,52 @@
       <p><strong>Mental:</strong> <br>{{ bestiario.mental }}</p>
       <p><strong>Energia:</strong> <br>{{ bestiario.energia }}</p>
     </section>
-    <!--{% endfor %}-->
+    {% endfor %}
   </main>
 </div>
 
 
 <script>
   function showContent(id) {
-    document.querySelectorAll('.content-section').forEach(sec => {
-      sec.classList.toggle('d-none', sec.getAttribute('data-content') !== id);
-    });
+    // Esconde todas as seções
+    document.querySelectorAll('.content-section').forEach(sec =>
+      sec.classList.toggle('d-none', sec.dataset.content !== id)
+    );
   }
 
-  document.querySelectorAll('.nav-link').forEach(el => {
-    el.addEventListener('click', e => {
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', e => {
       e.preventDefault();
-      const id = el.dataset.id;
+      const id = link.dataset.id;
       if (!id) return;
 
-      // Obtém o subtopico correspondente
+      // Alterna visibilidade do submenu correspondente
       const submenu = document.getElementById(`${id}-sub`);
-      const submenuEstavaVisivel = submenu && !submenu.classList.contains('d-none');
+      const isVisible = submenu && !submenu.classList.contains('d-none');
 
-      // Esconde todos os subtopicos
-      document.querySelectorAll('nav ul[id$="-sub"]').forEach(sub => {
-        sub.classList.add('d-none');
-      });
+      // Esconde todos os submenus
+      document.querySelectorAll('nav ul[id$="-sub"]').forEach(sub => 
+        sub.classList.add('d-none')
+      );
 
-      // Remove classe active de todos os links
-      document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
-      el.classList.add('active');
+      // Atualiza a classe ativa no menu
+      document.querySelectorAll('.nav-link').forEach(nav => 
+        nav.classList.remove('active')
+      );
+      link.classList.add('active');
 
-      // Mostra o conteudo
+      // Exibe a seção de conteúdo correspondente
       showContent(id);
 
-      if (submenu && !submenuEstavaVisivel) {
+      // Se existir e não estava visível, exibe este submenu
+      if (submenu && !isVisible) {
         submenu.classList.remove('d-none');
       }
     });
   });
 </script>
+
+
 
 
 {% endblock content %}

@@ -155,7 +155,7 @@ small.text-muted {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #2a2a2a;
+  background-color: rgba(34, 149, 209, 0.2);
   transition: 0.4s;
   border-radius: 30px;
   overflow: hidden;
@@ -265,6 +265,7 @@ small.text-muted {
 
 
   <!-- Sidebar das rotas -->
+
   <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title text-primary">Vale Místico</h5>
@@ -273,14 +274,16 @@ small.text-muted {
     <div class="offcanvas-body p-0">
       <nav class="nav flex-column">
        
-        <a href="{{url_for('home')}}" class="nav-link px-3 py-2"><i class="fa-solid fa-home me-2"></i> Home</a>
+        <a href="{{url_for('home')}}" class="nav-link px-3 py-2">  <i class="fa-solid fa-home me-2"></i> Home</a> 
         <a href="{{url_for('wiki')}}" class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Lista</a>
+        <a href="{{url_for('forum')}}" class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Fórum </a>
         
       </nav>
     </div>
   </div>
 
   <!-- Header -->
+
   <header>
     <div class="container text-center">
       <h1 class="display-4 fw-bold">Vale Místico</h1>
