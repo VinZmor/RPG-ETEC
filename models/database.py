@@ -2,13 +2,31 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+db = SQLAlchemy()
+
 class Forum(db.Model):
-    __tablename__ = 'lista'            # nome correto da tabela
-    id = db.Column(db.Integer, primary_key=True)   # adiciona chave primária obrigatória
+    __tablename__ = 'lista'
+    id = db.Column(db.Integer, primary_key=True)
     topico = db.Column(db.String(20))
     autor = db.Column(db.String(15))
     tema = db.Column(db.String(30))
     atualizacao = db.Column(db.Date)
+
+    # Relacionamento com comentários
+    comentarios = db.relationship('Comentario', backref='forum', lazy=True, cascade='all, delete-orphan')
+
+
+class Comentario(db.Model):
+    __tablename__ = 'comentario'
+    id = db.Column(db.Integer, primary_key=True)
+    texto = db.Column(db.Text, nullable=False)
+    autor = db.Column(db.String(50), nullable=True)
+    data = db.Column(db.DateTime, default=datetime.utcnow)
+    post_id = db.Column(db.Integer, db.ForeignKey('lista.id'), nullable=False)
+
 
 
 class Antepassado(db.Model):

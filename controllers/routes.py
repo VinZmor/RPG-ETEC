@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from models.database import Bestiario, Antepassado, Habilidade, Poder, Equipamento, Forum, db
+from models.database import Bestiario, Antepassado, Habilidade, Poder,Comentario, Equipamento, Forum, db
 
 def init_app(app):
     
@@ -30,7 +30,21 @@ def init_app(app):
     def forum():
         lista = Forum.query.all()
         return render_template('forum.html', lista=lista)
+
+    @app.route('/forum/<int:forum_id>', methods=['GET', 'POST'])
+    def respostas(forum_id):
+        forum = Forum.query.get_or_404(forum_id)
+        if request.method == 'POST':
+            conteudo = request.form['conteudo']
+            autor = request.form['autor']
+            comentario = Comentario(conteudo=conteudo, autor=autor, forum_id=forum.id)
+            db.session.add(comentario)
+            db.session.commit()
+            return redirect(url_for('respostas', forum_id=forum.id))
+        comentarios = Comentario.query.filter_by(forum_id=forum.id).all()
+        return render_template('respostas.html', forum=forum, comentarios=comentarios)
     
-    @app.route('/forum/respostas')
-    def respostas():
-        return render_template('respostas.html', )
+    @app.route('/forum/novo_topico')
+    def topico():
+        
+        return render_template('novo_topico.html')

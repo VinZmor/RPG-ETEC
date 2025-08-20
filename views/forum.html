@@ -4,11 +4,10 @@
 <main class="container my-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Fórum</h1>
-    <a  class="btn btn-danger">Novo Tópico</a>
+  <!--  <a href="{{ url_for('novo_topico') }}" class="btn btn-danger">Novo Tópico</a> -->
   </div>
 
   <section class="forum-list">
-    
     <div class="row font-weight-bold border-bottom py-2">
       <div class="col-md-6">Tópico</div>
       <div class="col-md-2 text-center">Autor</div>
@@ -16,19 +15,17 @@
       <div class="col-md-2 text-center">Última Atualização</div>
     </div>
 
-    
-    {% for lista in lista %}
+    {% for item in lista %}
     <div class="row py-3 border-bottom forum-item">
       <div class="col-md-6">
-        <h4><a href="{{url_for('respostas')}}">{{ lista.topico }}</a></h4>
-        <small class="text-muted">Tema: {{ lista.tema }}</small>
+        <h4><a href="{{ url_for('respostas', forum_id=item.id) }}">{{ item.topico }}</a></h4>
+        <small class="text-muted">Tema: {{ item.tema }}</small>
       </div>
-      <div class="col-md-2 text-center">{{ lista.autor }}</div>
+      <div class="col-md-2 text-center">{{ item.autor }}</div>
       <div class="col-md-2 text-center">—</div>
-      <div class="col-md-2 text-center">{{ lista.atualizacao or '—' }}</div>
+      <div class="col-md-2 text-center">{{ item.atualizacao or '—' }}</div>
     </div>
     {% endfor %}
-
   </section>
 </main>
 {% endblock content %}

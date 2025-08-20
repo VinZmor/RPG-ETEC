@@ -1,8 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-12">
-      <label for="observacao" class="form-label">Comentario</label>
-      <textarea class="form-control" name="observacao" id="observacao" rows="3" placeholder="Observações adicionais" required></textarea>
+<main class="container my-4">
+  <h1>{{ forum.topico }}</h1>
+  <p><strong>Autor:</strong> {{ forum.autor }}</p>
+  <p><strong>Tema:</strong> {{ forum.tema }}</p>
+  <p><strong>Última Atualização:</strong> {{ forum.atualizacao or '—' }}</p>
+
+  <section class="comentarios mt-4">
+    <h3>Comentários</h3>
+    {% for comentario in comentarios %}
+    <div class="comentario mb-3">
+      <p><strong>{{ comentario.autor }}</strong> comentou em {{ comentario.data_postagem }}</p>
+      <p>{{ comentario.conteudo }}</p>
     </div>
+    {% endfor %}
+  </section>
+
+  <section class="novo-comentario mt-4">
+    <h3>Adicionar Comentário</h3>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="autor" class="form-label">Seu Nome</label>
+        <input type="text" class="form-control" id="autor" name="autor" required>
+      </div>
+      <div class="mb-3">
+        <label for="conteudo" class="form-label">Comentário</label>
+        <textarea class="form-control" id="conteudo" name="conteudo" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Postar Comentário</button>
+    </form>
+  </section>
+</main>
 {% endblock content %}
