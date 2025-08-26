@@ -45,6 +45,6 @@ def init_app(app):
         return render_template('respostas.html', forum=forum, comentarios=comentarios)
     
     @app.route('/forum/novo_topico')
-    def topico():
+    def novo_topico():
         
         return render_template('novo_topico.html')

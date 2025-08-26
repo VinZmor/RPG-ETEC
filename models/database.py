@@ -15,9 +15,6 @@ class Forum(db.Model):
     tema = db.Column(db.String(30))
     atualizacao = db.Column(db.Date)
 
-    # Relacionamento com comentários
-    comentarios = db.relationship('Comentario', backref='forum', lazy=True, cascade='all, delete-orphan')
-
 
 class Comentario(db.Model):
     __tablename__ = 'comentario'

@@ -1,95 +1,214 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class="bg-gradient-to-b from-sky-50 to-white min-h-screen p-8 space-y-16">
-
+<div class="container py-4">
   <!-- Header -->
-  <header class="text-center space-y-4">
-    <h1 class="text-4xl font-extrabold text-sky-700">Plataforma RPG para Saúde Mental</h1>
-    <p class="text-lg text-slate-600 max-w-xl mx-auto">
+  <header class="text-center mb-5">
+    <h1 class="display-5 fw-bold text-primary mb-3">Plataforma RPG para Saúde Mental</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 700px;">
       Um ambiente gamificado que une a diversão do RPG com o cuidado da saúde mental,
-      alinhado ao <strong>ODS 3: Saúde e Bem-Estar</strong>.
+      alinhado ao <strong class="text-primary">ODS 3: Saúde e Bem-Estar</strong>.
     </p>
-    <a href="#projeto" class="inline-block mt-4 px-6 py-2 bg-sky-600 text-white rounded-xl hover:bg-sky-500 transition">
-      Conheça o Projeto
+    <a href="#projeto" class="btn btn-primary btn-lg mt-3 px-4">
+      Conheça o Projeto <i class="fas fa-arrow-down ms-2"></i>
     </a>
   </header>
 
   <!-- Missão e Gamificação -->
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="p-6 rounded-xl shadow text-center  hover:scale-105 transition">
-      <h3 class="font-bold text-xl text-sky-700 mb-2">Gamificação</h3>
-      <p class="text-slate-600">
-        RPG é uma ferramenta poderosa para melhorar o aprendizado, estimular o comportamento, desenvolver habilidades sociais
-        e promover o trabalho colaborativo, a criatividade e a interação.
-        <br>
-        <a class="text-sky-500 underline" href="https://unisales.br/wp-content/uploads/2023/06/OS-IMPACTOS-DA-PRATICA-DO-RPG-NA-ESFERA-PSICOSSOCIAL.pdf" target="_blank">Fonte: Unisale, Cezar, 2023</a>
-      </p>
+  <section class="row g-4 mb-5" id="projeto">
+    <div class="col-md-6">
+      <div class="card h-100 border-0 shadow-sm hover-shadow">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <i class="fas fa-dice-d20 fa-3x text-primary mb-3"></i>
+            <h3 class="card-title h4 text-primary">Gamificação</h3>
+          </div>
+          <p class="card-text text-muted">
+            RPG é uma ferramenta poderosa para melhorar o aprendizado, estimular o comportamento, desenvolver habilidades sociais
+            e promover o trabalho colaborativo, a criatividade e a interação.
+          </p>
+          <div class="mt-3">
+            <a href="https://unisales.br/wp-content/uploads/2023/06/OS-IMPACTOS-DA-PRATICA-DO-RPG-NA-ESFERA-PSICOSSOCIAL.pdf" 
+               target="_blank" class="text-primary text-decoration-none">
+              <i class="fas fa-link me-1"></i> Fonte: Unisale, Cezar, 2023
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
     
-    <div class="p-6 rounded-xl shadow text-center  hover:scale-105 transition">
-      <img class="w-24 h-24 mx-auto mb-4 rounded-full object-cover"
-           src="https://imgs.search.brave.com/svjTFQXtkn_9csBscjBkiSVwC9auBdANEYZqrakwVB4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3RpL2ZvdG9z/LWdyYXRpcy90Mi8x/NDkwODk3OS1lc3F1/aXpvZnJlbmlhLWNv/bS1zb2xpdGFyaW8t/ZS10cmlzdGUtbm8t/Y29uY2VpdG8tZGUt/ZGVwcmVzc2FvLWRl/LXNhdWRlLW1lbnRh/bC1tdWxoZXItZGVw/cmltaWRhLXNlbnRh/ZGEtY29udHJhLW8t/Y2hhby1lbS1jYXNh/LWNvbS1xdWFydG8t/ZXNjdXJvLXNlbnRp/bmRvLXNlLW1pc2Vy/YXZlbC1hcy1tdWxo/ZXJlcy1lc3Rhby1k/ZXByaW1pZGFzLW1l/ZHJvc2FzLWUtaW5m/ZWxpemVzLWZvdG8u/SlBH"
-           alt="Imagem sobre depressão">
-      <h3 class="font-bold text-xl text-sky-700 mb-2">Saúde Mental</h3>
-      <p class="text-slate-600 text-left text-sm">
-        <strong>Depressão Leve:</strong> Fadiga, insônia ou sono excessivo, alterações no apetite, dores leves.<br>
-        <strong>Moderada:</strong> Tristeza constante, desinteresse, irritabilidade, problemas de sono.<br>
-        <strong>Grave:</strong> Pensamentos suicidas, agitação, desesperança, dificuldade para tarefas simples.
-      </p>
-      <p class="mt-2 text-slate-500 text-sm">
-        🔗 <a class="text-sky-500 underline" href="https://clinicaohrpsiquiatria.com/estagios-da-depressao/" target="_blank">Estágios da depressão</a><br>
-        🔗 <a class="text-sky-500 underline" href="https://www.cnnbrasil.com.br/saude/pesquisas-apontam-aumento-nos-casos-de-depressao-no-brasil/" target="_blank">11,3% da população com depressão (2021)</a><br>
-        🔗 <a class="text-sky-500 underline" href="https://g1.globo.com/saude/noticia/2023/11/06/por-que-o-brasil-tem-a-populacao-mais-depressiva-da-america-latina.ghtml" target="_blank">5,8% dos brasileiros sofrem da doença</a>
-      </p>
+    <div class="col-md-6">
+      <div class="card h-100 border-0 shadow-sm hover-shadow">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <img class="rounded-circle mb-3" 
+                 src="https://imgs.search.brave.com/svjTFQXtkn_9csBscjBkiSVwC9auBdANEYZqrakwVB4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3RpL2ZvdG9z/LWdyYXRpcy90Mi8x/NDkwODk3OS1lc3F1/aXpvZnJlbmlhLWNv/bS1zb2xpdGFyaW8t/ZS10cmlzdGUtbm8t/Y29uY2VpdG8tZGUt/ZGVwcmVzc2FvLWRl/LXNhdWRlLW1lbnRh/bC1tdWxoZXItZGVw/cmltaWRhLXNlbnRh/ZGEtY29udHJhLW8t/Y2hhby1lbS1jYXNh/LWNvbS1xdWFydG8t/ZXNjdXJvLXNlbnRp/bmRvLXNlLW1pc2Vy/YXZlbC1hcy1tdWxo/ZXJlcy1lc3Rhby1k/ZXByaW1pZGFzLW1l/ZHJvc2FzLWUtaW5m/ZWxpemVzLWZvdG8u/SlBH"
+                 alt="Imagem sobre depressão" width="100" height="100" style="object-fit: cover;">
+            <h3 class="card-title h4 text-primary">Saúde Mental</h3>
+          </div>
+          <div class="card-text text-muted">
+            <p class="mb-2"><strong>Depressão Leve:</strong> Fadiga, insônia ou sono excessivo, alterações no apetite, dores leves.</p>
+            <p class="mb-2"><strong>Moderada:</strong> Tristeza constante, desinteresse, irritabilidade, problemas de sono.</p>
+            <p class="mb-3"><strong>Grave:</strong> Pensamentos suicidas, agitação, desesperança, dificuldade para tarefas simples.</p>
+            
+            <div class="links-container">
+              <div class="mb-1">
+                <a href="https://clinicaohrpsiquiatria.com/estagios-da-depressao/" target="_blank" class="text-primary text-decoration-none">
+                  <i class="fas fa-external-link-alt me-1"></i> Estágios da depressão
+                </a>
+              </div>
+              <div class="mb-1">
+                <a href="https://www.cnnbrasil.com.br/saude/pesquisas-apontam-aumento-nos-casos-de-depressao-no-brasil/" target="_blank" class="text-primary text-decoration-none">
+                  <i class="fas fa-external-link-alt me-1"></i> 11,3% da população com depressão (2021)
+                </a>
+              </div>
+              <div>
+                <a href="https://g1.globo.com/saude/noticia/2023/11/06/por-que-o-brasil-tem-a-populacao-mais-depressiva-da-america-latina.ghtml" target="_blank" class="text-primary text-decoration-none">
+                  <i class="fas fa-external-link-alt me-1"></i> 5,8% dos brasileiros sofrem da doença
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Objetivos -->
-  <section class="max-w-4xl mx-auto p-6 rounded-xl shadow space-y-4">
-    <h2 class="text-2xl font-bold text-sky-700 text-center">Objetivos do Projeto</h2>
-    <ul class="list-disc list-inside text-slate-700 text-lg space-y-2">
-      <li>Criar um ambiente de apoio para pessoas com depressão leve ou moderada.</li>
-      <li>Desenvolver regras claras e mecânicas acessíveis para o jogo.</li>
-      <li>Oferecer um aplicativo mobile para facilitar o acesso e uso da plataforma.</li>
-    </ul>
-  </section>
-
-  <!-- Sistema -->
-  <section class="max-w-4xl mx-auto  p-6 rounded-xl shadow space-y-4">
-    <h2 class="text-2xl font-bold text-sky-700 text-center">Sistema RPG (TTRPG)</h2>
-    <ul class="list-disc list-inside text-slate-700 text-lg space-y-2">
-      <li>Regras simples e intuitivas</li>
-      <li>Uso de apenas um dado comum de 6 lados</li>
-      <li>Inclui exemplos de jogo para iniciantes</li>
-    </ul>
-  </section>
-
-  <!-- Equipe -->
-  <section>
-    <h2 class="text-2xl font-bold mb-6 text-center text-sky-700">Nossa Equipe</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {% for nome, descricao in [('Larissa', 'Desenvolvedora principal da aplicação mobile'),
-                                 ('Vinícius', 'Desenvolvedor do website'),
-                                 ('Matheus', 'Desenvolvedor do sistema e mobile')] %}
-      <div class="p-4 rounded-xl shadow text-center">
-        <h3 class="font-bold text-lg text-sky-700">{{ nome }}</h3>
-        <p class="text-slate-600">{{ descricao }}</p>
+  <section class="card border-0 shadow-sm mb-5">
+    <div class="card-body p-5">
+      <h2 class="text-center text-primary mb-4">Objetivos do Projeto</h2>
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-hands-helping fa-2x text-primary"></i>
+          </div>
+          <h4 class="h5">Ambiente de Apoio</h4>
+          <p class="text-muted">Criar um ambiente de apoio para pessoas com depressão leve ou moderada.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-book fa-2x text-primary"></i>
+          </div>
+          <h4 class="h5">Regras Claras</h4>
+          <p class="text-muted">Desenvolver regras claras e mecânicas acessíveis para o jogo.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-mobile-alt fa-2x text-primary"></i>
+          </div>
+          <h4 class="h5">Aplicativo Mobile</h4>
+          <p class="text-muted">Oferecer um aplicativo mobile para facilitar o acesso e uso da plataforma.</p>
+        </div>
       </div>
-      {% endfor %}
     </div>
   </section>
 
-  <!-- Pesquisa -->
-  <section id="projeto" class="bg-sky-100 p-8 rounded-2xl shadow text-center max-w-4xl mx-auto">
-    <h2 class="text-xl font-bold text-sky-700 mb-4">Sobre a Pesquisa</h2>
-    <p class="text-slate-700 text-lg leading-relaxed">
-      Segundo Germano Henning (2021), a terapia analítico-comportamental com RPG e gamificação
-      pode auxiliar adolescentes a desenvolver habilidades sociais e combater sintomas depressivos.
-      Dados apontam que os casos de depressão chegaram a <strong>11,3% em 2021</strong>. Nosso projeto busca
-      criar um ambiente acessível e estruturado para o tratamento e melhora dessas condições.
-    </p>
+  <!-- Sistema -->
+  <section class="card border-0 shadow-sm mb-5">
+    <div class="card-body p-5">
+      <h2 class="text-center text-primary mb-4">Sistema RPG (TTRPG)</h2>
+      <div class="row g-4 text-center">
+        <div class="col-md-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-lightbulb fa-2x text-primary"></i>
+          </div>
+          <h4 class="h5">Regras Simples</h4>
+          <p class="text-muted">Regras simples e intuitivas para todos os jogadores</p>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-dice fa-2x text-primary"></i>
+          </div>
+          <h4 class="h5">D6 Único</h4>
+          <p class="text-muted">Uso de apenas um dado comum de 6 lados</p>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-book-open fa-2x text-primary"></i>
+          </div>
+          <h4 class="h5">Exemplos Inclusos</h4>
+          <p class="text-muted">Inclui exemplos de jogo para iniciantes</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-</main>
+  <!-- Equipe -->
+  <section class="mb-5">
+    <h2 class="text-center text-primary mb-4">Nossa Equipe</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 text-center shadow-sm team-card">
+          <div class="card-body p-4">
+            <div class="team-img mx-auto mb-3">
+              <i class="fas fa-user-circle fa-3x text-primary"></i>
+            </div>
+            <h4 class="card-title h5 text-primary">Larissa</h4>
+            <p class="card-text text-muted">Desenvolvedora principal da aplicação mobile</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 text-center shadow-sm team-card">
+          <div class="card-body p-4">
+            <div class="team-img mx-auto mb-3">
+              <i class="fas fa-user-circle fa-3x text-primary"></i>
+            </div>
+            <h4 class="card-title h5 text-primary">Vinícius</h4>
+            <p class="card-text text-muted">Desenvolvedor do website</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 text-center shadow-sm team-card">
+          <div class="card-body p-4">
+            <div class="team-img mx-auto mb-3">
+              <i class="fas fa-user-circle fa-3x text-primary"></i>
+            </div>
+            <h4 class="card-title h5 text-primary">Matheus</h4>
+            <p class="card-text text-muted">Desenvolvedor do sistema e mobile</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hover-shadow {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .team-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .team-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(34, 149, 209, 0.1);
+  }
+  
+  .links-container a {
+    transition: color 0.2s ease;
+  }
+  
+  .links-container a:hover {
+    color: #00283D !important;
+  }
+</style>
 {% endblock content %}
