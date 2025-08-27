@@ -1,31 +1,193 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class="container my-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>Fórum</h1>
-   <a href="{{ url_for('novo_topico') }}" class="btn btn-danger">Novo Tópico</a> 
+<div class="container py-4">
+  <!-- Cabeçalho do Fórum -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h2 text-primary mb-1"><i class="fas fa-comments me-2"></i> Fórum da Comunidade</h1>
+      <p class="text-muted">Compartilhe ideias, faça perguntas e interaja com outros jogadores</p>
+    </div>
+    <a href="{{ url_for('novo_topico') }}" class="btn btn-primary">
+      <i class="fas fa-plus-circle me-2"></i> Novo Tópico
+    </a>
   </div>
 
-  <section class="forum-list">
-    <div class="row font-weight-bold border-bottom py-2">
-      <div class="col-md-6">Tópico</div>
-      <div class="col-md-2 text-center">Autor</div>
-      <div class="col-md-2 text-center">Respostas</div>
-      <div class="col-md-2 text-center">Última Atualização</div>
-    </div>
-
-    {% for item in lista %}
-    <div class="row py-3 border-bottom forum-item">
-      <div class="col-md-6">
-        <h4 ><a href="{{ url_for('respostas', forum_id=item.id) }}">{{ item.topico }}</a></h4>
-        <small class="text-muted">Tema: {{ item.tema }}</small>
+  <!-- Estatísticas Rápidas -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card stat-card border-0 bg-light">
+        <div class="card-body text-center py-3">
+          <h3 class="stat-number text-primary mb-0">{{ lista|length }}</h3>
+          <p class="stat-label text-muted mb-0">Tópicos</p>
+        </div>
       </div>
-      <div class="col-md-2 text-center">{{ item.autor }}</div>
-      <div class="col-md-2 text-center">—</div>
-      <div class="col-md-2 text-center">{{ item.atualizacao or '—' }}</div>
     </div>
-    {% endfor %}
-  </section>
-</main>
+    <div class="col-md-4">
+      <div class="card stat-card border-0 bg-light">
+        <div class="card-body text-center py-3">
+          <h3 class="stat-number text-primary mb-0">—</h3>
+          <p class="stat-label text-muted mb-0">Respostas</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card stat-card border-0 bg-light">
+        <div class="card-body text-center py-3">
+          <h3 class="stat-number text-primary mb-0">{{ lista|length }}</h3>
+          <p class="stat-label text-muted mb-0">Participantes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtros e Busca -->
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body py-3">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-2 mb-md-0">
+          <div class="d-flex align-items-center">
+            <span class="me-2 text-muted">Filtrar por:</span>
+            <select class="form-select form-select-sm" style="width: auto;">
+              <option selected>Todos os temas</option>
+              <option>Regras</option>
+              <option>Personagens</option>
+              <option>Aventuras</option>
+              <option>Dúvidas</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar no fórum...">
+            <button class="btn btn-primary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Tópicos -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-header bg-light py-3">
+      <div class="row fw-bold">
+        <div class="col-md-6">Tópico</div>
+        <div class="col-md-2 text-center">Autor</div>
+        <div class="col-md-2 text-center">Respostas</div>
+        <div class="col-md-2 text-center">Última Atualização</div>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      {% if lista|length > 0 %}
+        {% for item in lista %}
+        <div class="row align-items-center py-3 border-bottom forum-item {% if loop.index % 2 == 0 %}bg-light{% endif %}">
+          <div class="col-md-6">
+            <div class="d-flex align-items-center">
+              <div class="forum-icon me-3 text-primary">
+                <i class="fas fa-comment fa-lg"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">
+                  <a href="{{ url_for('respostas', forum_id=item.id) }}" class="text-decoration-none text-dark">{{ item.topico }}</a>
+                </h5>
+                <small class="text-muted">
+                  <span class="badge bg-primary-light">{{ item.tema }}</span>
+                  • Iniciado por {{ item.autor }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 text-center">
+            <div class="author-avatar">
+              <i class="fas fa-user-circle text-primary"></i>
+              <span class="d-block small mt-1">{{ item.autor }}</span>
+            </div>
+          </div>
+          <div class="col-md-2 text-center">
+            <span class="badge bg-secondary rounded-pill">—</span>
+          </div>
+          <div class="col-md-2 text-center">
+            <small class="text-muted">{{ item.atualizacao or '—' }}</small>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="text-center py-5">
+          <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+          <h4 class="text-muted">Nenhum tópico ainda</h4>
+          <p class="text-muted">Seja o primeiro a iniciar uma discussão!</p>
+          <a href="{{ url_for('novo_topico') }}" class="btn btn-primary mt-2">
+            <i class="fas fa-plus-circle me-2"></i> Criar Primeiro Tópico
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Paginação -->
+  {% if lista|length > 0 %}
+  <nav aria-label="Navegação do fórum" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+      </li>
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#">1</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Próxima</a>
+      </li>
+    </ul>
+  </nav>
+  {% endif %}
+</div>
+
+<style>
+  .forum-item {
+    transition: background-color 0.2s ease;
+  }
+  
+  .forum-item:hover {
+    background-color: rgba(34, 149, 209, 0.05) !important;
+  }
+  
+  .forum-icon {
+    width: 40px;
+    text-align: center;
+  }
+  
+  .stat-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+  }
+  
+  .author-avatar {
+    font-size: 1.8rem;
+  }
+  
+  .bg-primary-light {
+    background-color: rgba(34, 149, 209, 0.15) !important;
+    color: #2295D1;
+  }
+  
+  .badge {
+    font-weight: 500;
+  }
+</style>
 {% endblock content %}
