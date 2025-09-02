@@ -1,37 +1,37 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           10.4.32-MariaDB - mariadb.org binary distribution
--- OS do Servidor:               Win64
--- HeidiSQL Versão:              12.10.0.7000
+-- Versão do servidor:           10.1.33-MariaDB - mariadb.org binary distribution
+-- OS do Servidor:               Win32
+-- HeidiSQL Versão:              9.5.0.5196
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
 -- Copiando estrutura do banco de dados para etec_rpg
-CREATE DATABASE IF NOT EXISTS `etec_rpg` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+DROP DATABASE IF EXISTS `etec_rpg`;
+CREATE DATABASE IF NOT EXISTS `etec_rpg` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `etec_rpg`;
 
--- Copiando estrutura para tabela etec_rpg.antepassado
-CREATE TABLE IF NOT EXISTS `antepassado` (
+-- Copiando estrutura para tabela etec_rpg.antepassados
+DROP TABLE IF EXISTS `antepassados`;
+CREATE TABLE IF NOT EXISTS `antepassados` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
-  `descricao` text DEFAULT NULL,
+  `descricao` text,
   `pericia` varchar(200) DEFAULT NULL,
   `equipamento` varchar(200) DEFAULT NULL,
   `credito` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.antepassado: ~37 rows (aproximadamente)
-INSERT INTO `antepassado` (`id`, `nome`, `descricao`, `pericia`, `equipamento`, `credito`) VALUES
+-- Copiando dados para a tabela etec_rpg.antepassados: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `antepassados` DISABLE KEYS */;
+INSERT IGNORE INTO `antepassados` (`id`, `nome`, `descricao`, `pericia`, `equipamento`, `credito`) VALUES
 	(1, 'Estudante', 'Você é um estudante no ensino médio ou faculdade.', 'Atualidades: +2, Análise +1', 'Bolsa Larga', '0'),
 	(2, 'Artista Marcial', 'Você dedica boa parte do seu tempo livre à prática de artes marciais, ou pratica profissionalmente.', ' Luta +2, Atletismo +1', 'Soco Inglês', '1'),
 	(3, 'Fazendeiro', 'Você tem aptidão com a natureza, trabalhando no campo ou  rancho.', 'Sobrevivência +2 (PE), Lâmina +1', 'Enxada', '2'),
@@ -69,12 +69,14 @@ INSERT INTO `antepassado` (`id`, `nome`, `descricao`, `pericia`, `equipamento`, 
 	(35, 'Cientista', 'Você é um profissional em uma área complexa (Química, Física, etc), embora muitos a vejam com difícil demais, para você aquilo tem as maravilhas disso.', 'Atualidades +2, Análise +1', 'Óculos de visão no escuro', '3'),
 	(36, 'Desempregado', 'Devido ao sistema capitalista, houve uma crescente onda de desempregados, ou seja, pessoas que não possuem empregos.', ' Iniciativa +1, Procurar +2', 'Celular', '0'),
 	(37, 'Fanático', 'Seu interesse em algo é inigualável, o fazendo um seguidor fiel dessa ideologia. (Substitua o “X” por seu fanatismo)', 'Fanático por X +3 (PE) ', 'Livro sobre X', '1');
+/*!40000 ALTER TABLE `antepassados` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela etec_rpg.bestiario
+DROP TABLE IF EXISTS `bestiario`;
 CREATE TABLE IF NOT EXISTS `bestiario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
-  `descricao` text DEFAULT NULL,
+  `descricao` text,
   `nd` varchar(50) DEFAULT NULL,
   `atributos` varchar(200) DEFAULT NULL,
   `pericias` varchar(200) DEFAULT NULL,
@@ -83,43 +85,50 @@ CREATE TABLE IF NOT EXISTS `bestiario` (
   `mental` int(11) DEFAULT NULL,
   `energia` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.bestiario: ~6 rows (aproximadamente)
-INSERT INTO `bestiario` (`id`, `nome`, `descricao`, `nd`, `atributos`, `pericias`, `velocidade`, `vida`, `mental`, `energia`) VALUES
+-- Copiando dados para a tabela etec_rpg.bestiario: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `bestiario` DISABLE KEYS */;
+INSERT IGNORE INTO `bestiario` (`id`, `nome`, `descricao`, `nd`, `atributos`, `pericias`, `velocidade`, `vida`, `mental`, `energia`) VALUES
 	(1, 'Cachorro', 'Um cachorro de grande porte.', ' 1/2', 'FOR 2, AGI 2, CON 2, INT 0, PER 4', 'Procurar 3, Furtividade 2', 8, 10, 6, 0),
 	(2, 'Lobo, Padrão', ' Um lobo, similar a um cachorro, mas consideravelmente maior e mais selvagem.', '1', 'FOR 3, AGI 2, CON 2, INT 0, PER 4', 'Procurar 3, Furtividade 2', 8, 18, 10, 0),
 	(3, 'Minotauro', 'Um híbrido entre humano e touro, racional mas geralmente hostil. Pode ser encontrado em labirintos antigos, procurando uma saída futilmente.', '7', 'FOR 4, CON 3, VON 2, SOR 0, ', 'Atletismo 3, Intimidação 3, Iniciativa 2', 7, 53, 21, 12),
 	(4, 'Unicórnio', 'Um cavalo mágico com inteligência humana, um chifre branco no meio da testa e cabelo arco-íris', '10', 'FOR 2, INT 2, VON 4, CON 2 SOR 3 ', 'Charme 3', 10, 42, 30, 30),
 	(5, 'Zumbi, Padrão', 'Criatura que ressurgiu após a morte, seu corpo agora decompondo, como suas habilidades, sua existência se resume a apenas alimentar.', '1/2', 'FOR 2, AGI 0, CON 3, INT 0', NULL, 4, 22, 0, 0),
 	(6, 'Zumbi, Raivoso', 'Similar a um zumbi comum, exceto que é coberto e uma substância similar a sangue, e se move muito mais rapidamente e ferozmente.', NULL, 'FOR 2, AGI 3, CON 2, INT 0', 'Atletismo 2, Acrobacia 2.', 8, 26, 0, 0);
+/*!40000 ALTER TABLE `bestiario` ENABLE KEYS */;
 
--- Copiando estrutura para tabela etec_rpg.equipamento
-CREATE TABLE IF NOT EXISTS `equipamento` (
+-- Copiando estrutura para tabela etec_rpg.equipamentos
+DROP TABLE IF EXISTS `equipamentos`;
+CREATE TABLE IF NOT EXISTS `equipamentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
   `custo` varchar(50) DEFAULT NULL,
   `volume` varchar(50) DEFAULT NULL,
-  `descricao` text DEFAULT NULL,
+  `descricao` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.equipamento: ~2 rows (aproximadamente)
-INSERT INTO `equipamento` (`id`, `nome`, `custo`, `volume`, `descricao`) VALUES
+-- Copiando dados para a tabela etec_rpg.equipamentos: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `equipamentos` DISABLE KEYS */;
+INSERT IGNORE INTO `equipamentos` (`id`, `nome`, `custo`, `volume`, `descricao`) VALUES
 	(1, 'Pé de Cabra', '2C', '1', 'Adicione +1 em testes de força onde sua alavanca pode ser utilizada. Serve como um bastão curto.'),
 	(2, 'Saco de Dormir', '2C', '1', 'Permite o sono sem uma cama, evitando penalidades.');
+/*!40000 ALTER TABLE `equipamentos` ENABLE KEYS */;
 
--- Copiando estrutura para tabela etec_rpg.habilidade
-CREATE TABLE IF NOT EXISTS `habilidade` (
+-- Copiando estrutura para tabela etec_rpg.habilidades
+DROP TABLE IF EXISTS `habilidades`;
+CREATE TABLE IF NOT EXISTS `habilidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
   `condicao` varchar(200) DEFAULT NULL,
-  `descricao` text DEFAULT NULL,
+  `descricao` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.habilidade: ~32 rows (aproximadamente)
-INSERT INTO `habilidade` (`id`, `nome`, `condicao`, `descricao`) VALUES
+-- Copiando dados para a tabela etec_rpg.habilidades: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `habilidades` DISABLE KEYS */;
+INSERT IGNORE INTO `habilidades` (`id`, `nome`, `condicao`, `descricao`) VALUES
 	(1, 'Treino', 'Nenhuma', 'Você ganha 2+INT pontos de perícia. '),
 	(2, 'Punho de Aço', 'Força 2', 'O dano do seu ataque desarmado aumenta para 1d2+Força, e seu crítico causa Lerdo por uma rodada.'),
 	(3, 'Pés Ágeis', 'Agilidade 2', 'Sua velocidade aumenta por 2.'),
@@ -152,20 +161,23 @@ INSERT INTO `habilidade` (`id`, `nome`, `condicao`, `descricao`) VALUES
 	(30, 'Argumento Convincente', 'Persuasão 3', 'Quando for fazer um teste de persuasão, você pode gastar 2 energia para adicionar INT e VON ao teste.'),
 	(31, 'Salvador', 'Primeiros-Socorros 3', 'Quando você remover a condição morrendo de uma criatura, você pode gastar 4 energia para acordar ela, curando 2d3+INT pontos de vida.'),
 	(32, 'Sexto-Sentido', 'Procurar 3', 'No começo do seu turno, você pode gastar 5 energia para ganhar um sentido cego de 3m ao seu redor por 1 minuto ');
+/*!40000 ALTER TABLE `habilidades` ENABLE KEYS */;
 
--- Copiando estrutura para tabela etec_rpg.poder
-CREATE TABLE IF NOT EXISTS `poder` (
+-- Copiando estrutura para tabela etec_rpg.poderes
+DROP TABLE IF EXISTS `poderes`;
+CREATE TABLE IF NOT EXISTS `poderes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
   `requisito` varchar(200) DEFAULT NULL,
   `custo` varchar(100) DEFAULT NULL,
   `uso` varchar(200) DEFAULT NULL,
-  `descricao` text DEFAULT NULL,
+  `descricao` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.poder: ~9 rows (aproximadamente)
-INSERT INTO `poder` (`id`, `nome`, `requisito`, `custo`, `uso`, `descricao`) VALUES
+-- Copiando dados para a tabela etec_rpg.poderes: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `poderes` DISABLE KEYS */;
+INSERT IGNORE INTO `poderes` (`id`, `nome`, `requisito`, `custo`, `uso`, `descricao`) VALUES
 	(1, 'Invisibilidade', 'Nenhum', '1 Energia por rodada.', ' 1 Ação principal', 'Você encosta em uma criatura ou objeto, os tornando invisíveis. O efeito dura até ser cancelado por você ou pela criatura. Caso o alvo seja um objeto, o custo diminui para 1 energia por minuto.'),
 	(2, 'Transferir Vitalidade', 'Nenhum', '5 Vida', '1 Ação Principal', 'Você cura 4 pontos de vida de uma criatura em alcance curto de você. '),
 	(3, 'Teletransporte Rápido', 'Agilidade 2', '2 Energia', '1 Ação de movimento.', 'Você se teletransporta a um ponto que consiga ver dentro do seu alcance médio.'),
@@ -175,9 +187,42 @@ INSERT INTO `poder` (`id`, `nome`, `requisito`, `custo`, `uso`, `descricao`) VAL
 	(7, 'Tratar', '1 Poder, Medicina 2', 'X Energia', '1 Minuto', 'Encoste em uma criatura por 1 minuto, curando 2 de vida por ponto de energia gastado'),
 	(8, 'Acelerar', '2 Poderes', ' 4 Energia, +2 por turno', '1 Ação Principal', ' Encoste em uma criatura. No próximo turno daquela criatura, ela tem mais 1 ação principal. No final do turno, você pode gastar +2 energia para evitar que o efeito acabe.'),
 	(9, 'Pertubar', 'Nenhum', '4 Energia', '1 Ação Principal', 'Escolha um alvo a alcance médio. O alvo deve fazer um teste de VON DT (3 + sua VON).');
+/*!40000 ALTER TABLE `poderes` ENABLE KEYS */;
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+-- Copiando estrutura para tabela etec_rpg.respostas
+DROP TABLE IF EXISTS `respostas`;
+CREATE TABLE IF NOT EXISTS `respostas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `autor` varchar(100) NOT NULL,
+  `conteudo` text NOT NULL,
+  `data_criacao` datetime DEFAULT NULL,
+  `topico_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `topico_id` (`topico_id`),
+  CONSTRAINT `respostas_ibfk_1` FOREIGN KEY (`topico_id`) REFERENCES `topicos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela etec_rpg.respostas: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `respostas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `respostas` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela etec_rpg.topicos
+DROP TABLE IF EXISTS `topicos`;
+CREATE TABLE IF NOT EXISTS `topicos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `autor` varchar(100) NOT NULL,
+  `topico` varchar(200) NOT NULL,
+  `categoria` varchar(50) NOT NULL,
+  `conteudo` text NOT NULL,
+  `data_criacao` datetime DEFAULT NULL,
+  `data_atualizacao` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela etec_rpg.topicos: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `topicos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `topicos` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

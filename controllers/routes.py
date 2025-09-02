@@ -26,6 +26,8 @@ def init_app(app):
             rpg_poder=rpg_poder,
             rpg_equipamento=rpg_equipamento
         )
+        
+        
 
     @app.route('/forum')
     def forum():

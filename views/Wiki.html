@@ -316,14 +316,18 @@
       </li>
 
       <li class="nav-item">
+
         <a href="#" data-id="antepassados" class="nav-link">Antepassados</a>
         <ul id="antepassados-sub" class="nav flex-column ms-3 d-none">
-          {% for antepassado in rpg_antepassado %}
-          <li class="nav-item">
-          <a href="#" data-id="{{ antepassado.id }}"  class="nav-link">{{ antepassado.nome }}</a>
-</li>
-          {% endfor %}
+
+            {% for antepassado in rpg_antepassado %}
+            <li class="nav-item">
+            <a href="#" data-id="{{ antepassado.id }}"  class="nav-link">{{ antepassado.nome }}</a>
+          </li>
+            {% endfor %}
+
         </ul>
+
       </li>
 
       <li class="nav-item">
@@ -338,12 +342,14 @@
       </li>
 
       <li class="nav-item">
-        <a href="#" data-id="habilidades" class="nav-link">Habilidades</a>
+        <a href="#" data-id="habilidades" class="nav-link ">Habilidades</a>
         <ul id="habilidades-sub" class="nav flex-column ms-3 d-none">
           {% for habilidade in rpg_habilidade %}
           <li class="nav-item">
             <a href="#" data-id="{{ habilidade.id }}" class="nav-link">{{ habilidade.nome }}</a>
           </li>
+           {% else %}
+    <li>Nenhum antepassado encontrado</li>
           {% endfor %}
         </ul>
       </li>
