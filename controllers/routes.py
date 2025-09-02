@@ -1,16 +1,17 @@
-from flask import render_template, request, redirect, url_for
-from models.database import Bestiario, Antepassado, Habilidade, Poder,Comentario, Equipamento, Forum, db
+
+from flask import render_template, request, redirect, url_for, jsonify
+from models.database import Bestiario, Antepassado, Habilidade, Poder, Resposta, Equipamento, Topico, db
 
 def init_app(app):
     
     @app.route('/')
-    
     def home():
         return render_template('home.html')
     
     @app.route('/wiki', methods=['GET', 'POST'])
     @app.route('/wiki/<int:id>', methods=['GET', 'POST'])
-    def wiki(id=None):
+    def wiki(id=None):  
+        
         rpg_bestiario = Bestiario.query.all()
         rpg_antepassado = Antepassado.query.all()
         rpg_habilidade = Habilidade.query.all()
@@ -28,23 +29,84 @@ def init_app(app):
 
     @app.route('/forum')
     def forum():
-        lista = Forum.query.all()
-        return render_template('forum.html', lista=lista)
+        # Página principal do fórum
+        topicos = Topico.query.order_by(Topico.data_criacao.desc()).all()
+        return render_template('forum.html', topicos=topicos)
 
-    @app.route('/forum/<int:forum_id>', methods=['GET', 'POST'])
-    def respostas(forum_id):
-        forum = Forum.query.get_or_404(forum_id)
-        if request.method == 'POST':
-            conteudo = request.form['conteudo']
-            autor = request.form['autor']
-            comentario = Comentario(conteudo=conteudo, autor=autor, forum_id=forum.id)
-            db.session.add(comentario)
-            db.session.commit()
-            return redirect(url_for('respostas', forum_id=forum.id))
-        comentarios = Comentario.query.filter_by(forum_id=forum.id).all()
-        return render_template('respostas.html', forum=forum, comentarios=comentarios)
-    
-    @app.route('/forum/novo_topico')
-    def novo_topico():
+    @app.route('/api/topicos', methods=['GET', 'POST'])
+    def api_topicos():
+        if request.method == 'GET':
+            topicos = Topico.query.order_by(Topico.data_criacao.desc()).all()
+            return jsonify([topico.to_dict() for topico in topicos])
         
-        return render_template('novo_topico.html')
+        elif request.method == 'POST':
+            data = request.get_json()
+            novo_topico = Topico(
+                autor=data['autor'],
+                topico=data['topico'],
+                categoria=data['categoria'],
+                conteudo=data['conteudo']
+            )
+            db.session.add(novo_topico)
+            db.session.commit()
+            return jsonify(novo_topico.to_dict())
+
+    @app.route('/api/topicos/<int:topico_id>', methods=['GET'])
+    def api_topico_detalhe(topico_id):
+        topico = Topico.query.get_or_404(topico_id)
+        return jsonify(topico.to_dict())
+
+    @app.route('/api/topicos/<int:topico_id>/respostas', methods=['GET', 'POST'])
+    def api_respostas(topico_id):
+        if request.method == 'GET':
+            respostas = Resposta.query.filter_by(topico_id=topico_id).order_by(Resposta.data_criacao.asc()).all()
+            return jsonify([resposta.to_dict() for resposta in respostas])
+        
+        elif request.method == 'POST':
+            data = request.get_json()
+            nova_resposta = Resposta(
+                autor=data['autor'],
+                conteudo=data['conteudo'],
+                topico_id=topico_id
+            )
+            db.session.add(nova_resposta)
+            db.session.commit()
+            return jsonify(nova_resposta.to_dict())
+
+    @app.route('/api/estatisticas')
+    def api_estatisticas():
+        total_topicos = Topico.query.count()
+        
+        # Calcular total de respostas
+        total_respostas = db.session.query(db.func.count(Resposta.id)).scalar()
+        
+        # Calcular usuários únicos (autores de tópicos e respostas)
+        autores_topicos = db.session.query(Topico.autor).distinct()
+        autores_respostas = db.session.query(Resposta.autor).distinct()
+        usuarios_unicos = set([autor[0] for autor in autores_topicos] + [autor[0] for autor in autores_respostas])
+        
+        return jsonify({
+            'totalTopicos': total_topicos,
+            'totalRespostas': total_respostas,
+            'totalUsuarios': len(usuarios_unicos)
+        })
+
+    @app.route('/api/topicos/filtrar/<categoria>')
+    def api_filtrar_topicos(categoria):
+        if categoria == 'todos':
+            topicos = Topico.query.order_by(Topico.data_criacao.desc()).all()
+        else:
+            topicos = Topico.query.filter_by(categoria=categoria).order_by(Topico.data_criacao.desc()).all()
+        
+        return jsonify([topico.to_dict() for topico in topicos])
+
+    @app.route('/api/topicos/buscar/<termo>')
+    def api_buscar_topicos(termo):
+        # Busca em tópicos e conteúdo
+        topicos = Topico.query.filter(
+            (Topico.topico.ilike(f'%{termo}%')) | 
+            (Topico.conteudo.ilike(f'%{termo}%')) |
+            (Topico.autor.ilike(f'%{termo}%'))
+        ).order_by(Topico.data_criacao.desc()).all()
+        
+        return jsonify([topico.to_dict() for topico in topicos])

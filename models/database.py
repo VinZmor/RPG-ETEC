@@ -1,35 +1,56 @@
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 db = SQLAlchemy()
 
-class Forum(db.Model):
-    __tablename__ = 'lista'
+class Topico(db.Model):
+    __tablename__ = 'topicos'
+    
     id = db.Column(db.Integer, primary_key=True)
-    topico = db.Column(db.String(20))
-    autor = db.Column(db.String(15))
-    tema = db.Column(db.String(30))
-    atualizacao = db.Column(db.Date)
+    autor = db.Column(db.String(100), nullable=False)
+    topico = db.Column(db.String(200), nullable=False)
+    categoria = db.Column(db.String(50), nullable=False)  # duvida, procurando, sugestao, discussao
+    conteudo = db.Column(db.Text, nullable=False)
+    data_criacao = db.Column(db.DateTime, default=datetime.utcnow)
+    data_atualizacao = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relacionamento com respostas
+    respostas = db.relationship('Resposta', backref='topico', lazy=True, cascade='all, delete-orphan')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'autor': self.autor,
+            'topico': self.topico,
+            'categoria': self.categoria,
+            'conteudo': self.conteudo,
+            'dataCriacao': self.data_criacao.isoformat(),
+            'respostas': [resposta.to_dict() for resposta in self.respostas]
+        }
 
-
-class Comentario(db.Model):
-    __tablename__ = 'comentario'
+class Resposta(db.Model):
+    __tablename__ = 'respostas'
+    
     id = db.Column(db.Integer, primary_key=True)
-    texto = db.Column(db.Text, nullable=False)
-    autor = db.Column(db.String(50), nullable=True)
-    data = db.Column(db.DateTime, default=datetime.utcnow)
-    post_id = db.Column(db.Integer, db.ForeignKey('lista.id'), nullable=False)
-
-
+    autor = db.Column(db.String(100), nullable=False)
+    conteudo = db.Column(db.Text, nullable=False)
+    data_criacao = db.Column(db.DateTime, default=datetime.utcnow)
+    topico_id = db.Column(db.Integer, db.ForeignKey('topicos.id'), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'autor': self.autor,
+            'conteudo': self.conteudo,
+            'dataCriacao': self.data_criacao.isoformat()
+        }
 
 class Antepassado(db.Model):
-    __tablename__ = 'antepassado'
+    __tablename__ = 'antepassados'
     
-
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))
     descricao = db.Column(db.Text)  
@@ -37,47 +58,26 @@ class Antepassado(db.Model):
     equipamento = db.Column(db.String(200)) 
     credito = db.Column(db.String(50))
 
-    def __init__(self, pericia, equipamento, credito, descricao, nome):
-        self.nome = nome
-        self.descricao = descricao
-        self.pericia = pericia
-        self.equipamento = equipamento
-        self.credito = credito
-
-
 class Equipamento(db.Model):
-    __tablename__ = 'equipamento'
-
+    __tablename__ = 'equipamentos'
+    
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))
     custo = db.Column(db.String(50))
     volume = db.Column(db.String(50))
     descricao = db.Column(db.Text)  
 
-    def __init__(self, nome, custo, descricao, volume):
-        self.nome = nome
-        self.custo = custo
-        self.descricao = descricao
-        self.volume = volume
-
-
 class Habilidade(db.Model):
-    __tablename__ = 'habilidade'
-
+    __tablename__ = 'habilidades'
+    
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))
     condicao = db.Column(db.String(200))  
     descricao = db.Column(db.Text)
 
-    def __init__(self, nome, condicao, descricao):
-        self.nome = nome
-        self.condicao = condicao
-        self.descricao = descricao
-
-
 class Poder(db.Model):
-    __tablename__ = 'poder'
-
+    __tablename__ = 'poderes'
+    
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))
     requisito = db.Column(db.String(200))
@@ -85,17 +85,9 @@ class Poder(db.Model):
     uso = db.Column(db.String(200))
     descricao = db.Column(db.Text)
 
-    def __init__(self, nome, requisito, custo, descricao, uso):
-        self.nome = nome
-        self.requisito = requisito
-        self.custo = custo
-        self.uso = uso
-        self.descricao = descricao
-
-
 class Bestiario(db.Model):
     __tablename__ = 'bestiario'
-
+    
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))
     descricao = db.Column(db.Text) 
@@ -106,14 +98,3 @@ class Bestiario(db.Model):
     vida = db.Column(db.Integer)
     mental = db.Column(db.Integer)
     energia = db.Column(db.Integer)
-
-    def __init__(self, nome, descricao, nd, atributos, pericias, velocidade, vida, mental, energia):
-        self.nome = nome
-        self.descricao = descricao
-        self.nd = nd
-        self.atributos = atributos
-        self.pericias = pericias
-        self.velocidade = velocidade
-        self.vida = vida
-        self.mental = mental
-        self.energia = energia

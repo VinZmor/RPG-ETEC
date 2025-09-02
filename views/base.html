@@ -1,260 +1,102 @@
+
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RPG ETEC - WIki</title>
+  <title>ETEC RPG</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --primary-color: #4e54c8;
-      --secondary-color: #8f94fb;
-      --text-color: #333;
-      --bg-color: #f8f9fa;
-      --card-bg: #ffffff;
-      --border-color: #dee2e6;
-      --footer-bg: #e9ecef;
-      --transition-speed: 0.3s;
-    }
-    
-    [data-theme="dark"] {
-      --primary-color: #6c63ff;
-      --secondary-color: #a5a8ff;
-      --text-color: #f8f9fa;
-      --bg-color: #121212;
-      --card-bg: #1e1e1e;
-      --border-color: #444;
-      --footer-bg: #2d2d2d;
-    }
-    
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color var(--transition-speed), color var(--transition-speed);
-    }
-    
-    .navbar {
-      background-color: var(--card-bg) !important;
-      transition: background-color var(--transition-speed);
-    }
-    
-    .navbar-brand {
-      color: var(--primary-color) !important;
-      font-weight: 700;
-    }
-    
-    .offcanvas {
-      background-color: var(--card-bg);
-      transition: background-color var(--transition-speed);
-    }
-    
-    .nav-link {
-      color: var(--text-color);
-      transition: color var(--transition-speed), background-color var(--transition-speed);
-    }
-    
-    .nav-link:hover {
-      background-color: var(--primary-color);
-      color: white;
-    }
-    
-    footer {
-      background-color: var(--footer-bg) !important;
-      transition: background-color var(--transition-speed);
-    }
-    
-    /* Estilização do Switch de Tema */
-    .theme-switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-    
-    .theme-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-    
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-    
-    input:checked + .slider {
-      background-color: #2196F3;
-    }
-    
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-    
-    .slider .icon {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 16px;
-      color: white;
-    }
-    
-    .slider .sun {
-      left: 8px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .slider .moon {
-      right: 8px;
-      opacity: 1;
-      transition: opacity 0.3s;
-    }
-    
-    input:checked + .slider .sun {
-      opacity: 1;
-    }
-    
-    input:checked + .slider .moon {
-      opacity: 0;
-    }
-    
-    /* Melhorias no design geral */
-    header {
-      padding: 2rem 0;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white;
-      margin-bottom: 2rem;
-      border-radius: 0 0 20px 20px;
-    }
-    
-    .display-4 {
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    
-    .btn-close {
-      filter: invert(0.5);
-    }
-    
-    [data-theme="dark"] .btn-close {
-      filter: invert(0.8);
-    }
-  </style>
+
 </head>
+
+<style>
+  .a {
+    padding: 10px;
+  }
+</style>
+
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Navbar superior -->
-  <nav class="navbar navbar-light shadow-sm sticky-top">
-    <div id="nav" class="container d-flex align-items-center">
-      <!-- Logo -->
-      <a href="{{url_for('home')}}" class="navbar-brand fw-bold d-flex align-items-center">
-        <i class="fa-solid fa-dice-d20 me-2"></i> RPG ETEC
-      </a>
-      <div class="ms-auto d-flex align-items-center gap-3">
-        <!-- Botão das Rotas -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <!-- Botão para trocar de tema melhorado -->
-        <label class="theme-switch">
+  <nav class="navbar  navbar-light bg-body-tertiary shadow-sm sticky-top">
+  <div id="nav" class="container d-flex align-items-center">
+
+    <!-- Logo -->
+    <a href="{{url_for('home')}}" class="navbar-brand fw-bold text-primary d-flex align-items-center">
+      <i class="fa-solid fa-dice-d20 me-2"></i> RPG ETEC
+    </a>
+    <div class="ms-auto d-flex align-items-center gap-2">
+
+      <!-- Botão das Rotas -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <!-- Botão para trocar de tema -->
+ <label class="switch me-2">
           <input id="themeCheckbox" type="checkbox" />
-          <span class="slider">
-            <i class="fas fa-sun icon sun"></i>
-            <i class="fas fa-moon icon moon"></i>
-          </span>
+          <span class="slider"></span>
         </label>
-      </div>
-    </div>
-  </nav>
+</nav>
 
   <!-- Sidebar das rotas -->
-  <div class="offcanvas offcanvas-start" id="sidebarOffcanvas">
+
+  <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" style="color: var(--primary-color)">Navegação</h5>
+      <h5 class="offcanvas-title text-primary" id="a">Vale Místico</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body p-0">
       <nav class="nav flex-column">
-        <a href="/" class="nav-link px-3 py-2"><i class="fa-solid fa-home me-2"></i> Home</a> 
-        <a href="/wiki" class="nav-link px-3 py-2"><i class="fa-solid fa-book-open me-2"></i> Wiki</a>
-        <a href="/forum" class="nav-link px-3 py-2"><i class="fa-solid fa-comments me-2"></i> Fórum</a>
+       
+        <a href="/" class="nav-link px-3 py-2">  <i class="fa-solid fa-home me-2"></i> Home</a> 
+        <a href="/wiki"  class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Lista</a>
+        <a href="/forum"  class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Fórum </a>
+        
       </nav>
     </div>
   </div>
 
   <!-- Header -->
+
   <header>
     <div class="container text-center">
       <h1 class="display-4 fw-bold">Vale Místico</h1>
-      <p class="lead">Explore um mundo de fantasia e aventura</p>
     </div>
   </header>
 
-  <!-- Conteúdo principal -->
+  
   <main class="container my-4 flex-grow-1">
     {% block content %}
-    <!-- Conteúdo padrão caso nenhum bloco seja definido -->
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <div class="card shadow-sm mb-4" style="background-color: var(--card-bg); border-color: var(--border-color);">
-          <div class="card-body">
-            <h3 class="card-title">Bem-vindo ao RPG ETEC</h3>
-            <p class="card-text">Este é um sistema para gerenciar sua campanha de RPG, com wiki integrada e fórum para discussões.</p>
-            <p class="card-text">Use o menu lateral para navegar entre as seções e o interruptor no canto superior direito para alternar entre os temas claro e escuro.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- aqui fica o conteúdo das outras delas -->
     {% endblock %}
   </main>
 
   <!-- Rodapé -->
-  <footer class="py-3 text-center">
+  <footer class="bg-body-tertiary text-center">
     <small class="text-muted">&copy; {{ current_year if current_year else "2025" }} RPG ETEC. Todos os direitos reservados.</small>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Parte do JavaScript -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const themeCheckbox = document.getElementById('themeCheckbox');
-    
-    // Verificar se há um tema salvo no localStorage
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    
-    // Aplicar o tema salvo
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    themeCheckbox.checked = savedTheme === 'dark';
-    
-    // Adicionar evento para mudança de tema
-    themeCheckbox.addEventListener('change', () => {
-      const newTheme = themeCheckbox.checked ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
-  </script>
+  const themeCheckbox = document.getElementById('themeCheckbox')
+const savedTheme = localStorage.getItem('theme') || 'light'
+
+//Aplica Tema
+document.documentElement.setAttribute('data-theme', savedTheme)
+themeCheckbox.checked = savedTheme === 'light'
+
+//Altera Tema
+themeCheckbox.addEventListener('change', () => {
+  const newTheme = themeCheckbox.checked ? 'light' : 'dark'
+  document.documentElement.setAttribute('data-theme', newTheme)
+  localStorage.setItem('theme', newTheme)
+})
+
+</script>
+
 </body>
 </html>

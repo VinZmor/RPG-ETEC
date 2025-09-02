@@ -1,174 +1,415 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container py-4">
-  <!-- Cabeçalho do Fórum -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h1 class="h2 text-primary mb-1"><i class="fas fa-comments me-2"></i> Fórum da Comunidade</h1>
-      <p class="text-muted">Compartilhe ideias, faça perguntas e interaja com outros jogadores</p>
-    </div>
-    <a href="{{ url_for('novo_topico') }}" class="btn btn-primary">
-      <i class="fas fa-plus-circle me-2"></i> Novo Tópico
-    </a>
-  </div>
-
-  <!-- Estatísticas Rápidas -->
-  <div class="row mb-4">
-    <div class="col-md-4">
-      <div class="card stat-card border-0 bg-light">
-        <div class="card-body text-center py-3">
-          <h3 class="stat-number text-primary mb-0">{{ lista|length }}</h3>
-          <p class="stat-label text-muted mb-0">Tópicos</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card stat-card border-0 bg-light">
-        <div class="card-body text-center py-3">
-          <h3 class="stat-number text-primary mb-0">—</h3>
-          <p class="stat-label text-muted mb-0">Respostas</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card stat-card border-0 bg-light">
-        <div class="card-body text-center py-3">
-          <h3 class="stat-number text-primary mb-0">{{ lista|length }}</h3>
-          <p class="stat-label text-muted mb-0">Participantes</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Filtros e Busca -->
-  <div class="card border-0 shadow-sm mb-4">
-    <div class="card-body py-3">
-      <div class="row align-items-center">
-        <div class="col-md-6 mb-2 mb-md-0">
-          <div class="d-flex align-items-center">
-            <span class="me-2 text-muted">Filtrar por:</span>
-            <select class="form-select form-select-sm" style="width: auto;">
-              <option selected>Todos os temas</option>
-              <option>Regras</option>
-              <option>Personagens</option>
-              <option>Aventuras</option>
-              <option>Dúvidas</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar no fórum...">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Lista de Tópicos -->
-  <div class="card border-0 shadow-sm">
-    <div class="card-header bg-light py-3">
-      <div class="row fw-bold">
-        <div class="col-md-6">Tópico</div>
-        <div class="col-md-2 text-center">Autor</div>
-        <div class="col-md-2 text-center">Respostas</div>
-        <div class="col-md-2 text-center">Última Atualização</div>
-      </div>
-    </div>
-    <div class="card-body p-0">
-      {% if lista|length > 0 %}
-        {% for item in lista %}
-        <div class="row align-items-center py-3 border-bottom forum-item {% if loop.index % 2 == 0 %}bg-light{% endif %}">
-          <div class="col-md-6">
-            <div class="d-flex align-items-center">
-              <div class="forum-icon me-3 text-primary">
-                <i class="fas fa-comment fa-lg"></i>
-              </div>
-              <div>
-                <h5 class="mb-1">
-                  <a href="{{ url_for('respostas', forum_id=item.id) }}" class="text-decoration-none text-dark">{{ item.topico }}</a>
-                </h5>
-                <small class="text-muted">
-                  <span class="badge bg-primary-light">{{ item.tema }}</span>
-                  • Iniciado por {{ item.autor }}
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 text-center">
-            <div class="author-avatar">
-              <i class="fas fa-user-circle text-primary"></i>
-              <span class="d-block small mt-1">{{ item.autor }}</span>
-            </div>
-          </div>
-          <div class="col-md-2 text-center">
-            <span class="badge bg-secondary rounded-pill">—</span>
-          </div>
-          <div class="col-md-2 text-center">
-            <small class="text-muted">{{ item.atualizacao or '—' }}</small>
-          </div>
-        </div>
-        {% endfor %}
-      {% else %}
-        <div class="text-center py-5">
-          <i class="fas fa-comments fa-3x text-muted mb-3"></i>
-          <h4 class="text-muted">Nenhum tópico ainda</h4>
-          <p class="text-muted">Seja o primeiro a iniciar uma discussão!</p>
-          <a href="{{ url_for('novo_topico') }}" class="btn btn-primary mt-2">
-            <i class="fas fa-plus-circle me-2"></i> Criar Primeiro Tópico
-          </a>
-        </div>
-      {% endif %}
-    </div>
-  </div>
-
 
 <style>
-  .forum-item {
-    transition: background-color 0.2s ease;
-  }
-  
-  .forum-item:hover {
-    background-color: rgba(34, 149, 209, 0.05) !important;
-  }
-  
-  .forum-icon {
-    width: 40px;
-    text-align: center;
-  }
-  
-  .stat-card {
-    transition: transform 0.3s ease;
-  }
-  
-  .stat-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-    font-weight: 700;
-  }
-  
-  .stat-label {
-    font-size: 0.9rem;
-  }
-  
-  .author-avatar {
-    font-size: 1.8rem;
-  }
-  
-  .bg-primary-light {
-    background-color: rgba(34, 149, 209, 0.15) !important;
-    color: #2295D1;
-  }
-  
-  .badge {
-    font-weight: 500;
-  }
+    /* Seus estilos CSS permanecem os mesmos */
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar-brand {
+        font-weight: 700;
+    }
+    .stat-card {
+        transition: transform 0.3s;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    .forum-item {
+        transition: background-color 0.2s;
+    }
+    .forum-item:hover {
+        background-color: #f1f3f5 !important;
+    }
+    .badge-category {
+        font-size: 0.8em;
+        padding: 0.35em 0.65em;
+    }
+    .author-avatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .forum-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #e9ecef;
+    }
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+    .bg-primary-light {
+        background-color: #e8f4ff;
+        color: #0d6efd;
+    }
+    .topic-form {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .forum-item {
+        transition: background-color 0.2s ease;
+    }
+    .forum-item:hover {
+        background-color: rgba(34, 149, 209, 0.05) !important;
+    }
+    .stat-card {
+        transition: transform 0.3s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    .author-avatar {
+        font-size: 20px;
+    }
+    .bg-primary-light {
+        background-color: rgba(34, 149, 209, 0.15) !important;
+        color: #2295D1;
+    }
+    .badge {
+        font-weight: 500;
+    }
 </style>
+
+<div class="container py-4">
+    <!-- Cabeçalho do Fórum -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 text-primary mb-1"><i class="fas fa-comments me-2"></i> Fórum</h1>
+        </div>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novoTopicoModal">
+            <i class="fas fa-plus-circle me-2"></i> Novo Tópico
+        </button>
+    </div>
+
+    <!-- Estatísticas Rápidas -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card stat-card border-0 bg-light">
+                <div class="card-body text-center py-3">
+                    <h3 class="stat-number text-primary mb-0" id="totalTopicos">0</h3>
+                    <p class="stat-label text-muted mb-0">Tópicos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stat-card border-0 bg-light">
+                <div class="card-body text-center py-3">
+                    <h3 class="stat-number text-primary mb-0" id="totalRespostas">0</h3>
+                    <p class="stat-label text-muted mb-0">Respostas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stat-card border-0 bg-light">
+                <div class="card-body text-center py-3">
+                    <h3 class="stat-number text-primary mb-0" id="totalUsuarios">0</h3>
+                    <p class="stat-label text-muted mb-0">Usuários</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros e Busca -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body py-3">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-2 mb-md-0">
+                    <div class="d-flex align-items-center">
+                        <span class="me-2 text-muted">Filtrar por:</span>
+                        <select class="form-select form-select-sm" id="filtroCategoria" style="width: auto;">
+                            <option value="todos" selected>Todos os temas</option>
+                            <option value="duvida">Dúvida</option>
+                            <option value="procurando">Procurando Jogo</option>
+                            <option value="sugestao">Sugestões</option>
+                            <option value="discussao">Discussão</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="campoBusca" placeholder="Buscar no fórum...">
+                        <button class="btn btn-primary" type="button" id="btnBuscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Tópicos -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light py-3">
+            <div class="row fw-bold">
+                <div class="col-md-6">Tópico</div>
+                <div class="col-md-2 text-center">Autor</div>
+                <div class="col-md-2 text-center">Respostas</div>
+                <div class="col-md-2 text-center">Última Atualização</div>
+            </div>
+        </div>
+        <div class="card-body p-0" id="listaTopicos">
+            <!-- Tópicos serão carregados aqui via JavaScript -->
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                </div>
+                <p class="mt-2 text-muted">Carregando tópicos...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Novo Tópico -->
+<div class="modal fade" id="novoTopicoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i> Criar Novo Tópico</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formNovoTopico">
+                    <div class="mb-3">
+                        <label for="autor" class="form-label">Seu Nome</label>
+                        <input type="text" class="form-control" id="autor" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="topico" class="form-label">Título do Tópico</label>
+                        <input type="text" class="form-control" id="topico" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <select class="form-select" id="categoria" required>
+                            <option value="" selected disabled>Selecione uma categoria</option>
+                            <option value="duvida">Dúvida</option>
+                            <option value="procurando">Procurando Jogo</option>
+                            <option value="sugestao">Sugestões</option>
+                            <option value="discussao">Discussão</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="conteudo" class="form-label">Conteúdo</label>
+                        <textarea class="form-control" id="conteudo" rows="5" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnCriarTopico">Criar Tópico</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-light text-center py-4 mt-5">
+    <div class="container">
+        <p class="text-muted mb-0">Fórum Comunitário &copy; 2023 - Todos os direitos reservados</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Elementos da DOM
+    const listaTopicos = document.getElementById('listaTopicos');
+    const filtroCategoria = document.getElementById('filtroCategoria');
+    const btnCriarTopico = document.getElementById('btnCriarTopico');
+    const campoBusca = document.getElementById('campoBusca');
+    const btnBuscar = document.getElementById('btnBuscar');
+    
+    // Função para carregar tópicos da API
+    async function carregarTopicos(filtro = 'todos', termoBusca = '') {
+        try {
+            let url = '/api/topicos';
+            
+            if (filtro !== 'todos') {
+                url = `/api/topicos/filtrar/${filtro}`;
+            }
+            
+            if (termoBusca) {
+                url = `/api/topicos/buscar/${encodeURIComponent(termoBusca)}`;
+            }
+            
+            const response = await fetch(url);
+            const topicos = await response.json();
+            renderizarTopicos(topicos);
+        } catch (error) {
+            console.error('Erro ao carregar tópicos:', error);
+            listaTopicos.innerHTML = `
+                <div class="text-center py-5">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <h4 class="text-danger">Erro ao carregar tópicos</h4>
+                    <p class="text-muted">Tente recarregar a página.</p>
+                </div>
+            `;
+        }
+    }
+    
+    // Função para carregar estatísticas da API
+    async function carregarEstatisticas() {
+        try {
+            const response = await fetch('/api/estatisticas');
+            const stats = await response.json();
+            
+            document.getElementById('totalTopicos').textContent = stats.totalTopicos;
+            document.getElementById('totalRespostas').textContent = stats.totalRespostas;
+            document.getElementById('totalUsuarios').textContent = stats.totalUsuarios;
+        } catch (error) {
+            console.error('Erro ao carregar estatísticas:', error);
+        }
+    }
+    
+    // Função para renderizar os tópicos
+    function renderizarTopicos(topicos) {
+        if (topicos.length > 0) {
+            let html = '';
+            
+            topicos.forEach((topico, index) => {
+                html += `
+                <div class="row align-items-center py-3 border-bottom forum-item ${index % 2 === 0 ? '' : 'bg-light'}">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <div class="forum-icon me-3 text-primary">
+                                <i class="fas fa-comment fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">
+                                    <a href="#" class="text-decoration-none text-dark">${topico.topico}</a>
+                                </h5>
+                                <small class="text-muted">
+                                    <span class="badge bg-primary-light badge-category">${getNomeCategoria(topico.categoria)}</span>
+                                    • Iniciado por ${topico.autor}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <div class="author-avatar">
+                            
+                            <span class="d-block small mt-1">${topico.autor}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <span class="badge bg-secondary rounded-pill">${topico.respostas ? topico.respostas.length : 0}</span>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <small class="text-muted">${formatarData(topico.dataCriacao)}</small>
+                    </div>
+                </div>
+                `;
+            });
+            
+            listaTopicos.innerHTML = html;
+        } else {
+            listaTopicos.innerHTML = `
+            <div class="text-center py-5">
+                <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Nenhum tópico encontrado</h4>
+                <p class="text-muted">Seja o primeiro a iniciar uma discussão!</p>
+                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#novoTopicoModal">
+                    <i class="fas fa-plus-circle me-2"></i> Criar Primeiro Tópico
+                </button>
+            </div>
+            `;
+        }
+    }
+    
+    // Função para obter o nome amigável da categoria
+    function getNomeCategoria(categoria) {
+        const categorias = {
+            'duvida': 'Dúvida',
+            'procurando': 'Procurando Jogo',
+            'sugestao': 'Sugestões',
+            'discussao': 'Discussão'
+        };
+        
+        return categorias[categoria] || categoria;
+    }
+    
+    // Função para formatar data
+    function formatarData(dataString) {
+        const data = new Date(dataString);
+        return data.toLocaleDateString('pt-BR');
+    }
+    
+    // Evento para criar novo tópico
+    btnCriarTopico.addEventListener('click', async function() {
+        const autor = document.getElementById('autor').value;
+        const topico = document.getElementById('topico').value;
+        const categoria = document.getElementById('categoria').value;
+        const conteudo = document.getElementById('conteudo').value;
+        
+        if (autor && topico && categoria && conteudo) {
+            try {
+                const response = await fetch('/api/topicos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        autor: autor,
+                        topico: topico,
+                        categoria: categoria,
+                        conteudo: conteudo
+                    })
+                });
+                
+                if (response.ok) {
+                    // Fechar o modal e resetar o formulário
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('novoTopicoModal'));
+                    modal.hide();
+                    document.getElementById('formNovoTopico').reset();
+                    
+                    // Recarregar tópicos e estatísticas
+                    await carregarTopicos(filtroCategoria.value, campoBusca.value);
+                    await carregarEstatisticas();
+                } else {
+                    alert('Erro ao criar tópico. Tente novamente.');
+                }
+            } catch (error) {
+                console.error('Erro ao criar tópico:', error);
+                alert('Erro ao criar tópico. Verifique sua conexão.');
+            }
+        } else {
+            alert('Por favor, preencha todos os campos!');
+        }
+    });
+    
+    // Evento para filtrar tópicos por categoria
+    filtroCategoria.addEventListener('change', function() {
+        carregarTopicos(this.value, campoBusca.value);
+    });
+    
+    // Evento para buscar tópicos
+    btnBuscar.addEventListener('click', function() {
+        carregarTopicos(filtroCategoria.value, campoBusca.value);
+    });
+    
+    // Permitir busca ao pressionar Enter
+    campoBusca.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            carregarTopicos(filtroCategoria.value, campoBusca.value);
+        }
+    });
+    
+    // Inicializar a listagem de tópicos e estatísticas
+    document.addEventListener('DOMContentLoaded', function() {
+        carregarTopicos();
+        carregarEstatisticas();
+    });
+</script>
 {% endblock content %}
