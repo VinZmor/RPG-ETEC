@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="light">
 <head>
@@ -7,96 +6,237 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <style>
+    :root {
+      --primary-blue: #6a98b3;
+      --light-blue: #a8c6d9;
+      --soft-blue: #d2e3ed;
+      --dark-blue: #4a7088;
+      --text-color: #333;
+      --bg-color: #f8fafb;
+      --shadow-color: rgba(106, 152, 179, 0.15);
+    }
+    
+    [data-theme="dark"] {
+      --primary-blue: #7eb0d1;
+      --light-blue: #4a7088;
+      --soft-blue: #2a3b45;
+      --dark-blue: #a8c6d9;
+      --text-color: #e6e6e6;
+      --bg-color: #1a2830;
+      --shadow-color: rgba(168, 198, 217, 0.1);
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+    
+    .navbar {
+      background-color: var(--soft-blue) !important;
+      padding: 12px 0;
+    }
+    
+    .navbar-brand {
+      font-weight: 600;
+      color: var(--dark-blue) !important;
+      font-size: 1.3rem;
+    }
+    
+    .nav-link {
+      color: var(--dark-blue);
+      font-weight: 500;
+      padding: 12px 20px !important;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+    
+    .nav-link:hover {
+      background-color: var(--light-blue);
+      color: white;
+      border-left: 3px solid var(--dark-blue);
+    }
+    
+    .offcanvas-header {
+      background-color: var(--soft-blue);
+      border-bottom: 1px solid var(--light-blue);
+    }
+    
+    .offcanvas-title {
+      color: var(--dark-blue) !important;
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    
+    .sidebar {
+      background-color: var(--bg-color) !important;
+    }
+    
+    header {
+      padding: 40px 0;
+      background: linear-gradient(to right, var(--soft-blue), var(--bg-color));
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--light-blue);
+    }
+    
+    h1.display-4 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--dark-blue);
+      text-shadow: 1px 1px 3px var(--shadow-color);
+    }
+    
+    footer {
+      padding: 20px 0;
+      background-color: var(--soft-blue);
+      border-top: 1px solid var(--light-blue);
+      margin-top: 40px;
+    }
+    
+    /* Switch personalizado */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--light-blue);
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--dark-blue);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .container.text-center {
+      position: relative;
+    }
+    
+    .container.text-center:after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--primary-blue);
+      margin: 15px auto;
+      opacity: 0.6;
+    }
+    
+    .btn-close {
+      color: var(--dark-blue);
+    }
+  </style>
 </head>
-
-<style>
-  .a {
-    padding: 10px;
-  }
-</style>
 
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Navbar superior -->
-  <nav class="navbar  navbar-light bg-body-tertiary shadow-sm sticky-top">
-  <div id="nav" class="container d-flex align-items-center">
-
-    <!-- Logo -->
-    <a href="{{url_for('home')}}" class="navbar-brand fw-bold text-primary d-flex align-items-center">
-      <i class="fa-solid fa-dice-d20 me-2"></i> RPG ETEC
-    </a>
-    <div class="ms-auto d-flex align-items-center gap-2">
-
-      <!-- Botão das Rotas -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <!-- Botão para trocar de tema -->
- <label class="switch me-2">
+  <nav class="navbar navbar-light shadow-sm sticky-top">
+    <div id="nav" class="container d-flex align-items-center">
+      <!-- Logo -->
+      <a href="{{url_for('home')}}" class="navbar-brand d-flex align-items-center">
+        <i class="fa-solid fa-dice-d6 me-2"></i> RPG ETEC
+      </a>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <!-- Botão das Rotas -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Botão para trocar de tema -->
+        <label class="switch me-2">
           <input id="themeCheckbox" type="checkbox" />
           <span class="slider"></span>
         </label>
-</nav>
+      </div>
+    </div>
+  </nav>
 
   <!-- Sidebar das rotas -->
-
   <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title text-primary" id="a">Vale Místico</h5>
+      <h5 class="offcanvas-title">Vale Místico</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body p-0">
       <nav class="nav flex-column">
-       
-        <a href="/" class="nav-link px-3 py-2">  <i class="fa-solid fa-home me-2"></i> Home</a> 
-        <a href="/wiki"  class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Lista</a>
-        <a href="/forum"  class="nav-link px-3 py-2"><i class="fa-solid fa-book-open list me-2"></i> Fórum </a>
-        
+        <a href="/" class="nav-link"><i class="fa-solid fa-home me-2"></i> Home</a> 
+        <a href="/wiki" class="nav-link"><i class="fa-solid fa-book-open me-2"></i> Lista</a>
+        <a href="/forum" class="nav-link"><i class="fa-solid fa-comments me-2"></i> Fórum</a>
       </nav>
     </div>
   </div>
 
   <!-- Header -->
-
   <header>
     <div class="container text-center">
       <h1 class="display-4 fw-bold">Vale Místico</h1>
     </div>
   </header>
 
-  
   <main class="container my-4 flex-grow-1">
     {% block content %}
-    <!-- aqui fica o conteúdo das outras delas -->
+    <!-- aqui fica o conteúdo das outras telas -->
     {% endblock %}
   </main>
 
   <!-- Rodapé -->
-  <footer class="bg-body-tertiary text-center">
-    <small class="text-muted">&copy; {{ current_year if current_year else "2025" }} RPG ETEC. Todos os direitos reservados.</small>
+  <footer class="text-center">
+    <small>&copy; {{ current_year if current_year else "2025" }} RPG ETEC. Todos os direitos reservados.</small>
   </footer>
 
   <!-- Parte do JavaScript -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  const themeCheckbox = document.getElementById('themeCheckbox')
-const savedTheme = localStorage.getItem('theme') || 'light'
+    const themeCheckbox = document.getElementById('themeCheckbox')
+    const savedTheme = localStorage.getItem('theme') || 'light'
 
-//Aplica Tema
-document.documentElement.setAttribute('data-theme', savedTheme)
-themeCheckbox.checked = savedTheme === 'light'
+    // Aplica Tema
+    document.documentElement.setAttribute('data-theme', savedTheme)
+    themeCheckbox.checked = savedTheme === 'light'
 
-//Altera Tema
-themeCheckbox.addEventListener('change', () => {
-  const newTheme = themeCheckbox.checked ? 'light' : 'dark'
-  document.documentElement.setAttribute('data-theme', newTheme)
-  localStorage.setItem('theme', newTheme)
-})
-
-</script>
+    // Altera Tema
+    themeCheckbox.addEventListener('change', () => {
+      const newTheme = themeCheckbox.checked ? 'light' : 'dark'
+      document.documentElement.setAttribute('data-theme', newTheme)
+      localStorage.setItem('theme', newTheme)
+    })
+  </script>
 
 </body>
 </html>
