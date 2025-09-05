@@ -2,34 +2,36 @@
 
 {% block content %}
 <div class="container py-4">
-  <!-- Header -->
-  <header class="text-center mb-5">
-    <h1 class="display-5 fw-bold text-primary mb-3">Plataforma RPG para Saúde Mental</h1>
-    <p class="lead text-muted mx-auto" style="max-width: 700px;">
-      Um ambiente gamificado que une a diversão do RPG com o cuidado da saúde mental,
-      alinhado ao <strong class="text-primary">ODS 3: Saúde e Bem-Estar</strong>.
-    </p>
-    <a href="#projeto" class="btn btn-primary btn-lg mt-3 px-4">
-      Conheça o Projeto <i class="fas fa-arrow-down ms-2"></i>
-    </a>
+  <!-- Header com destaque visual -->
+  <header class="text-center mb-5 py-5 rpg-hero">
+    <div class="hero-content">
+      <h1 class="display-5 fw-bold text-white mb-3">Plataforma RPG para Saúde Mental</h1>
+      <p class="lead text-light mx-auto hero-subtitle">
+        Uma jornada gamificada que une a diversão do RPG com o cuidado da saúde mental,
+        alinhado ao <strong class="text-warning">ODS 3: Saúde e Bem-Estar</strong>.
+      </p>
+      
+    </div>
   </header>
 
   <!-- Missão e Gamificação -->
   <section class="row g-4 mb-5" id="projeto">
-    <div class="col-md-6">
-      <div class="card h-100 border-0 shadow-sm hover-shadow">
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-lg rpg-card">
         <div class="card-body p-4">
           <div class="text-center mb-4">
-            <i class="fas fa-dice-d20 fa-3x text-primary mb-3"></i>
+            <div class="rpg-icon mb-3">
+              <i class="fas fa-dice-d20"></i>
+            </div>
             <h3 class="card-title h4 text-primary">Gamificação</h3>
           </div>
-          <p class="card-text text-muted">
+          <p class="card-text">
             RPG é uma ferramenta poderosa para melhorar o aprendizado, estimular o comportamento, desenvolver habilidades sociais
             e promover o trabalho colaborativo, a criatividade e a interação.
           </p>
           <div class="mt-3">
             <a href="https://unisales.br/wp-content/uploads/2023/06/OS-IMPACTOS-DA-PRATICA-DO-RPG-NA-ESFERA-PSICOSSOCIAL.pdf" 
-               target="_blank" class="text-primary text-decoration-none">
+               target="_blank" class="text-primary text-decoration-none source-link">
               <i class="fas fa-link me-1"></i> Fonte: Unisale, Cezar, 2023
             </a>
           </div>
@@ -37,31 +39,42 @@
       </div>
     </div>
     
-    <div class="col-md-6">
-      <div class="card h-100 border-0 shadow-sm hover-shadow">
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-lg rpg-card">
         <div class="card-body p-4">
           <div class="text-center mb-4">
-            <i class="fas fa-brain fa-3x text-primary mb-3"></i>
-            <h3 class="card-title h4 text-primary" id="a">Saúde Mental</h3>
+            <div class="rpg-icon mb-3">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3 class="card-title h4 text-primary">Saúde Mental</h3>
           </div>
-          <div class="card-text text-muted">
-            <p class="mb-2"><strong>Depressão Leve:</strong> Fadiga, insônia ou sono excessivo, alterações no apetite, dores leves.</p>
-            <p class="mb-2"><strong>Moderada:</strong> Tristeza constante, desinteresse, irritabilidade, problemas de sono.</p>
-            <p class="mb-3"><strong>Grave:</strong> Pensamentos suicidas, agitação, desesperança, dificuldade para tarefas simples.</p>
+          <div class="card-text">
+            <div class="depression-level mb-3">
+              <h5 class="text-primary">Leve</h5>
+              <p class="mb-2">Fadiga, insônia ou sono excessivo, alterações no apetite, dores leves.</p>
+            </div>
+            <div class="depression-level mb-3">
+              <h5 class="text-primary">Moderada</h5>
+              <p class="mb-2">Tristeza constante, desinteresse, irritabilidade, problemas de sono.</p>
+            </div>
+            <div class="depression-level mb-4">
+              <h5 class="text-primary">Grave</h5>
+              <p class="mb-3">Pensamentos suicidas, agitação, desesperança, dificuldade para tarefas simples.</p>
+            </div>
             
             <div class="links-container">
-              <div class="mb-1">
-                <a href="https://clinicaohrpsiquiatria.com/estagios-da-depressao/" target="_blank" class="text-primary text-decoration-none">
+              <div class="mb-2">
+                <a href="https://clinicaohrpsiquiatria.com/estagios-da-depressao/" target="_blank" class="source-link">
                   <i class="fas fa-external-link-alt me-1"></i> Estágios da depressão
                 </a>
               </div>
-              <div class="mb-1">
-                <a href="https://www.cnnbrasil.com.br/saude/pesquisas-apontam-aumento-nos-casos-de-depressao-no-brasil/" target="_blank" class="text-primary text-decoration-none">
+              <div class="mb-2">
+                <a href="https://www.cnnbrasil.com.br/saude/pesquisas-apontam-aumento-nos-casos-de-depressao-no-brasil/" target="_blank" class="source-link">
                   <i class="fas fa-external-link-alt me-1"></i> 11,3% da população com depressão (2021)
                 </a>
               </div>
               <div>
-                <a href="https://g1.globo.com/saude/noticia/2023/11/06/por-que-o-brasil-tem-a-populacao-mais-depressiva-da-america-latina.ghtml" target="_blank" class="text-primary text-decoration-none">
+                <a href="https://g1.globo.com/saude/noticia/2023/11/06/por-que-o-brasil-tem-a-populacao-mais-depressiva-da-america-latina.ghtml" target="_blank" class="source-link">
                   <i class="fas fa-external-link-alt me-1"></i> 5,8% dos brasileiros sofrem da doença
                 </a>
               </div>
@@ -73,60 +86,60 @@
   </section>
 
   <!-- Objetivos -->
-  <section class="card border-0 shadow-sm mb-5">
+  <section class="card border-0 shadow-lg mb-5 rpg-feature-card">
     <div class="card-body p-5">
       <h2 class="text-center text-primary mb-4">Objetivos do Projeto</h2>
       <div class="row g-4">
         <div class="col-md-4 text-center">
           <div class="feature-icon mb-3">
-            <i class="fas fa-hands-helping fa-2x text-primary"></i>
+            <i class="fas fa-hands-helping"></i>
           </div>
           <h4 class="h5">Ambiente de Apoio</h4>
-          <p class="text-muted">Criar um ambiente de apoio para pessoas com depressão leve ou moderada.</p>
+          <p>Criar um ambiente de apoio para pessoas com depressão leve ou moderada.</p>
         </div>
         <div class="col-md-4 text-center">
           <div class="feature-icon mb-3">
-            <i class="fas fa-book fa-2x text-primary"></i>
+            <i class="fas fa-book"></i>
           </div>
           <h4 class="h5">Regras Claras</h4>
-          <p class="text-muted">Desenvolver regras claras e mecânicas acessíveis para o jogo.</p>
+          <p>Desenvolver regras claras e mecânicas acessíveis para o jogo.</p>
         </div>
         <div class="col-md-4 text-center">
           <div class="feature-icon mb-3">
-            <i class="fas fa-mobile-alt fa-2x text-primary"></i>
+            <i class="fas fa-mobile-alt"></i>
           </div>
           <h4 class="h5">Aplicativo Mobile</h4>
-          <p class="text-muted">Oferecer um aplicativo mobile para facilitar o acesso e uso da plataforma.</p>
+          <p>Oferecer um aplicativo mobile para facilitar o acesso e uso da plataforma.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Sistema -->
-  <section class="card border-0 shadow-sm mb-5">
+  <section class="card border-0 shadow-lg mb-5 rpg-feature-card">
     <div class="card-body p-5">
       <h2 class="text-center text-primary mb-4">Sistema RPG (TTRPG)</h2>
       <div class="row g-4 text-center">
         <div class="col-md-4">
           <div class="feature-icon mb-3">
-            <i class="fas fa-lightbulb fa-2x text-primary"></i>
+            <i class="fas fa-lightbulb"></i>
           </div>
           <h4 class="h5">Regras Simples</h4>
-          <p class="text-muted">Regras simples e intuitivas para todos os jogadores</p>
+          <p>Regras simples e intuitivas para todos os jogadores</p>
         </div>
         <div class="col-md-4">
           <div class="feature-icon mb-3">
-            <i class="fas fa-dice fa-2x text-primary"></i>
+            <i class="fas fa-dice"></i>
           </div>
           <h4 class="h5">D6 Único</h4>
-          <p class="text-muted">Uso de apenas um dado comum de 6 lados</p>
+          <p>Uso de apenas um dado comum de 6 lados</p>
         </div>
         <div class="col-md-4">
           <div class="feature-icon mb-3">
-            <i class="fas fa-book-open fa-2x text-primary"></i>
+            <i class="fas fa-book-open"></i>
           </div>
           <h4 class="h5">Exemplos Inclusos</h4>
-          <p class="text-muted">Inclui exemplos de jogo para iniciantes</p>
+          <p>Inclui exemplos de jogo para iniciantes</p>
         </div>
       </div>
     </div>
@@ -140,10 +153,12 @@
         <div class="card h-100 border-0 text-center shadow-sm team-card">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <i class="fas fa-user-circle fa-3x text-primary"></i>
+              <div class="avatar-placeholder">
+                <i class="fas fa-user"></i>
+              </div>
             </div>
             <h4 class="card-title h5 text-primary">Larissa</h4>
-            <p class="card-text text-muted">Desenvolvedora principal da aplicação mobile</p>
+            <p class="card-text">Desenvolvedora principal da aplicação mobile</p>
           </div>
         </div>
       </div>
@@ -151,10 +166,12 @@
         <div class="card h-100 border-0 text-center shadow-sm team-card">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <i class="fas fa-user-circle fa-3x text-primary"></i>
+              <div class="avatar-placeholder">
+                <i class="fas fa-user"></i>
+              </div>
             </div>
             <h4 class="card-title h5 text-primary">Vinícius</h4>
-            <p class="card-text text-muted">Desenvolvedor do website</p>
+            <p class="card-text">Desenvolvedor do website</p>
           </div>
         </div>
       </div>
@@ -162,10 +179,12 @@
         <div class="card h-100 border-0 text-center shadow-sm team-card">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <i class="fas fa-user-circle fa-3x text-primary"></i>
+              <div class="avatar-placeholder">
+                <i class="fas fa-user"></i>
+              </div>
             </div>
             <h4 class="card-title h5 text-primary">Matheus</h4>
-            <p class="card-text text-muted">Desenvolvedor do sistema e mobile</p>
+            <p class="card-text">Desenvolvedor do sistema e mobile</p>
           </div>
         </div>
       </div>
@@ -174,42 +193,174 @@
 </div>
 
 <style>
-  /* Style do home.html */
-    .hover-shadow {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Variáveis CSS para consistência */
+  :root {
+    --primary: #2295d1;
+    --primary-dark: #1a7aac;
+    --secondary: #f9c74f;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #43aa8b;
+    --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%), 
+                     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23FFFFFF" fill-opacity="0.05" x="0" y="0" width="100" height="100"/><path d="M0 50L50 0L100 50L50 100Z" fill="%23FFFFFF" fill-opacity="0.05"/></svg>');
   }
-  
-  .hover-shadow:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+
+  /* Estilos gerais */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #444;
   }
-  
-  .team-card {
-    transition: transform 0.3s ease;
+
+  .text-primary {
+    color: var(--primary) !important;
   }
-  
-  .team-card:hover {
-    transform: scale(1.03);
+
+  .btn-primary {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
-  
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
+  }
+
+  /* Hero section */
+  .rpg-hero {
+    background: var(--gradient-hero);
+    border-radius: 20px;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    max-width: 700px;
+  }
+
+  /* Cards */
+  .rpg-card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background-color: white;
+  }
+
+  .rpg-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .rpg-feature-card {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  /* Ícones */
+  .rpg-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: white;
+    font-size: 2rem;
+  }
+
   .feature-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: rgba(34, 149, 209, 0.1);
-  }
-  
-  .links-container a {
-    transition: color 0.2s ease;
-  }
-  
-  .links-container a:hover {
-    color: #00283D !important;
+    color: var(--primary);
+    font-size: 1.8rem;
   }
 
+  /* Links de fonte */
+  .source-link {
+    color: var(--primary) !important;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
 
+  .source-link:hover {
+    color: var(--primary-dark) !important;
+    text-decoration: underline !important;
+  }
+
+  /* Níveis de depressão */
+  .depression-level {
+    padding-left: 15px;
+    border-left: 3px solid var(--primary);
+  }
+
+  /* Equipe */
+  .team-card {
+    transition: transform 0.3s ease;
+    border-radius: 15px;
+  }
+
+  .team-card:hover {
+    transform: scale(1.05);
+  }
+
+  .avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+  }
+
+  /* Animações */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .rpg-cta {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .display-5 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .card-body.p-5 {
+      padding: 2rem !important;
+    }
+    
+    .rpg-icon, .feature-icon {
+      width: 70px;
+      height: 70px;
+      font-size: 1.5rem;
+    }
+  }
 </style>
 {% endblock content %}

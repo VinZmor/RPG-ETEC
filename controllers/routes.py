@@ -1,9 +1,19 @@
-
-from flask import render_template, request, redirect, url_for, jsonify
+from datetime import datetime
+import json
+from flask import render_template, request, jsonify
 from models.database import Bestiario, Antepassado, Habilidade, Poder, Resposta, Equipamento, Topico, db
 
 def init_app(app):
+    # Configuração do JSON Encoder para datas
+    class CustomJSONEncoder(json.JSONEncoder):
+        def default(self, obj):
+            if isinstance(obj, datetime):
+                return obj.isoformat()
+            return super().default(obj)
     
+    app.json_encoder = CustomJSONEncoder
+
+    # Rotas principais
     @app.route('/')
     def home():
         return render_template('home.html')
@@ -11,12 +21,11 @@ def init_app(app):
     @app.route('/wiki', methods=['GET', 'POST'])
     @app.route('/wiki/<int:id>', methods=['GET', 'POST'])
     def wiki(id=None):  
-        
         rpg_bestiario = Bestiario.query.all()
         rpg_antepassado = Antepassado.query.all()
         rpg_habilidade = Habilidade.query.all()
         rpg_poder = Poder.query.all()
-        rpg_equipamento = Equipamento.query.all() 
+        rpg_equipamento = Equipamento.query.all()
         
         return render_template(
             'wiki.html',
@@ -26,15 +35,17 @@ def init_app(app):
             rpg_poder=rpg_poder,
             rpg_equipamento=rpg_equipamento
         )
-        
-        
-
+    
     @app.route('/forum')
     def forum():
-        # Página principal do fórum
         topicos = Topico.query.order_by(Topico.data_criacao.desc()).all()
         return render_template('forum.html', topicos=topicos)
+    
+    @app.route('/respostas')
+    def respostas():
+        return render_template('respostas.html')
 
+    # API Routes
     @app.route('/api/topicos', methods=['GET', 'POST'])
     def api_topicos():
         if request.method == 'GET':
@@ -51,7 +62,7 @@ def init_app(app):
             )
             db.session.add(novo_topico)
             db.session.commit()
-            return jsonify(novo_topico.to_dict())
+            return jsonify(novo_topico.to_dict()), 201
 
     @app.route('/api/topicos/<int:topico_id>', methods=['GET'])
     def api_topico_detalhe(topico_id):
@@ -73,16 +84,14 @@ def init_app(app):
             )
             db.session.add(nova_resposta)
             db.session.commit()
-            return jsonify(nova_resposta.to_dict())
+            return jsonify(nova_resposta.to_dict()), 201
 
     @app.route('/api/estatisticas')
     def api_estatisticas():
         total_topicos = Topico.query.count()
-        
-        # Calcular total de respostas
         total_respostas = db.session.query(db.func.count(Resposta.id)).scalar()
         
-        # Calcular usuários únicos (autores de tópicos e respostas)
+        # Calcular usuários únicos
         autores_topicos = db.session.query(Topico.autor).distinct()
         autores_respostas = db.session.query(Resposta.autor).distinct()
         usuarios_unicos = set([autor[0] for autor in autores_topicos] + [autor[0] for autor in autores_respostas])
@@ -104,7 +113,6 @@ def init_app(app):
 
     @app.route('/api/topicos/buscar/<termo>')
     def api_buscar_topicos(termo):
-        # Busca em tópicos e conteúdo
         topicos = Topico.query.filter(
             (Topico.topico.ilike(f'%{termo}%')) | 
             (Topico.conteudo.ilike(f'%{termo}%')) |

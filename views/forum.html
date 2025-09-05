@@ -96,34 +96,7 @@
         </button>
     </div>
 
-    <!-- Estatísticas Rápidas -->
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card stat-card border-0 bg-light">
-                <div class="card-body text-center py-3">
-                    <h3 class="stat-number text-primary mb-0" id="totalTopicos">0</h3>
-                    <p class="stat-label text-muted mb-0">Tópicos</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card stat-card border-0 bg-light">
-                <div class="card-body text-center py-3">
-                    <h3 class="stat-number text-primary mb-0" id="totalRespostas">0</h3>
-                    <p class="stat-label text-muted mb-0">Respostas</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card stat-card border-0 bg-light">
-                <div class="card-body text-center py-3">
-                    <h3 class="stat-number text-primary mb-0" id="totalUsuarios">0</h3>
-                    <p class="stat-label text-muted mb-0">Usuários</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  
     <!-- Filtros e Busca -->
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-body py-3">
@@ -216,13 +189,8 @@
     </div>
 </div>
 
-<footer class="bg-light text-center py-4 mt-5">
-    <div class="container">
-        <p class="text-muted mb-0">Fórum Comunitário &copy; 2023 - Todos os direitos reservados</p>
-    </div>
-</footer>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     // Elementos da DOM
     const listaTopicos = document.getElementById('listaTopicos');
@@ -288,7 +256,7 @@
                             </div>
                             <div>
                                 <h5 class="mb-1">
-                                    <a href="#" class="text-decoration-none text-dark">${topico.topico}</a>
+                                    <a href="{{ url_for('respostas') }}?id=${topico.id}" class="text-decoration-none text-dark">${topico.topico}</a>
                                 </h5>
                                 <small class="text-muted">
                                     <span class="badge bg-primary-light badge-category">${getNomeCategoria(topico.categoria)}</span>
@@ -340,11 +308,40 @@
         return categorias[categoria] || categoria;
     }
     
-    // Função para formatar data
-    function formatarData(dataString) {
+ // Função para formatar data - ATUALIZADA
+function formatarData(dataString) {
+    console.log('Formatando:', dataString);
+    try {
         const data = new Date(dataString);
-        return data.toLocaleDateString('pt-BR');
+        if (isNaN(data.getTime())) {
+            return dataString; // Retorna original se inválida
+        }
+        
+        const agora = new Date();
+        const diffTempo = agora - data;
+        const diffDias = diffTempo / (1000 * 3600 * 24);
+        
+        // Se for hoje, mostra horas
+        if (diffDias < 1) {
+            return data.toLocaleTimeString('pt-BR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+        }
+        // Se for nos últimos 7 dias, mostra dias atrás
+        else if (diffDias < 7) {
+            const dias = Math.floor(diffDias);
+            return `${dias} dia${dias > 1 ? 's' : ''} atrás`;
+        }
+        // Mais de uma semana, mostra data completa
+        else {
+            return data.toLocaleDateString('pt-BR');
+        }
+    } catch (error) {
+        console.error('Erro ao formatar data:', error);
+        return dataString;
     }
+}
     
     // Evento para criar novo tópico
     btnCriarTopico.addEventListener('click', async function() {
