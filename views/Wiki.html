@@ -2,637 +2,1232 @@
 
 {% block content %}
 <style>
-        :root {
-            --primary: #3a86ff;
-            --primary-dark: #2563eb;
-            --primary-light: #93c5fd;
-            --secondary: #f59e0b;
-            --bg-color: #f8fafc;
-            --sidebar-bg: #ffffff;
-            --card-bg: #ffffff;
-            --text-color: #334155;
-            --border-color: #e2e8f0;
-            --transition: all 0.3s ease;
-        }
+    /* Variáveis CSS para consistência - mantidas da home */
+    :root {
+        --primary: #2295d1;
+        --primary-dark: #1a7aac;
+        --secondary: #f9c74f;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --success: #43aa8b;
+        --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
+        --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%), 
+                         url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23FFFFFF" fill-opacity="0.05" x="0" y="0" width="100" height="100"/><path d="M0 50L50 0L100 50L50 100Z" fill="%23FFFFFF" fill-opacity="0.05"/></svg>');
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    /* Estilos gerais mantidos da home */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #444;
+    }
 
-        /* Layout Principal */
+    .text-primary {
+        color: var(--primary) !important;
+    }
+
+    .btn-primary {
+        background: var(--gradient-primary);
+        border: none;
+        border-radius: 50px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
+    }
+
+    /* Cards - mantido do estilo original mas com adaptações */
+    .rpg-card {
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        background-color: white;
+    }
+
+    .rpg-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .rpg-feature-card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    /* Ícones - mantido do estilo original */
+    .rpg-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: white;
+        font-size: 2rem;
+    }
+
+    .feature-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: rgba(34, 149, 209, 0.1);
+        color: var(--primary);
+        font-size: 1.8rem;
+    }
+
+    /* Links de fonte */
+    .source-link {
+        color: var(--primary) !important;
+        transition: all 0.2s ease;
+        font-weight: 500;
+    }
+
+    .source-link:hover {
+        color: var(--primary-dark) !important;
+        text-decoration: underline !important;
+    }
+
+    /* Estilos específicos para a página do sistema */
+    #fundo {
+        min-height: calc(100vh - 150px);
+        position: relative;
+        background-color: #f8fafc;
+    }
+
+    /* Sidebar de Navegação - adaptado ao estilo da home */
+    #sidebar {
+        width: 280px;
+        background-color: white;
+        border-right: 1px solid #e2e8f0;
+        padding: 1.5rem 1rem;
+        overflow-y: auto;
+        transition: all 0.3s ease;
+        height: calc(100vh - 76px);
+        position: sticky;
+        top: 76px;
+        border-radius: 0 15px 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    #sidebar .h5 {
+        color: var(--primary);
+        font-weight: 700;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--primary-light);
+    }
+
+    #sidebar .nav-item {
+        margin-bottom: 0.25rem;
+    }
+
+    #sidebar .nav-link {
+        color: #444;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    #sidebar .nav-link:hover {
+        background-color: rgba(34, 149, 209, 0.1);
+        color: var(--primary);
+    }
+
+    #sidebar .nav-link.active {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #sidebar .nav-link i {
+        margin-right: 0.75rem;
+        font-size: 0.9rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    #sidebar .nav-link::after {
+        content: '\f107';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    #sidebar .nav-link[aria-expanded="true"]::after {
+        transform: rotate(180deg);
+    }
+
+    #sidebar .nav.flex-column.ms-3 {
+        border-left: 2px solid rgba(34, 149, 209, 0.3);
+        padding-left: 0.5rem;
+        margin-left: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #sidebar .nav.flex-column.ms-3 .nav-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Conteúdo Principal */
+    #content {
+        padding: 2rem;
+        width: calc(100% - 280px);
+        background-color: #f8fafc;
+        transition: all 0.3s ease;
+    }
+
+    .content-section {
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sistema de Filtros - estilizado de acordo com a home */
+    .filter-container {
+        background-color: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--primary);
+    }
+
+    .filter-group {
+        margin-bottom: 1rem;
+    }
+
+    .filter-group label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary-dark);
+    }
+
+    .filter-badge {
+        cursor: pointer;
+        margin: 0.25rem;
+        transition: all 0.3s ease;
+    }
+
+    .filter-badge:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Cards para conteúdo - seguindo o padrão da home */
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .info-card {
+        background-color: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        border-left: 4px solid var(--primary);
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .info-card h4 {
+        color: var(--primary-dark);
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        border-bottom: 2px solid rgba(34, 149, 209, 0.3);
+        padding-bottom: 0.5rem;
+    }
+
+    .info-card .card-text {
+        line-height: 1.6;
+    }
+
+    .info-card .card-meta {
+        font-size: 0.9rem;
+        color: #64748b;
+        margin-top: 1rem;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 15px;
+        grid-column: 1 / -1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Badges estilizados */
+    .badge {
+        font-weight: 500;
+    }
+
+    .bg-primary {
+        background: var(--gradient-primary) !important;
+    }
+
+    /* Header das seções */
+    h1.text-primary {
+        border-bottom: 2px solid rgba(34, 149, 209, 0.3);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+    }
+
+    /* Responsividade */
+    @media (max-width: 992px) {
+
         #fundo {
-            min-height: calc(100vh - 150px);
-            position: relative;
+            flex-direction: column;
+            ;
+            
         }
-
-        /* Sidebar de Navegação */
+        
         #sidebar {
-            width: 280px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            padding: 1.5rem 1rem;
-            overflow-y: auto;
-            transition: var(--transition);
-            height: calc(100vh - 76px);
-            position: sticky;
-            top: 76px;
-        }
-
-        #sidebar .h5 {
-            color: var(--primary);
-            font-weight: 700;
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--primary-light);
-        }
-
-        #sidebar .nav-item {
-            margin-bottom: 0.25rem;
-        }
-
-        #sidebar .nav-link {
-            color: var(--text-color);
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
+            
+            width: 100%;
+            height: auto;
             position: relative;
+            top: 0;
+            border-right: none;
+            border-bottom: 1px solid #e2e8f0;
+            border-radius: 0 0 15px 15px;
         }
-
-        #sidebar .nav-link:hover {
-            background-color: var(--primary-light);
-            color: blue;
-        }
-
-        #sidebar .nav-link.active {
-            background-color: var(--primary);
-            color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        #sidebar .nav-link i {
-            margin-right: 0.75rem;
-            font-size: 0.9rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        #sidebar .nav-link::after {
-            content: '\f107';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            right: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        #sidebar .nav-link[aria-expanded="true"]::after {
-            transform: rotate(180deg);
-        }
-
-        #sidebar .nav.flex-column.ms-3 {
-            border-left: 2px solid var(--primary-light);
-            padding-left: 0.5rem;
-            margin-left: 1.25rem;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        #sidebar .nav.flex-column.ms-3 .nav-link {
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-        }
-
-        /* Conteúdo Principal */
+        
         #content {
-            padding: 2rem;
-            width: calc(100% - 280px);
-            background-color: var(--bg-color);
-            transition: var(--transition);
+            width: 100%;
         }
 
-        .content-section {
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Sistema de Filtros */
-        .filter-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--primary);
-        }
-
-        .filter-group {
-            margin-bottom: 1rem;
-        }
-
-        .filter-group label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary-dark);
-        }
-
-        .filter-badge {
-            cursor: pointer;
-            margin: 0.25rem;
-            transition: var(--transition);
-        }
-
-        .filter-badge:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Cards para conteúdo */
         .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         }
+    }
 
-        .info-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-            border-left: 4px solid var(--primary);
-            height: 100%;
-            transition: var(--transition);
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-
-        .info-card h4 {
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            border-bottom: 2px solid var(--primary-light);
-            padding-bottom: 0.5rem;
-        }
-
-        .info-card .card-text {
-            line-height: 1.6;
-        }
-
-        .info-card .card-meta {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-top: 1rem;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 8px;
-            grid-column: 1 / -1;
-        }
-
-        /* Responsividade */
-        @media (max-width: 992px) {
-            #fundo {
-                flex-direction: column;
-            }
+    @media (max-width: 576px) {
+        #content {
+            padding: 1rem;
             
-            #sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                top: 0;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-            }
-            
-            #content {
-                width: 100%;
-            }
-
-            .card-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
         }
-
-        @media (max-width: 576px) {
-            #content {
-                padding: 1rem;
-            }
-            
-            .card-container {
-                grid-template-columns: 1fr;
-            }
+        
+        .card-container {
+            grid-template-columns: 1fr;
         }
-    </style>
-</head>
-<body>
-    
-    <div id="fundo" class="d-flex">
-        <!-- Sidebar de Navegação -->
-        <nav id="sidebar">
-            <span class="h5">Vale Místico</span>
-            
-            <ul class="nav flex-column mt-3">
-                <li class="nav-item">
-                    <a href="#" data-id="introducao" class="nav-link active">
-                        <i class="fas fa-home"></i> Introdução
-                    </a>
-                    <ul id="introducao-sub" class="nav flex-column ms-3">
-                        <li class="nav-item"><a href="#" data-id="rpg" class="nav-link">RPG</a></li>
-                        <li class="nav-item"><a href="#" data-id="interpretacao" class="nav-link">Interpretação</a></li>
-                        <li class="nav-item"><a href="#" data-id="seuPersonagem" class="nav-link">Seu Personagem</a></li>
-                        <li class="nav-item"><a href="#" data-id="narrando" class="nav-link">Narrando</a></li>
-                        <li class="nav-item"><a href="#" data-id="ficha" class="nav-link">Preenchendo sua Ficha</a></li>
-                        <li class="nav-item"><a href="#" data-id="equipamento" class="nav-link">Equipamento</a></li>
-                        <li class="nav-item"><a href="#" data-id="levelUp" class="nav-link">Subindo de Nível</a></li>
-                        <li class="nav-item"><a href="#" data-id="habilidade" class="nav-link">Habilidades</a></li>
-                        <li class="nav-item"><a href="#" data-id="glossario" class="nav-link">Glossário</a></li>
-                        <li class="nav-item"><a href="#" data-id="bestiario" class="nav-link">Bestiário</a></li>
-                    </ul>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" data-id="bestiario" class="nav-link">
-                        <i class="fas fa-dragon"></i> Bestiário
-                    </a>
-                    <ul id="bestiario-sub" class="nav flex-column ms-3 d-none">
-                        {% for bestiario in rpg_bestiario %}
-                        <li class="nav-item">
-                            <a href="#" data-id="bestiario-{{ bestiario.id }}" class="nav-link">{{ bestiario.nome }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
+        
+        .filter-container {
+            padding: 1rem;
+        }
+    }
+    .impot {
+        font-weight: bold !important;
+    }
 
-                <li class="nav-item">
-                    <a href="#" data-id="antepassados" class="nav-link">
-                        <i class="fas fa-history"></i> Antepassados
-                    </a>
-                    <ul id="antepassados-sub" class="nav flex-column ms-3 d-none">
-                        {% for antepassado in rpg_antepassado %}
-                        <li class="nav-item">
-                            <a href="#" data-id="antepassado-{{ antepassado.id }}" class="nav-link">{{ antepassado.nome }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
+    .bestiario-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
 
-                <li class="nav-item">
-                    <a href="#" data-id="equipamentos" class="nav-link">
-                        <i class="fas fa-shield-alt"></i> Equipamentos
-                    </a>
-                    <ul id="equipamentos-sub" class="nav flex-column ms-3 d-none">
-                        {% for equipamento in rpg_equipamento %}
-                        <li class="nav-item">
-                            <a href="#" data-id="equipamento-{{ equipamento.id }}" class="nav-link">{{ equipamento.nome }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
+.bestiario-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
 
-                <li class="nav-item">
-                    <a href="#" data-id="habilidades" class="nav-link">
-                        <i class="fas fa-fire"></i> Habilidades
-                    </a>
-                    <ul id="habilidades-sub" class="nav flex-column ms-3 d-none">
-                        {% for habilidade in rpg_habilidade %}
-                        <li class="nav-item">
-                            <a href="#" data-id="habilidade-{{ habilidade.id }}" class="nav-link">{{ habilidade.nome }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
+.bestiario-header {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    color: white;
+    padding: 15px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
 
-                <li class="nav-item">
-                    <a href="#" data-id="poderes" class="nav-link">
-                        <i class="fas fa-magic"></i> Poderes
-                    </a>
-                    <ul id="poderes-sub" class="nav flex-column ms-3 d-none">
-                        {% for poder in rpg_poder %}
-                        <li class="nav-item">
-                            <a href="#" data-id="poder-{{ poder.id }}" class="nav-link">{{ poder.nome }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+.bestiario-body {
+    padding: 20px;
+    background-color: #f8f9fc;
+}
 
-        <!-- Conteúdo Principal -->
-        <main id="content" class="flex-grow">
-            <!-- Sistema de Filtros -->
-            <div class="filter-container d-none" id="filterSection">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="filter-group">
-                            <label for="searchInput"><i class="fas fa-search"></i> Buscar</label>
-                            <input type="text" id="searchInput" class="form-control" placeholder="Digite para buscar...">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="filter-group">
-                            <label for="sortSelect"><i class="fas fa-sort"></i> Ordenar por</label>
-                            <select id="sortSelect" class="form-select">
-                                <option value="name">Nome (A-Z)</option>
-                                <option value="name-desc">Nome (Z-A)</option>
-                            </select>
-                        </div>
-                    </div>
+.bestiario-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-item {
+    background-color: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-label {
+    font-weight: 600;
+    color: #4e73df;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    color: #5a5c69;
+}
+
+.bestiario-description {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.description-label {
+    font-weight: 600;
+    color: #4e73df;
+    margin-bottom: 8px;
+}
+
+.nd-badge {
+    background-color: #f6c23e;
+    color: #2c3e50;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .bestiario-stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div id="fundo" class="d-flex">
+    <!-- Sidebar de Navegação -->
+    <nav id="sidebar">
+        <span class="h5">Wíki</span>
+        
+        <ul class="nav flex-column mt-3">
+            <li class="nav-item">
+                <a href="#" data-id="introducao" class="nav-link active">
+                    <i class="fas fa-home"></i> Introdução
+                </a>
+                <ul id="introducao-sub" class="nav flex-column ms-3">
+                    <li class="nav-item"><a href="#" data-id="rpg" class="nav-link">RPG</a></li>
+                    <li class="nav-item"><a href="#" data-id="interpretacao" class="nav-link">Interpretação</a></li>
+                    <li class="nav-item"><a href="#" data-id="seuPersonagem" class="nav-link">Seu Personagem</a></li>
+                    <li class="nav-item"><a href="#" data-id="narrando" class="nav-link">Narrando</a></li>
+                    <li class="nav-item"><a href="#" data-id="ficha" class="nav-link">Preenchendo sua Ficha</a></li>
+                    <li class="nav-item"><a href="#" data-id="levelUp" class="nav-link">Subindo de Nível</a></li>     
+                    <li class="nav-item"><a href="#" data-id="regras" class="nav-link">Regras</a></li>
+                    <li class="nav-item"><a href="#" data-id="glossario" class="nav-link">Glossário</a></li>
                     
-                </div>
-            </div>
-
-            <!-- Conteúdo das Seções -->
-            <div class="content-section" data-content="introducao">
-                <h1 class="text-primary mb-4">Introdução ao Vale Místico</h1>
-                <p>Bem-vindo ao mundo de Vale Místico, um RPG de fantasia onde você pode criar personagens incríveis, explorar mundos misteriosos e viver aventuras épicas.</p>
+                </ul>
+            </li>
+            
+            <li class="nav-item">
+                <a href="#" data-id="bestiario" class="nav-link">
+                    <i class="fas fa-dragon"></i> Bestiário
+                </a>
                 
-                    
-            </div>
-
-            <!-- Seções de conteúdo dinâmico -->
-            <div class="content-section d-none" data-content="bestiario">
-                <h1 class="text-primary mb-4">Bestiário</h1>
-                <p>Explore as criaturas e monstros que habitam o mundo de Vale Místico.</p>
-                
-                <div class="card-container" id="bestiario-content">
+                <ul id="bestiario-sub" class="nav flex-column ms-3 d-none">
                     {% for bestiario in rpg_bestiario %}
-                    <div class="info-card" data-name="{{ bestiario.nome|lower }}">
-                        <h4>{{ bestiario.nome }}</h4>
-                        <p class="card-text">{{ bestiario.descricao }}</p>
-                        <div class="card-meta">
-                            <span class="badge bg-primary">ND: {{ bestiario.nd }}</span>
-                            <span class="badge bg-info ms-1">Vida: {{ bestiario.vida }}</span>
-                        </div>
-                    </div>
+                    <li class="nav-item">
+                        <a href="#" data-id="bestiario-{{ bestiario.id }}" class="nav-link">{{ bestiario.nome }}</a>
+                    </li>
                     {% endfor %}
-                </div>
-            </div>
+                </ul>
+            </li>
 
-            <div class="content-section d-none" data-content="antepassados">
-                <h1 class="text-primary mb-4">Antepassados</h1>
-                <p>Descubra as linhagens e histórias que moldaram seus personagens.</p>
-                
-                <div class="card-container" id="antepassados-content">
+            <li class="nav-item">
+                <a href="#" data-id="antepassados" class="nav-link">
+                    <i class="fas fa-history"></i> Antepassados
+                </a>
+                <ul id="antepassados-sub" class="nav flex-column ms-3 d-none">
                     {% for antepassado in rpg_antepassado %}
-                    <div class="info-card" data-name="{{ antepassado.nome|lower }}">
-                        <h4>{{ antepassado.nome }}</h4>
-                        <p class="card-text">{{ antepassado.descricao }}</p>
-                        <div class="card-meta">
-                            <span class="badge bg-success">Perícias: {{ antepassado.pericia }}</span>
-                        </div>
-                    </div>
+                    <li class="nav-item">
+                        <a href="#" data-id="antepassado-{{ antepassado.id }}" class="nav-link">{{ antepassado.nome }}</a>
+                    </li>
                     {% endfor %}
-                </div>
-            </div>
+                </ul>
+            </li>
 
-            <div class="content-section d-none" data-content="equipamentos">
-                <h1 class="text-primary mb-4">Equipamentos</h1>
-                <p>Armas, armaduras e itens para equipar seus personagens.</p>
-                
-                <div class="card-container" id="equipamentos-content">
+            <li class="nav-item">
+                <a href="#" data-id="equipamentos" class="nav-link">
+                    <i class="fas fa-shield-alt"></i> Equipamentos
+                </a>
+                <ul id="equipamentos-sub" class="nav flex-column ms-3 d-none">
                     {% for equipamento in rpg_equipamento %}
-                    <div class="info-card" data-name="{{ equipamento.nome|lower }}">
-                        <h4>{{ equipamento.nome }}</h4>
-                        <p class="card-text">{{ equipamento.descricao }}</p>
-                        <div class="card-meta">
-                            <span class="badge bg-info">Custo: {{ equipamento.custo }}</span>
-                            <span class="badge bg-secondary ms-1">Volume: {{ equipamento.volume }}</span>
-                        </div>
-                    </div>
+                    <li class="nav-item">
+                        <a href="#" data-id="equipamento-{{ equipamento.id }}" class="nav-link">{{ equipamento.nome }}</a>
+                    </li>
                     {% endfor %}
-                </div>
-            </div>
+                </ul>
+            </li>
 
-            <div class="content-section d-none" data-content="habilidades">
-                <h1 class="text-primary mb-4">Habilidades</h1>
-                <p>Técnicas e capacidades que seus personagens podem aprender.</p>
-                
-                <div class="card-container" id="habilidades-content">
+            <li class="nav-item">
+                <a href="#" data-id="habilidades" class="nav-link">
+                    <i class="fas fa-fire"></i> Habilidades
+                </a>
+                <ul id="habilidades-sub" class="nav flex-column ms-3 d-none">
                     {% for habilidade in rpg_habilidade %}
-                    <div class="info-card" data-name="{{ habilidade.nome|lower }}">
-                        <h4>{{ habilidade.nome }}</h4>
-                        <p class="card-text">{{ habilidade.descricao }}</p>
-                        <div class="card-meta">
-                            <span class="badge bg-warning text-dark">Condição: {{ habilidade.condicao }}</span>
-                        </div>
-                    </div>
+                    <li class="nav-item">
+                        <a href="#" data-id="habilidade-{{ habilidade.id }}" class="nav-link">{{ habilidade.nome }}</a>
+                    </li>
                     {% endfor %}
-                </div>
-            </div>
+                </ul>
+            </li>
 
-            <div class="content-section d-none" data-content="poderes">
-                <h1 class="text-primary mb-4">Poderes</h1>
-                <p>Habilidades especiais e poderes mágicos para seus personagens.</p>
-                
-                <div class="card-container" id="poderes-content">
+            <li class="nav-item">
+                <a href="#" data-id="poderes" class="nav-link">
+                    <i class="fas fa-magic"></i> Poderes
+                </a>
+                <ul id="poderes-sub" class="nav flex-column ms-3 d-none">
                     {% for poder in rpg_poder %}
-                    <div class="info-card" data-name="{{ poder.nome|lower }}">
-                        <h4>{{ poder.nome }}</h4>
-                        <p class="card-text">{{ poder.descricao }}</p>
-                        <div class="card-meta">
-                            <span class="badge bg-info">Requisito: {{ poder.requisito }}</span>
-                            <span class="badge bg-secondary ms-1">Custo: {{ poder.custo }}</span>
-                        </div>
-                    </div>
+                    <li class="nav-item">
+                        <a href="#" data-id="poder-{{ poder.id }}" class="nav-link">{{ poder.nome }}</a>
+                    </li>
                     {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main id="content" class="flex-grow">
+        <!-- Sistema de Filtros -->
+        <div class="filter-container d-none" id="filterSection">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="filter-group">
+                        <label for="searchInput"><i class="fas fa-search"></i> Buscar</label>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Digite para buscar...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label for="sortSelect"><i class="fas fa-sort"></i> Ordenar por</label>
+                        <select id="sortSelect" class="form-select">
+                            <option value="name">Nome (A-Z)</option>
+                            <option value="name-desc">Nome (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Conteúdo das Seções -->
+        <div class="content-section" data-content="introducao">
+            <h1 class="text-primary mb-4">Introdução ao Vale Místico</h1>
+            <p>Bem-vindo ao mundo de Vale Místico, um RPG de fantasia onde você pode criar personagens incríveis, explorar mundos misteriosos e viver aventuras épicas.</p>
+            
+            <div class="card rpg-card mt-4">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="rpg-icon mb-3">
+                            <i class="fas fa-dice-d20"></i>
+                        </div>
+                        <h3 class="card-title h4 text-primary">Uma Jornada Épica</h3>
+                    </div>
+                    <p class="card-text">
+                        No Vale Místico, você assume o papel de heróis em um mundo repleto de mistérios, perigos e oportunidades para crescimento pessoal. 
+                        Através da narrativa colaborativa, você desenvolverá habilidades, enfrentará desafios e descobrirá novas facetas de si mesmo.
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <!-- Seções de conteúdo estático -->
-            <div class="content-section d-none" data-content="rpg">
-                <h1 class="text-primary mb-4">O que é RPG?</h1>
-                <p>Um jogo de RPG (Role-Playing Game), traduzido para jogo interpretativo, tem uma estrutura relativamente simples. O Mestre funciona como o narrador de história, e geralmente deve ser o participante mais experiente (caso haja um).</p>
-            </div>
-
-            <!-- Outras seções de conteúdo estático... -->
+        <!-- Seções de conteúdo dinâmico -->
+        <div class="content-section d-none" data-content="bestiario">
+            <h1 class="text-primary mb-4">Bestiário</h1>
+            <p>Essa seção não deve ser vista por jogadores, e mesmo que o jogador saiba sobre esses números, não se esqueça que os seus personagens não saberiam os detalhes. Sinta-se livre para alterar esses valores como mestre, mas cuidado com não acidentalmente criar uma situação extremamente difícil ou fácil para os jogadores.
+	Criaturas seguem o seguinte padrão:
+Nome
+Descrição: Uma descrição do que a criatura é. Tende a ser simples quando se trata de coisas reais.
+ND: Nível de Desafio, um número representando o quão difícil é enfrentar essa criatura. Não se esqueça que o ambiente, situação atual dos jogadores, e aliados fortemente influenciam esse fator.
+Atributos: Os atributos da criatura que são diferentes de 1.
+Perícias: Perícias da criatura que são diferentes de 1 para criaturas inteligentes, e diferentes de 0 para criaturas irracionais.
+Velocidade: A velocidade da criatura.
+Vida: A vida da criatura.
+Mental: O mental da criatura, caso o não tenha, a criatura é imune a danos mentais.
+Energia: A energia da criatura. Nem toda criatura tem energia, ou habilidades que a utilizam.
+Habilidade: Algo específico da criatura.</p>
             
-            <!-- Seções de conteúdo individual -->
-            {% for bestiario in rpg_bestiario %}
-            <div class="content-section d-none" data-content="bestiario-{{ bestiario.id }}">
-                <h1 class="text-primary">{{ bestiario.nome }}</h1>
-                <p><strong>Descrição:</strong> {{ bestiario.descricao }}</p>
-                <p><strong>ND:</strong> {{ bestiario.nd }}</p>
-                <p><strong>Atributos:</strong> {{ bestiario.atributos }}</p>
-                <p><strong>Perícias:</strong> {{ bestiario.pericias }}</p>
-                <p><strong>Velocidade:</strong> {{ bestiario.velocidade }}</p>
-                <p><strong>Vida:</strong> {{ bestiario.vida }}</p>
-                <p><strong>Mental:</strong> {{ bestiario.mental }}</p>
-                <p><strong>Energia:</strong> {{ bestiario.energia }}</p>
+            <div class="card-container" id="bestiario-content">
+                {% for bestiario in rpg_bestiario %}
+                <div class="info-card" data-name="{{ bestiario.nome|lower }}">
+                    <h4>{{ bestiario.nome }}</h4>
+                    <p class="card-text">{{ bestiario.descricao }}</p>
+                    <div class="card-meta">
+                        <span class="badge bg-primary">ND: {{ bestiario.nd }}</span>
+                        <span class="badge bg-info ms-1">Vida: {{ bestiario.vida }}</span>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        </div>
 
-            {% for antepassado in rpg_antepassado %}
-            <div class="content-section d-none" data-content="antepassado-{{ antepassado.id }}">
-                <h1 class="text-primary">{{ antepassado.nome }}</h1>
-                <p><strong>Descrição:</strong> {{ antepassado.descricao }}</p>
-                <p><strong>Perícias:</strong> {{ antepassado.pericia }}</p>
-                <p><strong>Equipamento:</strong> {{ antepassado.equipamento }}</p>
-                <p><strong>Crédito:</strong> {{ antepassado.credito }}</p>
+        <div class="content-section d-none" data-content="antepassados">
+            <h1 class="text-primary mb-4">Antepassados</h1>
+            <p>Descubra as linhagens e histórias que moldaram seus personagens.</p>
+            
+            <div class="card-container" id="antepassados-content">
+                {% for antepassado in rpg_antepassado %}
+                <div class="info-card" data-name="{{ antepassado.nome|lower }}">
+                    <h4>{{ antepassado.nome }}</h4>
+                    <p class="card-text">{{ antepassado.descricao }}</p>
+                    <div class="card-meta">
+                        <span class="badge bg-success">Perícias: {{ antepassado.pericia }}</span>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        </div>
 
-            {% for equipamento in rpg_equipamento %}
-            <div class="content-section d-none" data-content="equipamento-{{ equipamento.id }}">
-                <h1 class="text-primary">{{ equipamento.nome }}</h1>
-                <p><strong>Descrição:</strong> {{ equipamento.descricao }}</p>
-                <p><strong>Custo:</strong> {{ equipamento.custo }}</p>
-                <p><strong>Volume:</strong> {{ equipamento.volume }}</p>
+        <div class="content-section d-none" data-content="equipamentos">
+            <h1 class="text-primary mb-4">Equipamentos</h1>
+            <p>Seu equipamento inclui todo item que você carrega que pode ser útil para você durante sua aventura.
+Créditos
+	Para simplificar a jogatina, você não precisa manter seu valor de dinheiro exato, mas sim um atributo de “Crédito” que simboliza o seu poder de compra. Seu equipamento inicial não pode passar do seu valor de crédito (ignorando itens dados por antepassados). Seu crédito padrão é 7 + seu bônus de antepassado.
+Volume
+	Você só consegue carregar uma quantidade limitada de itens. Sua capacidade é 3 + Força. Caso os itens em seu inventário  tiverem um volume total acima desse valor, você ganha Sobrecarga. Itens com L no volume são leves, e 5 deles representam 1 volume. Itens com ”-” são desprezíveis em questão de volume.
+Celular e Veículos
+	Por padrão, todo personagem possui um celular, com todas as funções na tabela.
+	É decisão do mestre quais jogadores terão um veículo por padrão, mas geralmente qualquer um consegue comprar um pelo preço da tabela.
+</p>
+            
+            <div class="card-container" id="equipamentos-content">
+                {% for equipamento in rpg_equipamento %}
+                <div class="info-card" data-name="{{ equipamento.nome|lower }}">
+                    <h4>{{ equipamento.nome }}</h4>
+                    <p class="card-text">{{ equipamento.descricao }}</p>
+                    <div class="card-meta">
+                        <span class="badge bg-info">Custo: {{ equipamento.custo }}</span>
+                        <span class="badge bg-secondary ms-1">Volume: {{ equipamento.volume }}</span>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        </div>
 
-            {% for habilidade in rpg_habilidade %}
-            <div class="content-section d-none" data-content="habilidade-{{ habilidade.id }}">
-                <h1 class="text-primary">{{ habilidade.nome }}</h1>
-                <p><strong>Condição:</strong> {{ habilidade.condicao }}</p>
-                <p><strong>Descrição:</strong> {{ habilidade.descricao }}</p>
+        <div class="content-section d-none" data-content="habilidades">
+            <h1 class="text-primary mb-4">Habilidades</h1>
+            <p>Suas habilidades representam capacidades mais específicas do seu personagem. Personagens ganham habilidades pela primeira vez no 2° nível. Seus requisitos estão abaixo do nome em uma fonte menor, caso haja algum.</p>
+            
+            <div class="card-container" id="habilidades-content">
+                {% for habilidade in rpg_habilidade %}
+                <div class="info-card" data-name="{{ habilidade.nome|lower }}">
+                    <h4>{{ habilidade.nome }}</h4>
+                    <p class="card-text">{{ habilidade.descricao }}</p>
+                    <div class="card-meta">
+                        <span class="badge bg-warning text-dark">Condição: {{ habilidade.condicao }}</span>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        </div>
 
-            {% for poder in rpg_poder %}
-            <div class="content-section d-none" data-content="poder-{{ poder.id }}">
-                <h1 class="text-primary">{{ poder.nome }}</h1>
-                <p><strong>Requisito:</strong> {{ poder.requisito }}</p>
-                <p><strong>Custo:</strong> {{ poder.custo }}</p>
-                <p><strong>Uso:</strong> {{ poder.uso }}</p>
-                <p><strong>Descrição:</strong> {{ poder.descricao }}</p>
+        <div class="content-section d-none" data-content="poderes">
+            <h1 class="text-primary mb-4">Poderes</h1>
+            <p>Poderes são habilidades místicas ou mágicas que seu personagem possui. Geralmente adquirido pela habilidade Aprender Poder acima. Efeitos de poderes seu acabam caso você se torne inconsciente.
+Caso o poder não seja passivo (sempre ativo).
+</p>
+            
+            <div class="card-container" id="poderes-content">
+                {% for poder in rpg_poder %}
+                <div class="info-card" data-name="{{ poder.nome|lower }}">
+                    <h4>{{ poder.nome }}</h4>
+                    <p class="card-text">{{ poder.descricao }}</p>
+                    <div class="card-meta">
+                        <span class="badge bg-info">Requisito: {{ poder.requisito }}</span>
+                        <span class="badge bg-secondary ms-1">Custo: {{ poder.custo }}</span>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </main>
+        </div>
+
+      <div class="content-section d-none" data-content="rpg">
+    <h1 class="text-primary mb-4">O que é RPG?</h1>
+    <p>Um jogo de RPG (Role-Playing Game), traduzido para jogo interpretativo, tem uma estrutura relativamente simples:</p>
+    <ul>
+        <li>O <strong>Mestre</strong> funciona como o narrador da história, e geralmente deve ser o participante mais experiente (caso haja um).</li>
+        <li>É ele quem irá dar a premissa da história antes dos personagens serem feitos, estabelecer a situação inicial e os principais conflitos.</li>
+        <li>Os <strong>jogadores</strong> são os protagonistas desta história, e são eles quem tomam as decisões, superam desafios e crescem junto de seus personagens.</li>
+    </ul>
+    <p>Enquanto jogam, todos devem manter em mente a própria diversão, e a de seus companheiros. Caso todos do grupo sejam iniciantes, é recomendado utilizar uma das campanhas prontas do sistema.</p>
+</div>
+
+<div class="content-section d-none" data-content="interpretacao">
+    <h1 class="text-primary mb-4">Interpretação e Conexão</h1>
+    <p>Vale Místico é um jogo de interpretação antes de tudo. O foco da história recomendada sempre vai ser os personagens dos players, e geralmente é o mestre quem deve agregar uma boa conexão entre a história e os personagens, para que haja diversão mútua.</p>
+</div>
+
+<div class="content-section d-none" data-content="seuPersonagem">
+    <h1 class="text-primary mb-4">Criando seu Personagem</h1>
+    <p>Todo jogador deve fazer um personagem. Quando estiver criando seu personagem:</p>
+    <ul>
+        <li>Pense bem sobre a personalidade e história desse personagem</li>
+        <li>Considere como ele irá interagir com o grupo</li>
+        <li>Em certas campanhas, o mestre dará direções específicas para a criação</li>
+    </ul>
+    <p>Geralmente é bom ter tudo de importante sobre seu personagem anotado em sua ficha, que também possui a parte mecânica (os números) do personagem.</p>
+</div>
+
+<div class="content-section d-none" data-content="ficha">
+    <h1 class="text-primary mb-4">Preenchendo sua Ficha</h1>
+    
+    <h3 class="mt-4 text-secondary">Passo a passo:</h3>
+    <ol>
+        <li>Preencha sua biografia (Nome, idade, história, etc.)</li>
+        <li>Escolha um antepassado</li>
+        <li>Distribua seus pontos de atributo</li>
+        <li>Defina sua vida, energia e mental</li>
+        <li>Distribua seus pontos de perícia</li>
+    </ol>
+    
+    <h3 class="mt-4 text-secondary">1. Biografia</h3>
+    <p>Sua biografia define os aspectos mais básicos de quem você é, como seu nome, idade, peso, altura e sua história. Mesmo que muitos desses fatores não tenham um impacto mecânico no sistema, são importantes para trazer um aspecto de vida a seu personagem.</p>
+    
+    <h3 class="mt-4 text-secondary">2. Antepassado</h3>
+    <p>Seu antepassado se relaciona a seu passado. Eles definem seu equipamento inicial além de alguns bônus a perícias. Geralmente, ao fazer um personagem, se pensa em uma história, e depois se escolhe um antepassado que encaixe na história escrita.</p>
+    
+    <h3 class="mt-4 text-secondary">3. Atributos</h3>
+    <p>São valores que definem suas capacidades físicas e mentais. 1 é o equivalente a capacidade de uma pessoa comum. Esse valor é adicionado a testes a qual são relevantes (Inteligência para decifrar algo, força para levantar algo pesado, etc.)</p>
+    
+    <h3 class="mt-4 text-secondary">4. Vida, Energia e Mental</h3>
+    <p>Esses valores representam aspectos diferentes de seu personagem:</p>
+    <ul>
+        <li><strong>Vida:</strong> Representa sua capacidade de aguentar dano físico. A base é igual a 9 + Fortitude.</li>
+        <li><strong>Mental:</strong> Representa sua capacidade de aguentar dano mental. A base é igual a 9 + Vontade.</li>
+        <li><strong>Energia:</strong> Representa sua capacidade de se esforçar enquanto evita cansaço. A base é 10.</li>
+    </ul>
+    
+    <h3 class="mt-4 text-secondary">5. Perícias</h3>
+    <p>Representa seu conhecimento e experiência em atividades ou assuntos específicos. Geralmente devem ser refletivos das experiências e interesses do seu personagem.</p>
+    <p>Você pode distribuir 3 + INT pontos de perícia ao criar seu personagem, mas sem passar de 3 em qualquer perícia. Você pode reduzir uma perícia para 0 para ganhar um ponto extra.</p>
+    
+    <h4 class="mt-3 text-info">Perícias Específicas (PE):</h4>
+    <p>Algumas perícias são sobre assuntos mais específicos, que uma pessoa normal não teria conhecimento profundo. Essas perícias começam em 0, e o mestre deve aprová-la. Exemplos:</p>
+    <ul>
+        <li>Legislação</li>
+        <li>Contabilidade</li>
+        <li>Pilotagem Aérea</li>
+        <li>Metalurgia</li>
+        <li>Arrombamento</li>
+        <li>Direção</li>
+    </ul>
+    
+    <h4 class="mt-3 text-info">Perícias de Combate (PC):</h4>
+    <p>Seguem as mesmas regras de perícias específicas (também começam em 0), mas são geralmente usadas durante combate:</p>
+    <ul>
+        <li><strong>Luta:</strong> Combate desarmado e armas intuitivas (porretes, bastões, facas curtas)</li>
+        <li><strong>Lâminas:</strong> Machados, facões, etc.</li>
+        <li><strong>Arco:</strong> Arcos e bestas</li>
+        <li><strong>Pistola:</strong> Revólveres, pistolas</li>
+        <li><strong>Rifle:</strong> Rifles e rifles de precisão</li>
+        <li><strong>Espingarda:</strong> Espingardas</li>
+        <li><strong>Armas Pesadas:</strong> Lança-granadas, RPGs, etc.</li>
+        <li><strong>Automática:</strong> Disparo automático com armas de fogo</li>
+    </ul>
+</div>
+
+<div class="content-section d-none" data-content="levelUp">
+    <h1 class="text-primary mb-4">Subindo de Nível</h1>
+    <p>Durante uma história, os desafios que vocês superam junto com os conhecimentos que adquirem são representados pela sua Experiência (XP). Depois de cada encontro, o mestre pode dar uma quantidade de XP baseado na dificuldade da situação.</p>
+    <p>A cada 1000 XP, o personagem sobe de nível, e recebe os seguintes benefícios:</p>
+    <ul>
+        <li><strong>Níveis ímpares:</strong> 2 + CON pontos de vida, 2 + VON pontos de mental, 2 pontos de energia</li>
+        <li><strong>Níveis pares:</strong> 1 habilidade</li>
+    </ul>
+</div>
+
+<div class="content-section d-none" data-content="regras">
+    <h1 class="text-primary mb-4">Regras do Jogo</h1>
+    <p class="fst-italic">A coleção de mecânicas que representam os modos com que os jogadores interagem com o sistema. Lembre-se que a maioria das regras são gerais, e o mestre pode alterá-las caso necessário.</p>
+    
+    <h3 class="mt-4 text-secondary">Testes</h3>
+    <p>Caso seu personagem esteja fazendo algo com chance considerável de falha, o mestre irá pedir um teste utilizando algum atributo e, na maioria das vezes, uma perícia.</p>
+    <ul>
+        <li>Todo teste possui uma Dificuldade de Teste (DT), decidida pelo mestre</li>
+        <li>Role uma quantidade de dados (d6) igual a seu valor de perícia</li>
+        <li>Adicione o atributo utilizado como bônus ao resultado mais alto</li>
+        <li>Caso o resultado seja igual ou maior que a DT, você teve sucesso</li>
+        <li>Em testes sem perícia, role apenas 1 dado</li>
+    </ul>
+    
+    <h4 class="mt-3 text-info">Notações Especiais:</h4>
+    <ul>
+        <li><strong>-1d:</strong> Teste com menos 1 dado (se valor menor que 1, role dados igual à distância do valor a 1 e pegue o menor)</li>
+        <li><strong>1d2:</strong> d6 (1-3 = 1, 4-6 = 2)</li>
+        <li><strong>1d3:</strong> d6 (1-2 = 1, 3-4 = 2, 5-6 = 3)</li>
+    </ul>
+    
+    <h4 class="mt-3 text-info">Críticos e Falhas Críticas:</h4>
+    <ul>
+        <li><strong>Crítico:</strong> Dois dados caem em "6" (efeitos especiais, benefícios adicionais)</li>
+        <li><strong>Falha Crítica:</strong> Todos os dados caem em "1" (efeitos negativos adicionais)</li>
+    </ul>
+    
+    <h3 class="mt-4 text-secondary">Percepção</h3>
+    <ul>
+        <li>Para perceber algo sem procurar: teste de PER</li>
+        <li>Para procurar ativamente: teste de Procurar com PER</li>
+        <li>Em longo alcance: -2 no teste, e outro -2 além do alcance</li>
+    </ul>
+    
+    <h3 class="mt-4 text-secondary">Combate</h3>
+    <p>Uma cena de combate inicia quando o grupo começa uma interação hostil.</p>
+    
+    <h4 class="mt-3 text-info">Iniciativa:</h4>
+    <ul>
+        <li>No início do combate, todos rolam iniciativa (geralmente com PER)</li>
+        <li>Ações em ordem decrescente do resultado</li>
+        <li>Empates: maior AGI age primeiro</li>
+        <li>Se ainda empatar: jogadores decidem entre si, oponentes primeiro</li>
+    </ul>
+    
+    <h4 class="mt-3 text-info">Seu Turno:</h4>
+    <p>Você tem uma ação principal e uma ação de movimento.</p>
+    
+    <h5 class="mt-2">Ações Principais:</h5>
+    <ul>
+        <li><strong>Atacar:</strong> Realiza um ataque contra um alvo no alcance</li>
+        <li><strong>Esquivar:</strong> Ataques contra você recebem -1d até seu próximo turno</li>
+        <li><strong>Interagir:</strong> Interage com um item ou algo a seu alcance</li>
+        <li><strong>Preparar uma Ação:</strong> Prepara ação para usar como reação (acaba seu turno)</li>
+        <li><strong>Realizar uma manobra:</strong> Agarrar, derrubar ou empurrar (teste de Atletismo)</li>
+        <li><strong>Desarmar:</strong> Tente desarmar um oponente (teste de Atletismo com -1d)</li>
+        <li><strong>Ajudar:</strong> Auxilia um aliado em alguma ação (teste relevante, DT definido pelo mestre)</li>
+        <li><strong>Atrapalhar:</strong> Similar a "Ajudar", mas aplica penalidade</li>
+    </ul>
+    
+    <h5 class="mt-2">Ações de Movimento:</h5>
+    <ul>
+        <li><strong>Se mover:</strong> Anda sua velocidade em metros</li>
+        <li><strong>Pegar um Item:</strong> Pegue ou guarde um item</li>
+        <li><strong>Mirar:</strong> Ganhe +1 em um ataque feito no mesmo turno</li>
+    </ul>
+    
+    <h4 class="mt-3 text-info">Reações Padrões (1 por rodada):</h4>
+    <ul>
+        <li><strong>Desvio:</strong> Quando atacado corpo a corpo, teste de AGI para evitar dano</li>
+        <li><strong>Pegar Cobertura:</strong> Similar a Desvio, mas para ataques à distância</li>
+        <li><strong>Contra-Ataque:</strong> Quando atacado corpo a corpo, contra-ataca se o ataque errar</li>
+    </ul>
+    
+    <h4 class="mt-3 text-info">Regras Específicas de Combate:</h4>
+    <ul>
+        <li><strong>Alcances:</strong>
+            <ul>
+                <li>Corpo-a-Corpo: 1 metro</li>
+                <li>Curto: 5+PER metros</li>
+                <li>Médio: 10+2*PER metros</li>
+                <li>Longo: 20+4*PER metros</li>
+            </ul>
+            -1 a cada metro fora do alcance da arma
+        </li>
+        <li><strong>Cobertura:</strong> Penalidade de -1 a -3 no ataque</li>
+        <li><strong>Rajada:</strong> Armas automáticas podem fazer 2 ataques com penalidade de -4d (reduzida pela perícia Automático)</li>
+        <li><strong>Flanco:</strong> +1d em ataques corpo-a-corpo com aliado no lado oposto</li>
+        <li><strong>Surpresa:</strong> Emboscadas bem-sucedidas garantem rodada extra</li>
+        <li><strong>Queima-Roupa:</strong> +1d com armas de fogo a 1m (considerado corpo-a-corpo para reações)</li>
+        <li><strong>Porte-Duplo:</strong> Ataque extra com ação de movimento (-1d) quando usando duas armas leves</li>
+    </ul>
+    
+    <h3 class="mt-4 text-secondary">Dano e Cura</h3>
+    <ul>
+        <li>Equipamentos de proteção reduzem dano aplicável</li>
+        <li>Pode ser tratado com bolsa de medicina</li>
+        <li>Recuperação por descanso: 
+            <ul>
+                <li>Vida: 1d3+CON</li>
+                <li>Mental: 1d6+VON</li>
+                <li>Energia: 1d6+Nível</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content-section d-none" data-content="glossario">
+    <h1 class="text-primary mb-4">Glossário e Condições</h1>
+    
+    <h3 class="mt-4 text-secondary">Termos e Abreviações</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <ul>
+                <li><strong>FOR:</strong> Força</li>
+                <li><strong>CON:</strong> Constituição</li>
+                <li><strong>AGI:</strong> Agilidade</li>
+                <li><strong>INT:</strong> Inteligência</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul>
+                <li><strong>VON:</strong> Vontade</li>
+                <li><strong>PER:</strong> Percepção</li>
+                <li><strong>SOR:</strong> Sorte</li>
+                <li><strong>DT:</strong> Dificuldade de Teste</li>
+            </ul>
+        </div>
     </div>
+    
+    <h3 class="mt-4 text-secondary">Condições</h3>
+    <p>Condições geralmente duram até o final do seu próximo turno quando aplicadas durante seu turno.</p>
+    
+    <div class="accordion" id="condicoesAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#condicao1">
+                    Abalado
+                </button>
+            </h2>
+            <div id="condicao1" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                    Condição mental danificada (Mental = 0). -1d em todo teste. Pode ser removido por teste de Acalmar (VON, DT 7) de um aliado.
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao2">
+                    Agarrado
+                </button>
+            </h2>
+            <div id="condicao2" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    Velocidade = 0. Use ação principal com teste de Atletismo ou Acrobacia para escapar. -1d em ações hostis contra outros.
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao3">
+                    Caído
+                </button>
+            </hh2>
+            <div id="condicao3" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    Velocidade = 2 (se não for menor). Ataques à distância e testes de AGI: -1d contra você. Ataques corpo-a-corpo: +1d contra você. Levantar-se: ação de movimento.
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao4">
+                    Em Chamas
+                </button>
+            </h2>
+            <div id="condicao4" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    No final de cada turno: 1d3+1 de dano. Ação principal: teste de AGI (DT 5) para apagar as chamas.
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao5">
+                    Lerdo
+                </button>
+            </h2>
+            <div id="condicao5" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    Não tem ação de movimento.
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao6">
+                    Morrendo
+                </button>
+            </h2>
+            <div id="condicao6" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    No final do turno: teste de CON (DT 4, aumenta +1 a cada turno). Pode ser estabilizado com teste de primeiros-socorros (INT, DT 7, -1d).
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao7">
+                    Atordoado
+                </button>
+            </h2>
+            <div id="condicao7" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    Não tem ações. No final de cada turno: teste de Fortitude contra DT do efeito.
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao8">
+                    Amedrontado
+                </button>
+            </h2>
+            <div id="condicao8" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    Ao se aproximar ou agir hostilmente contra fonte do medo: teste de VON (DT 6). Falha = ação falha e turno acaba.
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#condicao9">
+                    Sangrando
+                </button>
+            </h2>
+            <div id="condicao9" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    No final de cada rodada: perde 1d3 de vida, depois teste de CON (DT 5) para remover condição. Pode ser removida com medicina (INT, DT 6) ou primeiros socorros (INT, DT 5).
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Função para aplicar filtros
-        function applyFilters() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const sortValue = document.getElementById('sortSelect').value;
-            
-            // Determinar qual seção está ativa
-            const activeSection = document.querySelector('.content-section:not(.d-none)');
-            const sectionType = activeSection.dataset.content;
-            
-            // Apenas aplicar filtros nas seções de listagem
-            if (!['bestiario', 'antepassados', 'equipamentos', 'habilidades', 'poderes'].includes(sectionType)) {
-                return;
-            }
-            
-            // Obter os cards da seção atual
-            const cards = activeSection.querySelectorAll('.info-card');
-            let visibleCards = 0;
-            
-            // Aplicar filtro de busca
-            cards.forEach(card => {
-                const cardName = card.dataset.name;
-                const isVisible = !searchTerm || cardName.includes(searchTerm);
+        <!-- Outras seções de conteúdo estático... -->
+        
+        <!-- Seções de conteúdo individual -->
+        {% for bestiario in rpg_bestiario %}
+<div class="content-section d-none" data-content="bestiario-{{ bestiario.id }}">
+    <div class="bestiario-card">
+        <div class="bestiario-header d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">{{ bestiario.nome }}</h3>
+            <span class="nd-badge">ND {{ bestiario.nd }}</span>
+        </div>
+        
+        <div class="bestiario-body">
+            <div class="bestiario-stats">
+                <div class="stat-item">
+                    <div class="stat-label">ATRIBUTOS</div>
+                    <div class="stat-value">{{ bestiario.atributos }}</div>
+                </div>
                 
-                card.style.display = isVisible ? 'block' : 'none';
-                if (isVisible) visibleCards++;
-            });
+                <div class="stat-item">
+                    <div class="stat-label">PERÍCIAS</div>
+                    <div class="stat-value">{{ bestiario.pericias }}</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-label">VELOCIDADE</div>
+                    <div class="stat-value">{{ bestiario.velocidade }}</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-label">VIDA</div>
+                    <div class="stat-value">{{ bestiario.vida }}</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-label">MENTAL</div>
+                    <div class="stat-value">{{ bestiario.mental }}</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-label">ENERGIA</div>
+                    <div class="stat-value">{{ bestiario.energia }}</div>
+                </div>
+            </div>
             
-            // Mostrar mensagem se não houver resultados
-            const noResults = activeSection.querySelector('.no-results');
-            if (visibleCards === 0) {
-                if (!noResults) {
-                    const noResultsElement = document.createElement('div');
-                    noResultsElement.className = 'no-results';
-                    noResultsElement.innerHTML = `
-                        <i class="fas fa-search fa-3x mb-3 text-muted"></i>
-                        <h4>Nenhum resultado encontrado</h4>
-                        <p>Tente ajustar os filtros para ver mais resultados.</p>
-                    `;
-                    activeSection.querySelector('.card-container').appendChild(noResultsElement);
-                }
-            } else if (noResults) {
-                noResults.remove();
-            }
-            
-            // Aplicar ordenação (precisa ser implementada se necessário)
-            // Esta é uma implementação simplificada - para ordenação real, precisaríamos
-            // rearranjar os elementos no DOM
+            <div class="bestiario-description">
+                <div class="description-label">DESCRIÇÃO</div>
+                <p class="mb-0">{{ bestiario.descricao }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+        {% for antepassado in rpg_antepassado %}
+        <div class="content-section d-none" data-content="antepassado-{{ antepassado.id }}">
+            <h1 class="text-primary">{{ antepassado.nome }}</h1>
+            <p><strong>Descrição:</strong> {{ antepassado.descricao }}</p>
+            <p><strong>Perícias:</strong> {{ antepassado.pericia }}</p>
+            <p><strong>Equipamento:</strong> {{ antepassado.equipamento }}</p>
+            <p><strong>Crédito:</strong> {{ antepassado.credito }}</p>
+        </div>
+        {% endfor %}
+
+        {% for equipamento in rpg_equipamento %}
+        <div class="content-section d-none" data-content="equipamento-{{ equipamento.id }}">
+            <h1 class="text-primary">{{ equipamento.nome }}</h1>
+            <p><strong>Descrição:</strong> {{ equipamento.descricao }}</p>
+            <p><strong>Custo:</strong> {{ equipamento.custo }}</p>
+            <p><strong>Volume:</strong> {{ equipamento.volume }}</p>
+        </div>
+        {% endfor %}
+
+        {% for habilidade in rpg_habilidade %}
+        <div class="content-section d-none" data-content="habilidade-{{ habilidade.id }}">
+            <h1 class="text-primary">{{ habilidade.nome }}</h1>
+            <p><strong>Condição:</strong> {{ habilidade.condicao }}</p>
+            <p><strong>Descrição:</strong> {{ habilidade.descricao }}</p>
+        </div>
+        {% endfor %}
+
+        {% for poder in rpg_poder %}
+        <div class="content-section d-none" data-content="poder-{{ poder.id }}">
+            <h1 class="text-primary">{{ poder.nome }}</h1>
+            <p><strong>Requisito:</strong> {{ poder.requisito }}</p>
+            <p><strong>Custo:</strong> {{ poder.custo }}</p>
+            <p><strong>Uso:</strong> {{ poder.uso }}</p>
+            <p><strong>Descrição:</strong> {{ poder.descricao }}</p>
+        </div>
+        {% endfor %}
+    </main>
+</div>
+
+<script>
+    // Função para aplicar filtros
+    function applyFilters() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const sortValue = document.getElementById('sortSelect').value;
+        
+        // Determinar qual seção está ativa
+        const activeSection = document.querySelector('.content-section:not(.d-none)');
+        const sectionType = activeSection.dataset.content;
+        
+        // Apenas aplicar filtros nas seções de listagem
+        if (!['bestiario', 'antepassados', 'equipamentos', 'habilidades', 'poderes'].includes(sectionType)) {
+            return;
         }
-
-        // Inicializar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            // Adicionar event listeners para os filtros
-            document.getElementById('searchInput').addEventListener('input', applyFilters);
-            document.getElementById('sortSelect').addEventListener('change', applyFilters);
+        
+        // Obter os cards da seção atual
+        const cards = activeSection.querySelectorAll('.info-card');
+        let visibleCards = 0;
+        
+        // Aplicar filtro de busca
+        cards.forEach(card => {
+            const cardName = card.dataset.name;
+            const isVisible = !searchTerm || cardName.includes(searchTerm);
             
-            
-          
+            card.style.display = isVisible ? 'block' : 'none';
+            if (isVisible) visibleCards++;
         });
+        
+        // Mostrar mensagem se não houver resultados
+        const noResults = activeSection.querySelector('.no-results');
+        if (visibleCards === 0) {
+            if (!noResults) {
+                const noResultsElement = document.createElement('div');
+                noResultsElement.className = 'no-results';
+                noResultsElement.innerHTML = `
+                    <i class="fas fa-search fa-3x mb-3 text-muted"></i>
+                    <h4>Nenhum resultado encontrado</h4>
+                    <p>Tente ajustar os filtros para ver mais resultados.</p>
+                `;
+                activeSection.querySelector('.card-container').appendChild(noResultsElement);
+            }
+        } else if (noResults) {
+            noResults.remove();
+        }
+        
+        // Aplicar ordenação (precisa ser implementada se necessário)
+        // Esta é uma implementação simplificada - para ordenação real, precisaríamos
+        // rearranjar os elementos no DOM
+    }
 
-        // Função para navegação entre seções
-        function showContent(id) {
-            // Esconde todas as seções
-            document.querySelectorAll('.content-section').forEach(sec => {
-                sec.classList.add('d-none');
-            });
+    // Inicializar a página
+    document.addEventListener('DOMContentLoaded', function() {
+        // Adicionar event listeners para os filtros
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('sortSelect').addEventListener('change', applyFilters);
+    });
+
+    // Função para navegação entre seções
+    function showContent(id) {
+        // Esconde todas as seções
+        document.querySelectorAll('.content-section').forEach(sec => {
+            sec.classList.add('d-none');
+        });
+        
+        // Mostra a seção correspondente
+        const targetSection = document.querySelector(`[data-content="${id}"]`);
+        if (targetSection) {
+            targetSection.classList.remove('d-none');
             
-            // Mostra a seção correspondente
-            const targetSection = document.querySelector(`[data-content="${id}"]`);
-            if (targetSection) {
-                targetSection.classList.remove('d-none');
-                
-                // Mostra/oculta a seção de filtros baseado no tipo de conteúdo
-                const filterSection = document.getElementById('filterSection');
-                if (['bestiario', 'antepassados', 'equipamentos', 'habilidades', 'poderes'].includes(id)) {
-                    filterSection.classList.remove('d-none');
-                    // Aplicar filtros ao mudar de seção
-                    setTimeout(applyFilters, 100);
-                } else {
-                    filterSection.classList.add('d-none');
-                }
+            // Mostra/oculta a seção de filtros baseado no tipo de conteúdo
+            const filterSection = document.getElementById('filterSection');
+            if (['bestiario', 'antepassados', 'equipamentos', 'habilidades', 'poderes'].includes(id)) {
+                filterSection.classList.remove('d-none');
+                // Aplicar filtros ao mudar de seção
+                setTimeout(applyFilters, 100);
+            } else {
+                filterSection.classList.add('d-none');
             }
         }
+    }
 
-        // Event listeners para navegação
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', e => {
-                
-                
-                 const id = link.dataset.id;
-                if (!id) return;
+    // Event listeners para navegação
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', e => {
+            
+            
+            const id = link.dataset.id;
+            if (!id) return;
 
-                // Alterna visibilidade do submenu correspondente
-                const submenu = document.getElementById(`${id}-sub`);
-                const isVisible = submenu && !submenu.classList.contains('d-none');
+            // Alterna visibilidade do submenu correspondente
+            const submenu = document.getElementById(`${id}-sub`);
+            const isVisible = submenu && !submenu.classList.contains('d-none');
 
-                // Esconde todos os submenus
-                document.querySelectorAll('nav ul[id$="-sub"]').forEach(sub => {
-                    sub.classList.add('d-none');
-                });
-
-                // Atualiza a classe ativa no menu
-                document.querySelectorAll('.nav-link').forEach(nav => {
-                    nav.classList.remove('active');
-                });
-                link.classList.add('active');
-
-                // Exibe a seção de conteúdo correspondente
-                showContent(id);
-
-                // Se existir e não estava visível, exibe este submenu
-                if (submenu && !isVisible) {
-                    submenu.classList.remove('d-none');
-                }
+            // Esconde todos os submenus
+            document.querySelectorAll('nav ul[id$="-sub"]').forEach(sub => {
+                sub.classList.add('d-none');
             });
-        });
 
-        // Inicializar a primeira seção
-        showContent('introducao');
-    </script>
+            // Atualiza a classe ativa no menu
+            document.querySelectorAll('.nav-link').forEach(nav => {
+                nav.classList.remove('active');
+            });
+            link.classList.add('active');
+
+            // Exibe a seção de conteúdo correspondente
+            showContent(id);
+
+            // Se existir e não estava visível, exibe este submenu
+            if (submenu && !isVisible) {
+                submenu.classList.remove('d-none');
+            }
+        });
+    });
+
+    // Inicializar a primeira seção
+    showContent('introducao');
+</script>
 
 {% endblock content %}

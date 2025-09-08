@@ -9,93 +9,162 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* Variáveis CSS para consistência - mantidas da home */
     :root {
-      --primary-blue: #6a98b3;
-      --light-blue: #a8c6d9;
-      --soft-blue: #d2e3ed;
-      --dark-blue: #4a7088;
-      --text-color: #333;
-      --bg-color: #f8fafb;
-      --shadow-color: rgba(106, 152, 179, 0.15);
+      --primary: #2295d1;
+      --primary-dark: #1a7aac;
+      --primary-light: #93c5fd;
+      --secondary: #f9c74f;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #43aa8b;
+      --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
+      --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%);
+      --text-color: #444;
+      --bg-color: #f8fafc;
+      --sidebar-bg: #ffffff;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --transition: all 0.3s ease;
     }
     
     [data-theme="dark"] {
-      --primary-blue: #7eb0d1;
-      --light-blue: #4a7088;
-      --soft-blue: #2a3b45;
-      --dark-blue: #a8c6d9;
+      --primary: #3a86ff;
+      --primary-dark: #2563eb;
+      --primary-light: #93c5fd;
+      --secondary: #f59e0b;
       --text-color: #e6e6e6;
       --bg-color: #1a2830;
-      --shadow-color: rgba(168, 198, 217, 0.1);
+      --sidebar-bg: #1e2a35;
+      --card-bg: #243240;
+      --border-color: #334155;
+      --gradient-primary: linear-gradient(135deg, #3a86ff 0%, #2563eb 100%);
+      --gradient-hero: linear-gradient(135deg, rgba(58, 134, 255, 0.9) 0%, rgba(37, 99, 235, 0.85) 100%);
     }
     
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: all 0.3s ease;
+      transition: var(--transition);
       line-height: 1.6;
     }
     
     .navbar {
-      background-color: var(--soft-blue) !important;
+      background: var(--gradient-primary) !important;
       padding: 12px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
     .navbar-brand {
-      font-weight: 600;
-      color: var(--dark-blue) !important;
-      font-size: 1.3rem;
+      font-weight: 700;
+      color: white !important;
+      font-size: 1.4rem;
     }
     
     .nav-link {
-      color: var(--dark-blue);
+      
       font-weight: 500;
       padding: 12px 20px !important;
-      transition: all 0.2s ease;
+      transition: var(--transition);
       border-left: 3px solid transparent;
     }
     
     .nav-link:hover {
-      background-color: var(--light-blue);
+      background-color: rgba(255, 255, 255, 0.2);
       color: white;
-      border-left: 3px solid var(--dark-blue);
+      border-left: 3px solid white;
     }
     
     .offcanvas-header {
-      background-color: var(--soft-blue);
-      border-bottom: 1px solid var(--light-blue);
+      background: var(--gradient-primary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .offcanvas-title {
-      color: var(--dark-blue) !important;
+      color: white !important;
       font-weight: 600;
       font-size: 1.4rem;
     }
     
     .sidebar {
-      background-color: var(--bg-color) !important;
+      background-color: var(--sidebar-bg) !important;
     }
     
     header {
       padding: 40px 0;
-      background: linear-gradient(to right, var(--soft-blue), var(--bg-color));
+      background: var(--gradient-hero);
       margin-bottom: 30px;
-      border-bottom: 1px solid var(--light-blue);
+      border-bottom: 1px solid var(--border-color);
     }
     
     h1.display-4 {
       font-size: 2.8rem;
-      font-weight: 600;
-      color: var(--dark-blue);
-      text-shadow: 1px 1px 3px var(--shadow-color);
+      font-weight: 700;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
     
     footer {
       padding: 20px 0;
-      background-color: var(--soft-blue);
-      border-top: 1px solid var(--light-blue);
+      background: var(--gradient-primary);
+      border-top: 1px solid var(--border-color);
       margin-top: 40px;
+      color: white;
+    }
+    
+    /* Cards - mantido do estilo original */
+    .rpg-card {
+      border-radius: 15px;
+      transition: var(--transition);
+      background-color: var(--card-bg);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: none;
+    }
+    
+    .rpg-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Ícones - mantido do estilo original */
+    .rpg-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      color: white;
+      font-size: 2rem;
+    }
+    
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgba(34, 149, 209, 0.1);
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+    
+    /* Botões */
+    .btn-primary {
+      background: var(--gradient-primary);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
     }
     
     /* Switch personalizado */
@@ -119,7 +188,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: var(--light-blue);
+      background-color: var(--primary-light);
       transition: .4s;
       border-radius: 34px;
     }
@@ -137,7 +206,7 @@
     }
     
     input:checked + .slider {
-      background-color: var(--dark-blue);
+      background-color: var(--primary-dark);
     }
     
     input:checked + .slider:before {
@@ -153,13 +222,18 @@
       display: block;
       width: 80px;
       height: 3px;
-      background: var(--primary-blue);
+      background: white;
       margin: 15px auto;
       opacity: 0.6;
     }
     
     .btn-close {
-      color: var(--dark-blue);
+      filter: invert(1);
+    }
+    
+    /* Text colors */
+    .text-primary {
+      color: var(--primary) !important;
     }
   </style>
 </head>
@@ -175,11 +249,11 @@
       </a>
       <div class="ms-auto d-flex align-items-center gap-2">
         <!-- Botão das Rotas -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
-          <span class="navbar-toggler-icon"></span> Menu
+        <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Menu lateral">
+          <i class="fa-solid fa-bars me-1"></i> Menu
         </button>
         <!-- Botão para trocar de tema -->
-        <label class="switch me-2">
+        <label class="switch me-2" title="Alternar tema claro/escuro">
           <input id="themeCheckbox" type="checkbox" />
           <span class="slider"></span>
         </label>
@@ -188,7 +262,7 @@
   </nav>
 
   <!-- Sidebar das rotas -->
-  <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
+    <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title">Vale Místico</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
@@ -201,11 +275,17 @@
       </nav>
     </div>
   </div>
+    
 
   <!-- Header -->
   <header>
     <div class="container text-center">
       <h1 class="display-4 fw-bold">Vale Místico</h1>
+      
+      <!-- Talvez por coisas-->
+      <p class="lead text-light mx-auto" style="max-width: 600px;">
+        
+      </p>
     </div>
   </header>
 
@@ -217,7 +297,12 @@
 
   <!-- Rodapé -->
   <footer class="text-center">
-    <small>&copy; {{ current_year if current_year else "2025" }} RPG ETEC. Todos os direitos reservados.</small>
+    <div class="container">
+      <small>&copy; {{ current_year if current_year else "2025" }} Plataforma RPG para Saúde Mental. Todos os direitos reservados.</small>
+      <div class="mt-2">
+        <small>Alinhado ao <strong>ODS 3: Saúde e Bem-Estar</strong></small>
+      </div>
+    </div>
   </footer>
 
   <!-- Parte do JavaScript -->
@@ -228,11 +313,11 @@
 
     // Aplica Tema
     document.documentElement.setAttribute('data-theme', savedTheme)
-    themeCheckbox.checked = savedTheme === 'light'
+    themeCheckbox.checked = savedTheme === 'dark'
 
     // Altera Tema
     themeCheckbox.addEventListener('change', () => {
-      const newTheme = themeCheckbox.checked ? 'light' : 'dark'
+      const newTheme = themeCheckbox.checked ? 'dark' : 'light'
       document.documentElement.setAttribute('data-theme', newTheme)
       localStorage.setItem('theme', newTheme)
     })

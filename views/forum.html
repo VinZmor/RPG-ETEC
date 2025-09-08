@@ -1,87 +1,189 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <style>
-    /* Seus estilos CSS permanecem os mesmos */
-    body {
-        background-color: #f8f9fa;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Variáveis CSS para consistência - mantidas da home */
+    :root {
+        --primary: #2295d1;
+        --primary-dark: #1a7aac;
+        --primary-light: rgba(34, 149, 209, 0.15);
+        --secondary: #f9c74f;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --success: #43aa8b;
+        --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
+        --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%);
+        --text-color: #444;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --border-color: #e2e8f0;
+        --transition: all 0.3s ease;
     }
-    .navbar-brand {
-        font-weight: 700;
+
+    [data-theme="dark"] {
+        --primary: #3a86ff;
+        --primary-dark: #2563eb;
+        --primary-light: rgba(58, 134, 255, 0.15);
+        --text-color: #e6e6e6;
+        --bg-color: #1a2830;
+        --card-bg: #243240;
+        --border-color: #334155;
     }
+
+    /* Estilos específicos do fórum */
     .stat-card {
-        transition: transform 0.3s;
+        transition: var(--transition);
+        border-radius: 15px;
+        background-color: var(--card-bg);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: none;
+        height: 100%;
     }
+
     .stat-card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
+
     .forum-item {
-        transition: background-color 0.2s;
+        transition: var(--transition);
+        border-radius: 10px;
     }
+
     .forum-item:hover {
-        background-color: #f1f3f5 !important;
+        background-color: var(--primary-light) !important;
     }
+
     .badge-category {
         font-size: 0.8em;
         padding: 0.35em 0.65em;
+        background: var(--gradient-primary);
+        color: white;
     }
+
     .author-avatar {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .forum-icon {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background-color: #e9ecef;
+        background: var(--gradient-primary);
+        color: white;
     }
-    .btn-primary {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-    }
+
     .bg-primary-light {
-        background-color: #e8f4ff;
-        color: #0d6efd;
+        background-color: var(--primary-light) !important;
+        color: var(--primary);
     }
+
     .topic-form {
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
     }
-    .forum-item {
-        transition: background-color 0.2s ease;
-    }
-    .forum-item:hover {
-        background-color: rgba(34, 149, 209, 0.05) !important;
-    }
-    .stat-card {
-        transition: transform 0.3s ease;
-    }
-    .stat-card:hover {
-        transform: translateY(-5px);
-    }
+
     .stat-number {
         font-size: 2rem;
         font-weight: 700;
+        color: var(--primary);
     }
+
     .stat-label {
         font-size: 0.9rem;
+        color: var(--text-color);
     }
-    .author-avatar {
-        font-size: 20px;
+
+    .card-header {
+        background: var(--gradient-primary) !important;
+        color: white;
+        border: none;
     }
-    .bg-primary-light {
-        background-color: rgba(34, 149, 209, 0.15) !important;
-        color: #2295D1;
+
+    .form-control, .form-select {
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        padding: 0.75rem 1rem;
     }
-    .badge {
-        font-weight: 500;
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(34, 149, 209, 0.25);
+    }
+
+    /* Botões com estilo consistente */
+    .btn-primary {
+        background: var(--gradient-primary);
+        border: none;
+        border-radius: 50px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
+    }
+
+    .btn-outline-primary {
+        border-color: var(--primary);
+        color: var(--primary);
+        border-radius: 50px;
+        padding: 10px 25px;
+        font-weight: 600;
+        transition: var(--transition);
+    }
+
+    .btn-outline-primary:hover {
+        background: var(--gradient-primary);
+        color: white;
+        transform: translateY(-3px);
+    }
+
+    /* Modal estilizado */
+    .modal-content {
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-header {
+        background: var(--gradient-primary);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        border: none;
+    }
+
+    .modal-title {
+        font-weight: 600;
+    }
+
+    .btn-close {
+        filter: invert(1);
+    }
+
+    /* Cards com estilo consistente */
+    .card {
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Text colors */
+    .text-primary {
+        color: var(--primary) !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
     }
 </style>
 
@@ -90,15 +192,38 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h2 text-primary mb-1"><i class="fas fa-comments me-2"></i> Fórum</h1>
+            <!-- COlocar coisas -->
+            <p class="text-muted"></p>
         </div>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novoTopicoModal">
             <i class="fas fa-plus-circle me-2"></i> Novo Tópico
         </button>
     </div>
 
-  
+    <!-- Estatísticas da Comunidade -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="stat-card text-center p-4">
+                <div class="stat-number" id="totalTopicos">0</div>
+                <div class="stat-label">Tópicos Criados</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card text-center p-4">
+                <div class="stat-number" id="totalRespostas">0</div>
+                <div class="stat-label">Respostas</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card text-center p-4">
+                <div class="stat-number" id="totalUsuarios">0</div>
+                <div class="stat-label">Membros Ativos</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Filtros e Busca -->
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card mb-4">
         <div class="card-body py-3">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-2 mb-md-0">
@@ -110,6 +235,9 @@
                             <option value="procurando">Procurando Jogo</option>
                             <option value="sugestao">Sugestões</option>
                             <option value="discussao">Discussão</option>
+                            <option value="depressao">Depressão</option>
+                            <option value="ansiedade">Ansiedade</option>
+                            <option value="autoajuda">Autoajuda</option>
                         </select>
                     </div>
                 </div>
@@ -126,8 +254,8 @@
     </div>
 
     <!-- Lista de Tópicos -->
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-light py-3">
+    <div class="card">
+        <div class="card-header py-3">
             <div class="row fw-bold">
                 <div class="col-md-6">Tópico</div>
                 <div class="col-md-2 text-center">Autor</div>
@@ -135,7 +263,7 @@
                 <div class="col-md-2 text-center">Última Atualização</div>
             </div>
         </div>
-        <div class="card-body p-0" id="listaTopicos">
+        <div class="card-body p-" id="listaTopicos">
             <!-- Tópicos serão carregados aqui via JavaScript -->
             <div class="text-center py-5">
                 <div class="spinner-border text-primary" role="status">
@@ -173,6 +301,9 @@
                             <option value="procurando">Procurando Jogo</option>
                             <option value="sugestao">Sugestões</option>
                             <option value="discussao">Discussão</option>
+                            <option value="depressao">Depressão</option>
+                            <option value="ansiedade">Ansiedade</option>
+                            <option value="autoajuda">Autoajuda</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -188,8 +319,6 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     // Elementos da DOM
@@ -251,7 +380,7 @@
                 <div class="row align-items-center py-3 border-bottom forum-item ${index % 2 === 0 ? '' : 'bg-light'}">
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <div class="forum-icon me-3 text-primary">
+                            <div class="forum-icon me-3">
                                 <i class="fas fa-comment fa-lg"></i>
                             </div>
                             <div>
@@ -259,7 +388,7 @@
                                     <a href="{{ url_for('respostas') }}?id=${topico.id}" class="text-decoration-none text-dark">${topico.topico}</a>
                                 </h5>
                                 <small class="text-muted">
-                                    <span class="badge bg-primary-light badge-category">${getNomeCategoria(topico.categoria)}</span>
+                                    <span class="badge badge-category">${getNomeCategoria(topico.categoria)}</span>
                                     • Iniciado por ${topico.autor}
                                 </small>
                             </div>
@@ -267,7 +396,6 @@
                     </div>
                     <div class="col-md-2 text-center">
                         <div class="author-avatar">
-                            
                             <span class="d-block small mt-1">${topico.autor}</span>
                         </div>
                     </div>
@@ -302,46 +430,43 @@
             'duvida': 'Dúvida',
             'procurando': 'Procurando Jogo',
             'sugestao': 'Sugestões',
-            'discussao': 'Discussão'
+            'discussao': 'Discussão',
+            'depressao': 'Depressão',
+            'ansiedade': 'Ansiedade',
+            'autoajuda': 'Autoajuda'
         };
         
         return categorias[categoria] || categoria;
     }
     
- // Função para formatar data - ATUALIZADA
-function formatarData(dataString) {
-    console.log('Formatando:', dataString);
-    try {
-        const data = new Date(dataString);
-        if (isNaN(data.getTime())) {
-            return dataString; // Retorna original se inválida
+    // Função para formatar data
+    function formatarData(dataString) {
+        try {
+            const data = new Date(dataString);
+            if (isNaN(data.getTime())) {
+                return dataString;
+            }
+            
+            const agora = new Date();
+            const diffTempo = agora - data;
+            const diffDias = diffTempo / (1000 * 3600 * 24);
+            
+            if (diffDias < 1) {
+                return data.toLocaleTimeString('pt-BR', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+            } else if (diffDias < 7) {
+                const dias = Math.floor(diffDias);
+                return `${dias} dia${dias > 1 ? 's' : ''} atrás`;
+            } else {
+                return data.toLocaleDateString('pt-BR');
+            }
+        } catch (error) {
+            console.error('Erro ao formatar data:', error);
+            return dataString;
         }
-        
-        const agora = new Date();
-        const diffTempo = agora - data;
-        const diffDias = diffTempo / (1000 * 3600 * 24);
-        
-        // Se for hoje, mostra horas
-        if (diffDias < 1) {
-            return data.toLocaleTimeString('pt-BR', { 
-                hour: '2-digit', 
-                minute: '2-digit' 
-            });
-        }
-        // Se for nos últimos 7 dias, mostra dias atrás
-        else if (diffDias < 7) {
-            const dias = Math.floor(diffDias);
-            return `${dias} dia${dias > 1 ? 's' : ''} atrás`;
-        }
-        // Mais de uma semana, mostra data completa
-        else {
-            return data.toLocaleDateString('pt-BR');
-        }
-    } catch (error) {
-        console.error('Erro ao formatar data:', error);
-        return dataString;
     }
-}
     
     // Evento para criar novo tópico
     btnCriarTopico.addEventListener('click', async function() {
