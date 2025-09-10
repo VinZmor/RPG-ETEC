@@ -146,15 +146,15 @@
   </section>
 
   <!-- Equipe -->
-  <section class="mb-5">
+  <section class="mb-5 card border-0 shadow-lg mb-5 rpg-feature-card p-5">
     <h2 class="text-center text-primary mb-4">Nossa Equipe</h2>
     <div class="row g-4">
       <div class="col-md-4">
-        <div class="card h-100 border-0 text-center shadow-sm team-card">
+        <div class="h-100 text-center">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <div class="avatar-placeholder">
-                <i class="fas fa-user"></i>
+              <div class="rpg-icon">
+                <i class="fas fa-user color"></i>
               </div>
             </div>
             <h4 class="card-title h5 text-primary">Larissa</h4>
@@ -162,11 +162,11 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 border-0 text-center shadow-sm team-card">
+      <div class="col-md-4 ">
+        <div class=" h-100 text-center  ">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <div class="avatar-placeholder">
+              <div class="rpg-icon">
                 <i class="fas fa-user"></i>
               </div>
             </div>
@@ -176,10 +176,10 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card h-100 border-0 text-center shadow-sm team-card">
+        <div class="h-100 text-center">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <div class="avatar-placeholder">
+              <div class="rpg-icon ">
                 <i class="fas fa-user"></i>
               </div>
             </div>
@@ -194,6 +194,11 @@
 
 <style>
   /* Variáveis CSS para consistência */
+
+.a{
+    background-color: white !important;
+  }
+
   :root {
     --primary: #2295d1;
     --primary-dark: #1a7aac;
@@ -313,6 +318,7 @@
   .team-card {
     transition: transform 0.3s ease;
     border-radius: 15px;
+    
   }
 
   .team-card:hover {
@@ -320,11 +326,9 @@
   }
 
   .avatar-placeholder {
-    width: 80px;
-    height: 80px;
+    
     border-radius: 50%;
-    background: var(--gradient-primary);
-    display: flex;
+    
     align-items: center;
     justify-content: center;
     color: white;
@@ -354,6 +358,7 @@
     
     .card-body.p-5 {
       padding: 2rem !important;
+    
     }
     
     .rpg-icon, .feature-icon {
@@ -362,5 +367,7 @@
       font-size: 1.5rem;
     }
   }
+
+  
 </style>
 {% endblock content %}
