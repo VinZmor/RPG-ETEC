@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
+   <style>
     /* Variáveis CSS para consistência - mantidas da home */
     :root {
       --primary: #2295d1;
@@ -63,7 +63,6 @@
     }
     
     .nav-link {
-      
       font-weight: 500;
       padding: 12px 20px !important;
       transition: var(--transition);
@@ -188,7 +187,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: var(--primary-light);
+      background-color: var(--primary-light) !important;
       transition: .4s;
       border-radius: 34px;
     }
@@ -200,7 +199,7 @@
       width: 16px;
       left: 4px;
       bottom: 4px;
-      background-color: white;
+      background-color: white !important;
       transition: .4s;
       border-radius: 50%;
     }
@@ -234,6 +233,25 @@
     /* Text colors */
     .text-primary {
       color: var(--primary) !important;
+    }
+    
+    /* Estilo para o botão de alternância de tema */
+    .theme-toggle-container {
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+    }
+    
+    .theme-label {
+      color: white;
+      margin-right: 10px;
+      font-size: 0.9rem;
+    }
+    
+    /* Ajustes para o ícone do sol/lua */
+    .theme-icon {
+      margin-left: 8px;
+      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -299,9 +317,7 @@
   <footer class="text-center">
     <div class="container">
       <small>&copy; {{ current_year if current_year else "2025" }} Plataforma RPG para Saúde Mental. Todos os direitos reservados.</small>
-      <div class="mt-2">
-        <small>Alinhado ao <strong>ODS 3: Saúde e Bem-Estar</strong></small>
-      </div>
+      
     </div>
   </footer>
 
