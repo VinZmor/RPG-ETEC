@@ -23,13 +23,13 @@
     [data-theme="dark"] {
         --primary: #3a86ff;
         --primary-dark: #2563eb;
-        
         --text-color: #e6e6e6;
         --bg-color: #1a2830;
         --card-bg: #243240;
         --border-color: #334155;
     }
 
+   
     /* Estilos específicos do fórum */
     .stat-card {
         transition: var(--transition);
@@ -175,6 +175,8 @@
         border-radius: 15px;
         border: none;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+         width: auto;
+        height: auto;
     }
 
     /* Text colors */
@@ -185,6 +187,16 @@
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
     }
+
+   .card-body {
+    padding-bottom: 0%;
+    padding-top: 0%;
+    padding-left: 12px;
+    background-color: white;
+    border-radius: 10px;
+   }
+
+   
 </style>
 
 <div class="container py-4">
@@ -235,9 +247,7 @@
                             <option value="procurando">Procurando Jogo</option>
                             <option value="sugestao">Sugestões</option>
                             <option value="discussao">Discussão</option>
-                            <option value="depressao">Depressão</option>
-                            <option value="ansiedade">Ansiedade</option>
-                            <option value="autoajuda">Autoajuda</option>
+                       
                         </select>
                     </div>
                 </div>
@@ -263,7 +273,7 @@
                 <div class="col-md-2 text-center">Última Atualização</div>
             </div>
         </div>
-        <div class="card-body p-" id="listaTopicos">
+        <div class="card-body " id="listaTopicos">
             <!-- Tópicos serão carregados aqui via JavaScript -->
             <div class="text-center py-5">
                 <div class="spinner-border text-primary" role="status">
@@ -377,12 +387,10 @@
             
             topicos.forEach((topico, index) => {
                 html += `
-                <div class="row align-items-center py-3 border-bottom forum-item ${index % 2 === 0 ? '' : 'bg-light'}">
+                <div class="row align-items-center py-3 border-bottom forum-item ">
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <div class="forum-icon me-3">
-                                <i class="fas fa-comment fa-lg"></i>
-                            </div>
+                            
                             <div>
                                 <h5 class="mb-1">
                                     <a href="{{ url_for('respostas') }}?id=${topico.id}" class="text-decoration-none text-dark">${topico.topico}</a>

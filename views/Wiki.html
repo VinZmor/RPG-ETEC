@@ -98,12 +98,32 @@
         min-height: calc(100vh - 150px);
         position: relative;
         background-color: #f8fafc;
+    }    
+    
+    [data-theme="dark"] #fundo {
+        min-height: calc(100vh - 150px);
+        position: relative;
+        background-color: #212529;
     }
 
     /* Sidebar de Navegação - adaptado ao estilo da home */
     #sidebar {
         width: 280px;
         background-color: white;
+        border-right: 1px solid #e2e8f0;
+        padding: 1.5rem 1rem;
+        overflow-y: auto;
+        transition: all 0.3s ease;
+        height: calc(100vh - 76px);
+        position: sticky;
+        top: 76px;
+        border-radius: 0 15px 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="dark"] #sidebar {
+        width: 280px;
+        background-color: #212529;
         border-right: 1px solid #e2e8f0;
         padding: 1.5rem 1rem;
         overflow-y: auto;
@@ -149,6 +169,7 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
+    
     #sidebar .nav-link i {
         margin-right: 0.75rem;
         font-size: 0.9rem;
@@ -187,6 +208,13 @@
         padding: 2rem;
         width: calc(100% - 280px);
         background-color: #f8fafc;
+        transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] #content {
+        padding: 2rem;
+        width: calc(100% - 280px);
+        background-color: red;
         transition: all 0.3s ease;
     }
 
@@ -315,6 +343,17 @@
             border-bottom: 1px solid #e2e8f0;
             border-radius: 0 0 15px 15px;
         }
+
+        [data-theme="dark"] #sidebar {
+            
+            width: 100%;
+            height: auto;
+            position: relative;
+            top: 0;
+            border-right: none;
+            border-bottom: 1px solid orange !important;
+            border-radius: 0 0 15px 15px;
+        }
         
         #content {
             width: 100%;
@@ -417,6 +456,14 @@
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 0.9rem;
+}
+
+.card-body {
+    background-color: white;
+}
+
+[data-theme="dark"] .card-body {
+    background-color: #f6c23e;
 }
 
 @media (max-width: 768px) {
@@ -547,7 +594,7 @@
             <p>Bem-vindo ao mundo de Vale Místico, um RPG de fantasia onde você pode criar personagens incríveis, explorar mundos misteriosos e viver aventuras épicas.</p>
             
             <div class="card rpg-card mt-4">
-                <div class="card-body bg-white">
+                <div class="card-body">
                     <div class="text-center mb-4">
                         <div class="rpg-icon mb-3">
                             <i class="fas fa-dice-d20"></i>
@@ -704,15 +751,15 @@ Caso o poder não seja passivo (sempre ativo).
     
     <h3 class="mt-4 text-secondary">Passo a passo:</h3>
     <ol>
-        <li>Preencha sua biografia (Nome, idade, história, etc.)</li>
-        <li>Escolha um antepassado</li>
-        <li>Distribua seus pontos de atributo</li>
-        <li>Defina sua vida, energia e mental</li>
-        <li>Distribua seus pontos de perícia</li>
+        <li id="text">Preencha sua biografia (Nome, idade, história, etc.)</li>
+        <li id="text">Escolha um antepassado</li>
+        <li id="text">Distribua seus pontos de atributo</li>
+        <li id="text">Defina sua vida, energia e mental</li>
+        <li id="text">Distribua seus pontos de perícia</li>
     </ol>
     
-    <h3 class="mt-4 text-secondary">1. Biografia</h3>
-    <p>Sua biografia define os aspectos mais básicos de quem você é, como seu nome, idade, peso, altura e sua história. Mesmo que muitos desses fatores não tenham um impacto mecânico no sistema, são importantes para trazer um aspecto de vida a seu personagem.</p>
+    <h3 class="mt-4 text-secondary" id="text">1. Biografia</h3>
+    <p id="text"    >Sua biografia define os aspectos mais básicos de quem você é, como seu nome, idade, peso, altura e sua história. Mesmo que muitos desses fatores não tenham um impacto mecânico no sistema, são importantes para trazer um aspecto de vida a seu personagem.</p>
     
     <h3 class="mt-4 text-secondary">2. Antepassado</h3>
     <p>Seu antepassado se relaciona a seu passado. Eles definem seu equipamento inicial além de alguns bônus a perícias. Geralmente, ao fazer um personagem, se pensa em uma história, e depois se escolhe um antepassado que encaixe na história escrita.</p>
