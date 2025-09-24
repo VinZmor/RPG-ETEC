@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container py-4">
-  <!-- Header com destaque visual -->
-  <header class="text-center mb-5 py-5 rpg-hero">
-    <div class="hero-content">
-      <h1 class="display-5 fw-bold text-white mb-3">Plataforma RPG</h1>
-      <p class="lead text-light mx-auto hero-subtitle">
-        RPG de mesa no auxilio no tratamento da depressão por meio da interação social <strong class="text-warning">ODS 3: Saúde e Bem-Estar</strong>.
-      </p>
-      
+
+
+  <!-- Introdução com ilustração -->
+  <section class="row align-items-center mb-5">
+    <div class="col-lg-8">
+      <div class="intro-text p-4 rpg-border">
+        <h2 class="h3 text-primary mb-3">Bem-vindo ao Vale Místico</h2>
+        <p class="mb-0">Nossa plataforma utiliza o RPG de Mesa como ferramenta terapêutica para auxiliar no tratamento da <strong>Depressão</strong>. Através da <strong>Gamificação</strong>, estimulamos mudanças comportamentais positivas e desenvolvimento de habilidades sociais.</p>
+      </div>
     </div>
-  </header>
+    
+  </section>
 
   <!-- Missão e Gamificação -->
   <section class="row g-4 mb-5" id="projeto">
@@ -24,7 +25,7 @@
             </div>
             <h3 class="card-title h4 text-primary">Gamificação</h3>
           </div>
-          <p class="card-text" id="text">
+          <p class="card-text">
             RPG é uma ferramenta poderosa para melhorar o aprendizado, estimular o comportamento, desenvolver habilidades sociais
             e promover o trabalho colaborativo, a criatividade e a interação.
           </p>
@@ -45,20 +46,29 @@
             <div class="rpg-icon mb-3">
               <i class="fas fa-brain"></i>
             </div>
-            <h3 class="card-title h4 text-primary">Saúde Mental</h3>
+            <h3 class="card-title h4 text-primary">Depressão</h3>
           </div>
           <div class="card-text">
             <div class="depression-level mb-3">
-              <h5 class="text-primary">Leve</h5>
-              <p class="mb-2" id="text">Fadiga, insônia ou sono excessivo, alterações no apetite, dores leves.</p>
+              <div class="d-flex align-items-center mb-2">
+                <div class="level-indicator level-mild"></div>
+                <h5 class="text-primary mb-0 ms-2">Leve</h5>
+              </div>
+              <p class="mb-2">Fadiga, insônia ou sono excessivo, alterações no apetite, dores leves.</p>
             </div>
             <div class="depression-level mb-3">
-              <h5 class="text-primary">Moderada</h5>
-              <p class="mb-2" id="text">Tristeza constante, desinteresse, irritabilidade, problemas de sono.</p>
+              <div class="d-flex align-items-center mb-2">
+                <div class="level-indicator level-moderate"></div>
+                <h5 class="text-primary mb-0 ms-2">Moderada</h5>
+              </div>
+              <p class="mb-2">Tristeza constante, desinteresse, irritabilidade, problemas de sono.</p>
             </div>
             <div class="depression-level mb-4">
-              <h5 class="text-primary">Grave</h5>
-              <p class="mb-3" id="text">Pensamentos suicidas, agitação, desesperança, dificuldade para tarefas simples.</p>
+              <div class="d-flex align-items-center mb-2">
+                <div class="level-indicator level-severe"></div>
+                <h5 class="text-primary mb-0 ms-2">Grave</h5>
+              </div>
+              <p class="mb-3">Pensamentos suicidas, agitação, desesperança, dificuldade para tarefas simples.</p>
             </div>
             
             <div class="links-container">
@@ -87,28 +97,28 @@
   <!-- Objetivos -->
   <section class="card border-0 shadow-lg mb-5 rpg-feature-card">
     <div class="card-body p-5">
-      <h2 class="text-center text-primary mb-4" id="text">Objetivos do Projeto</h2>
+      <h2 class="text-center text-primary mb-4">Objetivos do Projeto</h2>
       <div class="row g-4">
         <div class="col-md-4 text-center">
           <div class="feature-icon mb-3">
             <i class="fas fa-hands-helping"></i>
           </div>
-          <h4 class="h5" id="text">Ambiente de Apoio</h4>
-          <p id="text">Criar um ambiente de apoio para pessoas com depressão leve ou moderada.</p>
+          <h4 class="h5">Ambiente de Apoio</h4>
+          <p>Criar um ambiente de apoio para pessoas com depressão leve ou moderada.</p>
         </div>
         <div class="col-md-4 text-center">
           <div class="feature-icon mb-3">
             <i class="fas fa-book"></i>
           </div>
-          <h4 class="h5" id="text">Regras Claras</h4>
-          <p id="text">Desenvolver regras claras e mecânicas acessíveis para o jogo.</p>
+          <h4 class="h5">Regras Claras</h4>
+          <p>Desenvolver regras claras e mecânicas acessíveis para o jogo.</p>
         </div>
         <div class="col-md-4 text-center">
           <div class="feature-icon mb-3">
             <i class="fas fa-mobile-alt"></i>
           </div>
-          <h4 class="h5" id="text">Aplicativo Mobile</h4>
-          <p id="text">Oferecer um aplicativo mobile para facilitar o acesso e uso da plataforma.</p>
+          <h4 class="h5">Aplicativo Mobile</h4>
+          <p>Oferecer um aplicativo mobile para facilitar o acesso e uso da plataforma.</p>
         </div>
       </div>
     </div>
@@ -117,281 +127,170 @@
   <!-- Sistema -->
   <section class="card border-0 shadow-lg mb-5 rpg-feature-card">
     <div class="card-body p-5">
-      <h2 class="text-center text-primary mb-4" id="text">Sistema RPG (TTRPG)</h2>
+      <h2 class="text-center text-primary mb-4">Sistema RPG (TTRPG)</h2>
       <div class="row g-4 text-center">
         <div class="col-md-4">
           <div class="feature-icon mb-3">
             <i class="fas fa-lightbulb"></i>
           </div>
-          <h4 class="h5" id="text">Regras Simples</h4>
-          <p id="text">Regras simples e intuitivas para todos os jogadores</p>
+          <h4 class="h5">Regras Simples</h4>
+          <p>Regras simples e intuitivas para todos os jogadores</p>
         </div>
         <div class="col-md-4">
           <div class="feature-icon mb-3">
             <i class="fas fa-dice"></i>
           </div>
-          <h4 class="h5" id="text">D6 Único</h4>
-          <p id="text">Uso de apenas um dado comum de 6 lados</p>
+          <h4 class="h5">D6 Único</h4>
+          <p>Uso de apenas um dado comum de 6 lados</p>
         </div>
         <div class="col-md-4">
           <div class="feature-icon mb-3">
             <i class="fas fa-book-open"></i>
           </div>
-          <h4 class="h5" id="text">Exemplos Inclusos</h4>
-          <p id="text">Inclui exemplos de jogo para iniciantes</p>
+          <h4 class="h5">Exemplos Inclusos</h4>
+          <p>Inclui exemplos de jogo para iniciantes</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Recursos da Plataforma -->
+  <section class="mb-5">
+    <h2 class="text-center text-primary mb-4">Recursos da Plataforma</h2>
+    <div class="row g-4">
+      <!-- Mapa -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-lg rpg-card feature-preview">
+          <div class="card-header bg-transparent border-0 text-center py-4">
+            <div class="rpg-icon sm mb-2">
+              <i class="fas fa-map"></i>
+            </div>
+            <h3 class="h4 text-primary">Sistema de Mapa</h3>
+          </div>
+          <div class="card-body">
+            <div class="map-preview rpg-map-placeholder mb-4">
+              <div class="grid-overlay"></div>
+              <div class="character-marker" style="top: 30%; left: 40%;">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="character-marker" style="top: 60%; left: 70%;">
+                <i class="fas fa-dragon"></i>
+              </div>
+            </div>
+            <p>O mapa auxilia em cenários onde a posição no ambiente tem importância, como em combates. Funciona com sistema de grid que posiciona os personagens visualmente.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Ficha -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-lg rpg-card feature-preview">
+          <div class="card-header bg-transparent border-0 text-center py-4">
+            <div class="rpg-icon sm mb-2">
+              <i class="fas fa-scroll"></i>
+            </div>
+            <h3 class="h4 text-primary">Ficha de Personagem</h3>
+          </div>
+          <div class="card-body">
+            <div class="character-sheet-preview rpg-sheet-placeholder mb-4">
+              <div class="sheet-header">
+                <div class="character-name">Nome do Personagem</div>
+                <div class="character-class">Classe & Nível</div>
+              </div>
+              <div class="sheet-stats">
+                <div class="stat"><span>Força:</span> <strong>12</strong></div>
+                <div class="stat"><span>Destreza:</span> <strong>14</strong></div>
+                <div class="stat"><span>Inteligência:</span> <strong>16</strong></div>
+              </div>
+            </div>
+            <p>Na ficha de personagem, você encontra todos os atributos, habilidades e características visuais do seu personagem de forma organizada e acessível.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- Equipe -->
-  <section class="mb-5 card border-0 shadow-lg mb-5 rpg-feature-card p-5">
-    <h2 class="text-center text-primary mb-4" id="text">Nossa Equipe</h2>
+  <section class="mb-5 card border-0 shadow-lg rpg-feature-card p-5">
+    <h2 class="text-center text-primary mb-4">Nossa Equipe</h2>
     <div class="row g-4">
       <div class="col-md-4">
-        <div class="h-100 text-center">
+        <div class="team-card card h-100 border-0 text-center">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <div class="rpg-icon">
-                <i class="fas fa-user color"></i>
+              <div class="rpg-icon character-avatar  ">
+                <i class="fas fa-hat-wizard"></i>
               </div>
             </div>
-            <h4 class="card-title h5 text-primary" id="text">Larissa</h4>
-            <p class="card-text" id="text">Desenvolvedora principal da aplicação mobile</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 ">
-        <div class=" h-100 text-center  ">
-          <div class="card-body p-4">
-            <div class="team-img mx-auto mb-3">
-              <div class="rpg-icon">
-                <i class="fas fa-user"></i>
-              </div>
-            </div>
-            <h4 class="card-title h5 text-primary" id="text">Vinícius</h4>
-            <p class="card-text" id="text">Desenvolvedor do website</p>
+            <h4 class="card-title h5 text-primary">Larissa</h4>
+            <p class="card-text">Desenvolvedora principal da aplicação mobile</p>
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="h-100 text-center">
+        <div class="team-card card h-100 border-0 text-center">
           <div class="card-body p-4">
             <div class="team-img mx-auto mb-3">
-              <div class="rpg-icon ">
-                <i class="fas fa-user"></i>
+              <div class="rpg-icon character-avatar ">
+                <i class=""></i>
               </div>
             </div>
-            <h4 class="card-title h5 text-primary" id="text">Matheus</h4>
-            <p class="card-text" id="text">Desenvolvedor do sistema e mobile</p>
+            <h4 class="card-title h5 text-primary">Vinícius</h4>
+            <p class="card-text">Desenvolvedor do website</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="team-card card h-100 border-0 text-center">
+          <div class="card-body p-4">
+            <div class="team-img mx-auto mb-3">
+              <div class="rpg-icon character-avatar ">
+                <i class=""></i>
+              </div>
+            </div>
+            <h4 class="card-title h5 text-primary">Matheus</h4>
+            <p class="card-text">Desenvolvedor do sistema e mobile</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Chamada para ação -->
+ 
 </div>
 
-<style>
-  /* Variáveis CSS para consistência */
 
-  
-.a{
-    background-color: white !important;
-  }
 
-  :root {
-    --primary: #2295d1;
-    --primary-dark: #1a7aac;
-    --secondary: #f9c74f;
-    --light: #f8f9fa;
-    --dark: #212529;
-    --success: #43aa8b;
-    --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%), 
-                     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23FFFFFF" fill-opacity="0.05" x="0" y="0" width="100" height="100"/><path d="M0 50L50 0L100 50L50 100Z" fill="%23FFFFFF" fill-opacity="0.05"/></svg>');
-  }
+<script>
+  // Interatividade simples para elementos da página
+  document.addEventListener('DOMContentLoaded', function() {
+    // Adiciona efeito de rolagem suave para links internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
 
-  /* Estilos gerais */
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #444;
-  }
+    // Animação de dados flutuantes no header
+    const dice = document.querySelectorAll('.hero-dice');
+    dice.forEach((die, index) => {
+      die.style.animationDelay = `${index * 1.5}s`;
+    });
 
-  .text-primary {
-    color: var(--primary) !important;
-  }
-
-  [data-theme="dark"] #text {
-    color: white;
-  }
-
-  .btn-primary {
-    background: var(--gradient-primary);
-    border: none;
-    border-radius: 50px;
-    padding: 12px 30px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
-  }
-
-  /* Hero section */
-  .rpg-hero {
-    background: var(--gradient-hero);
-    border-radius: 20px;
-    margin-top: 1rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-subtitle {
-    font-size: 1.2rem;
-    max-width: 700px;
-  }
-
-  /* Cards */
-  .rpg-card {
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    background-color: white;
-  }
-
-  [data-theme="dark"] .card {
-    background-color: #2f4963;
-  }
-
-  
-
-  [data-theme="dark"] .rpg-card {
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    background-color: #2f4963;
-  }
-
-  .rpg-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
-  }
-
-  .rpg-feature-card {
-    border-radius: 15px;
-    overflow: hidden;
-  }
-
-  /* Ícones */
-  .rpg-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: var(--gradient-primary);
-    color: white;
-    font-size: 2rem;
-  }
-
-  .feature-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: rgba(34, 149, 209, 0.1);
-    color: var(--primary);
-    font-size: 1.8rem;
-  }
-
-  /* Links de fonte */
-  .source-link {
-    color: var(--primary) !important;
-    transition: all 0.2s ease;
-    font-weight: 500;
-  }
-
-  .source-link:hover {
-    color: var(--primary-dark) !important;
-    text-decoration: underline !important;
-  }
-
-  /* Níveis de depressão */
-  .depression-level {
-    padding-left: 15px;
-    border-left: 3px solid var(--primary);
-  }
-
-  /* Equipe */
-  .team-card {
-    transition: transform 0.3s ease;
-    border-radius: 15px;
-    
-  }
-
-[data-theme="dark"] .card-body.p-5 {
-      padding: 2rem !important;
-    background-color: #2f4963 !important;
-    border-radius: 5%;
-    }
-
-  .team-card:hover {
-    transform: scale(1.05);
-  }
-
-  .avatar-placeholder {
-    
-    border-radius: 50%;
-    
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
-  }
-
-  /* Animações */
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-  }
-
-  .rpg-cta {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .display-5 {
-      font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-      font-size: 1.1rem;
-    }
-    
-    .card-body.p-5 {
-      padding: 2rem !important;
-    
-    }
-
-     
-    
-    .rpg-icon, .feature-icon {
-      width: 70px;
-      height: 70px;
-      font-size: 1.5rem;
-    }
-  }
-
-  
-</style>
+    // Efeito de interação nos cards
+    const cards = document.querySelectorAll('.rpg-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+      });
+    });
+  });
+</script>
 {% endblock content %}

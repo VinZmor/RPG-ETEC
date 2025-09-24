@@ -1,214 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
-    /* Variáveis CSS para consistência - mantidas da home */
-    :root {
-        --primary: #2295d1;
-        --primary-dark: #1a7aac;
-        
-        --secondary: #f9c74f;
-        --light: #f8f9fa;
-        --dark: #212529;
-        --success: #43aa8b;
-        --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
-        --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%);
-        --text-color: #444;
-        --bg-color: #f8fafc;
-        --card-bg: #ffffff;
-        --border-color: #e2e8f0;
-        --transition: all 0.3s ease;
-    }
 
-    [data-theme="dark"] {
-        --primary: #3a86ff;
-        --primary-dark: #2563eb;
-        --text-color: #e6e6e6;
-        --bg-color: #1a2830;
-        --card-bg: #243240;
-        --border-color: #334155;
-    }
-
-   
-    /* Estilos específicos do fórum */
-    .stat-card {
-        transition: var(--transition);
-        border-radius: 15px;
-        background-color: var(--card-bg);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        border: none;
-        height: 100%;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .forum-item {
-        transition: var(--transition);
-        border-radius: 10px;
-    }
-
-    .forum-item:hover {
-        background-color: var(--primary-light) !important;
-    }
-
-    .badge-category {
-        font-size: 0.8em;
-        padding: 0.35em 0.65em;
-        background: var(--gradient-primary);
-        color: white;
-    }
-
-    .author-avatar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .forum-icon {
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background: var(--gradient-primary);
-        color: white;
-    }
-
-    .bg-primary-light {
-        background-color: var(--primary-light) !important;
-        color: var(--primary);
-    }
-
-    .topic-form {
-        background-color: var(--card-bg);
-        border-radius: 15px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        padding: 2rem;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--primary);
-    }
-
-    .stat-label {
-        font-size: 0.9rem;
-        color: var(--text-color);
-    }
-
-    .card-header {
-        background: var(--gradient-primary) !important;
-        color: white;
-        border: none;
-    }
-
-    .form-control, .form-select {
-        border-radius: 10px;
-        border: 1px solid var(--border-color);
-        padding: 0.75rem 1rem;
-    }
-
-    .form-control:focus, .form-select:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 0.25rem rgba(34, 149, 209, 0.25);
-    }
-
-    /* Botões com estilo consistente */
-    .btn-primary {
-        background: var(--gradient-primary);
-        border: none;
-        border-radius: 50px;
-        padding: 12px 30px;
-        font-weight: 600;
-        transition: var(--transition);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
-    }
-
-    .btn-outline-primary {
-        border-color: var(--primary);
-        color: var(--primary);
-        border-radius: 50px;
-        padding: 10px 25px;
-        font-weight: 600;
-        transition: var(--transition);
-    }
-
-    .btn-outline-primary:hover {
-        background: var(--gradient-primary);
-        color: white;
-        transform: translateY(-3px);
-    }
-
-    /* Modal estilizado */
-    .modal-content {
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .modal-header {
-        background: var(--gradient-primary);
-        color: white;
-        border-radius: 15px 15px 0 0;
-        border: none;
-    }
-
-    .modal-title {
-        font-weight: 600;
-    }
-
-    .btn-close {
-        filter: invert(1);
-    }
-
-    /* Cards com estilo consistente */
-    .card {
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-         width: auto;
-        height: auto;
-    }
-
-    /* Text colors */
-    .text-primary {
-        color: var(--primary) !important;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        font-weight: 600;
-    }
-
-   .card-body {
-    padding-bottom: 0%;
-    padding-top: 0%;
-    padding-left: 12px;
-    background-color: white;
-    border-radius: 10px;
-   }
-
-   
-</style>
-
-<div class="container py-4">
-    <!-- Cabeçalho do Fórum -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h2 text-primary mb-1"><i class="fas fa-comments me-2"></i> Fórum</h1>
-            <!-- COlocar coisas -->
-            <p class="text-muted"></p>
+            <button class="btn btn-outline-primary me-2" id="btnDadosForum">
+                <i class="fas fa-dice-d20 me-2"></i>Dados do Fórum
+            </button>
         </div>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novoTopicoModal">
-            <i class="fas fa-plus-circle me-2"></i> Novo Tópico
+            <i class="fas fa-feather-alt me-2"></i> Novo Tópico
         </button>
     </div>
 
@@ -218,21 +19,32 @@
             <div class="stat-card text-center p-4">
                 <div class="stat-number" id="totalTopicos">0</div>
                 <div class="stat-label">Tópicos Criados</div>
+                <div class="mt-2">
+                    <i class="fas fa-scroll text-primary"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="stat-card text-center p-4">
                 <div class="stat-number" id="totalRespostas">0</div>
                 <div class="stat-label">Respostas</div>
+                <div class="mt-2">
+                    <i class="fas fa-comments text-primary"></i>
+                </div>
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="stat-card text-center p-4">
                 <div class="stat-number" id="totalUsuarios">0</div>
                 <div class="stat-label">Membros Ativos</div>
+                <div class="mt-2">
+                    <i class="fas fa-users text-primary"></i>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="rpg-divider"></div>
 
     <!-- Filtros e Busca -->
     <div class="card mb-4">
@@ -240,22 +52,25 @@
             <div class="row align-items-center">
                 <div class="col-md-6 mb-2 mb-md-0">
                     <div class="d-flex align-items-center">
-                        <span class="me-2 text-muted">Filtrar por:</span>
+                        <span class="me-2 text-muted"><i class="fas fa-filter"></i> Filtrar por:</span>
                         <select class="form-select form-select-sm" id="filtroCategoria" style="width: auto;">
                             <option value="todos" selected>Todos os temas</option>
-                            <option value="duvida">Dúvida</option>
-                            <option value="procurando">Procurando Jogo</option>
-                            <option value="sugestao">Sugestões</option>
-                            <option value="discussao">Discussão</option>
-                       
+                            <option value="duvida"><span class="category-icon"><i class="fas fa-question-circle"></i></span> Dúvida</option>
+                            <option value="procurando"><span class="category-icon"><i class="fas fa-search"></i></span> Procurando Jogo</option>
+                            <option value="sugestao"><span class="category-icon"><i class="fas fa-lightbulb"></i></span> Sugestões</option>
+                            <option value="discussao"><span class="category-icon"><i class="fas fa-comments"></i></span> Discussão</option>
+                            <option value="depressao"><span class="category-icon"><i class="fas fa-brain"></i></span> Depressão</option>
+                            <option value="ansiedade"><span class="category-icon"><i class="fas fa-wind"></i></span> Ansiedade</option>
+                            <option value="autoajuda"><span class="category-icon"><i class="fas fa-hands-helping"></i></span> Autoajuda</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
                         <input type="text" class="form-control" id="campoBusca" placeholder="Buscar no fórum...">
                         <button class="btn btn-primary" type="button" id="btnBuscar">
-                            <i class="fas fa-search"></i>
+                            Buscar
                         </button>
                     </div>
                 </div>
@@ -273,7 +88,7 @@
                 <div class="col-md-2 text-center">Última Atualização</div>
             </div>
         </div>
-        <div class="card-body " id="listaTopicos">
+        <div class="card-body p-0" id="listaTopicos">
             <!-- Tópicos serão carregados aqui via JavaScript -->
             <div class="text-center py-5">
                 <div class="spinner-border text-primary" role="status">
@@ -290,41 +105,43 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i> Criar Novo Tópico</h5>
+                <h5 class="modal-title"><i class="fas fa-feather-alt me-2"></i> Criar Novo Tópico</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="formNovoTopico">
                     <div class="mb-3">
                         <label for="autor" class="form-label">Seu Nome</label>
-                        <input type="text" class="form-control" id="autor" required>
+                        <input type="text" class="form-control" id="autor" required placeholder="Como devemos te chamar?">
                     </div>
                     <div class="mb-3">
                         <label for="topico" class="form-label">Título do Tópico</label>
-                        <input type="text" class="form-control" id="topico" required>
+                        <input type="text" class="form-control" id="topico" required placeholder="Dê um título claro ao seu tópico">
                     </div>
                     <div class="mb-3">
                         <label for="categoria" class="form-label">Categoria</label>
                         <select class="form-select" id="categoria" required>
                             <option value="" selected disabled>Selecione uma categoria</option>
-                            <option value="duvida">Dúvida</option>
-                            <option value="procurando">Procurando Jogo</option>
-                            <option value="sugestao">Sugestões</option>
-                            <option value="discussao">Discussão</option>
-                            <option value="depressao">Depressão</option>
-                            <option value="ansiedade">Ansiedade</option>
-                            <option value="autoajuda">Autoajuda</option>
+                            <option value="duvida"><i class="fas fa-question-circle me-2"></i> Dúvida</option>
+                            <option value="procurando"><i class="fas fa-search me-2"></i> Procurando Jogo</option>
+                            <option value="sugestao"><i class="fas fa-lightbulb me-2"></i> Sugestões</option>
+                            <option value="discussao"><i class="fas fa-comments me-2"></i> Discussão</option>
+                            <option value="depressao"><i class="fas fa-brain me-2"></i> Depressão</option>
+                            <option value="ansiedade"><i class="fas fa-wind me-2"></i> Ansiedade</option>
+                            <option value="autoajuda"><i class="fas fa-hands-helping me-2"></i> Autoajuda</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="conteudo" class="form-label">Conteúdo</label>
-                        <textarea class="form-control" id="conteudo" rows="5" required></textarea>
+                        <textarea class="form-control" id="conteudo" rows="5" required placeholder="Descreva sua dúvida, sugestão ou experiência..."></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnCriarTopico">Criar Tópico</button>
+                <button type="button" class="btn btn-primary" id="btnCriarTopico">
+                    <i class="fas fa-plus-circle me-2"></i>Criar Tópico
+                </button>
             </div>
         </div>
     </div>
@@ -337,6 +154,7 @@
     const btnCriarTopico = document.getElementById('btnCriarTopico');
     const campoBusca = document.getElementById('campoBusca');
     const btnBuscar = document.getElementById('btnBuscar');
+    const btnDadosForum = document.getElementById('btnDadosForum');
     
     // Função para carregar tópicos da API
     async function carregarTopicos(filtro = 'todos', termoBusca = '') {
@@ -361,6 +179,9 @@
                     <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
                     <h4 class="text-danger">Erro ao carregar tópicos</h4>
                     <p class="text-muted">Tente recarregar a página.</p>
+                    <button class="btn btn-primary mt-2" onclick="carregarTopicos()">
+                        <i class="fas fa-redo me-2"></i> Tentar Novamente
+                    </button>
                 </div>
             `;
         }
@@ -386,32 +207,43 @@
             let html = '';
             
             topicos.forEach((topico, index) => {
+                // Determinar badge com base no número de posts do autor
+               
+                
                 html += `
-                <div class="row align-items-center py-3 border-bottom forum-item ">
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center">
-                            
-                            <div>
-                                <h5 class="mb-1">
-                                    <a href="{{ url_for('respostas') }}?id=${topico.id}" class="text-decoration-none text-dark">${topico.topico}</a>
-                                </h5>
-                                <small class="text-muted">
-                                    <span class="badge badge-category">${getNomeCategoria(topico.categoria)}</span>
-                                    • Iniciado por ${topico.autor}
-                                </small>
+                <div class="forum-item p-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3 text-primary">
+                                    <i class="fas ${getIconeCategoria(topico.categoria)} fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">
+                                        <a href="{{ url_for('respostas') }}?id=${topico.id}" class="text-decoration-none text-dark">${topico.topico}</a>
+                                    </h5>
+                                    <small class="text-muted">
+                                        
+                                        • Iniciado por ${topico.autor}
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <div class="author-avatar">
-                            <span class="d-block small mt-1">${topico.autor}</span>
+                        <div class="col-md-2 text-center">
+                            <div class="author-avatar">
+                                <div class="avatar-img">${topico.autor ? topico.autor.charAt(0).toUpperCase() : 'U'}</div>
+                                <div>
+                                    <span class="d-block small">${topico.autor}</span>
+                                 
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <span class="badge bg-secondary rounded-pill">${topico.respostas ? topico.respostas.length : 0}</span>
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <small class="text-muted">${formatarData(topico.dataCriacao)}</small>
+                        <div class="col-md-2 text-center">
+                            <span class="badge bg-primary rounded-pill px-3 py-2">${topico.respostas ? topico.respostas.length : 0}</span>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <small class="text-muted">${formatarData(topico.dataCriacao)}</small>
+                        </div>
                     </div>
                 </div>
                 `;
@@ -446,6 +278,23 @@
         
         return categorias[categoria] || categoria;
     }
+    
+    // Função para obter ícone baseado na categoria
+    function getIconeCategoria(categoria) {
+        const icones = {
+            'duvida': 'fa-question-circle',
+            'procurando': 'fa-search',
+            'sugestao': 'fa-lightbulb',
+            'discussao': 'fa-comments',
+            'depressao': 'fa-brain',
+            'ansiedade': 'fa-wind',
+            'autoajuda': 'fa-hands-helping'
+        };
+        
+        return icones[categoria] || 'fa-file-alt';
+    }
+    
+
     
     // Função para formatar data
     function formatarData(dataString) {
@@ -507,17 +356,41 @@
                     // Recarregar tópicos e estatísticas
                     await carregarTopicos(filtroCategoria.value, campoBusca.value);
                     await carregarEstatisticas();
+                    
+                    // Feedback visual
+                    mostrarNotificacao('Tópico criado com sucesso!', 'success');
                 } else {
-                    alert('Erro ao criar tópico. Tente novamente.');
+                    mostrarNotificacao('Erro ao criar tópico. Tente novamente.', 'error');
                 }
             } catch (error) {
                 console.error('Erro ao criar tópico:', error);
-                alert('Erro ao criar tópico. Verifique sua conexão.');
+                mostrarNotificacao('Erro ao criar tópico. Verifique sua conexão.', 'error');
             }
         } else {
-            alert('Por favor, preencha todos os campos!');
+            mostrarNotificacao('Por favor, preencha todos os campos!', 'warning');
         }
     });
+    
+    // Função para mostrar notificação
+    function mostrarNotificacao(mensagem, tipo) {
+        // Criar elemento de notificação
+        const notificacao = document.createElement('div');
+        notificacao.className = `alert alert-${tipo === 'error' ? 'danger' : tipo === 'warning' ? 'warning' : 'success'} alert-dismissible fade show position-fixed`;
+        notificacao.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+        notificacao.innerHTML = `
+            ${mensagem}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notificacao);
+        
+        // Remover após 5 segundos
+        setTimeout(() => {
+            if (notificacao.parentNode) {
+                notificacao.parentNode.removeChild(notificacao);
+            }
+        }, 5000);
+    }
     
     // Evento para filtrar tópicos por categoria
     filtroCategoria.addEventListener('change', function() {
@@ -527,6 +400,12 @@
     // Evento para buscar tópicos
     btnBuscar.addEventListener('click', function() {
         carregarTopicos(filtroCategoria.value, campoBusca.value);
+    });
+    
+    // Evento para mostrar dados do fórum
+    btnDadosForum.addEventListener('click', function() {
+        carregarEstatisticas();
+        mostrarNotificacao('Estatísticas atualizadas!', 'success');
     });
     
     // Permitir busca ao pressionar Enter
@@ -540,6 +419,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         carregarTopicos();
         carregarEstatisticas();
+        
+        // Adicionar animação de entrada aos elementos
+        setTimeout(() => {
+            document.querySelectorAll('.stat-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
+        }, 100);
     });
 </script>
 {% endblock content %}

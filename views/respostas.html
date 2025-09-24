@@ -1,183 +1,75 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
-    /* Variáveis CSS para consistência - mantidas da home */
-    :root {
-        --primary: #2295d1;
-        --primary-dark: #1a7aac;
-        --primary-light: rgba(34, 149, 209, 0.15);
-        --secondary: #f9c74f;
-        --light: #f8f9fa;
-        --dark: #212529;
-        --success: #43aa8b;
-        --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
-        --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%);
-        --text-color: #444;
-        --bg-color: #f8fafc;
-        --card-bg: #ffffff;
-        --border-color: #e2e8f0;
-        --transition: all 0.3s ease;
-    }
-
-    [data-theme="dark"] {
-        --primary: #3a86ff;
-        --primary-dark: #2563eb;
-        --primary-light: rgba(58, 134, 255, 0.15);
-        --text-color: #e6e6e6;
-        --bg-color: #1a2830;
-        --card-bg: #243240;
-        --border-color: #334155;
-    }
-
-    /* Estilos específicos da página de respostas */
-    .card {
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        transition: var(--transition);
-    }
-
-    .card:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .user-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--gradient-primary);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-    }
-
-    .badge-category {
-        background: var(--gradient-primary);
-        color: white;
-        padding: 0.35em 0.65em;
-        border-radius: 20px;
-        font-size: 0.8em;
-        font-weight: 500;
-    }
-
-    .bg-primary-light {
-        background-color: var(--primary-light) !important;
-        color: var(--primary);
-    }
-
-    /* Botões com estilo consistente */
-    .btn-primary {
-        background: var(--gradient-primary);
-        border: none;
-        border-radius: 50px;
-        padding: 10px 25px;
-        font-weight: 600;
-        transition: var(--transition);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
-    }
-
-    .btn-outline-primary {
-        border-color: var(--primary);
-        color: var(--primary);
-        border-radius: 50px;
-        padding: 8px 20px;
-        font-weight: 600;
-        transition: var(--transition);
-    }
-
-    .btn-outline-primary:hover {
-        background: var(--gradient-primary);
-        color: white;
-        transform: translateY(-3px);
-    }
-
-    /* Modal estilizado */
-    .modal-content {
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .modal-header {
-        background: var(--gradient-primary);
-        color: white;
-        border-radius: 15px 15px 0 0;
-        border: none;
-    }
-
-    .modal-title {
-        font-weight: 600;
-    }
-
-    .btn-close {
-        filter: invert(1);
-    }
-
-    .form-control, .form-select {
-        border-radius: 10px;
-        border: 1px solid var(--border-color);
-        padding: 0.75rem 1rem;
-    }
-
-    .form-control:focus, .form-select:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 0.25rem rgba(34, 149, 209, 0.25);
-    }
-
-    /* Text colors */
-    .text-primary {
-        color: var(--primary) !important;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        font-weight: 600;
-    }
-
-    /* Estilos para as respostas */
-    .resposta-card {
-        border-left: 4px solid var(--primary);
-        transition: var(--transition);
-    }
-
-    .resposta-card:hover {
-        border-left: 4px solid var(--primary-dark);
-    }
-</style>
 
 <div class="container py-4">
     <!-- Cabeçalho -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <a href="{{ url_for('forum') }}" class="btn btn-outline-primary btn-sm mb-2">
-                <i class="fas fa-arrow-left me-1"></i> Voltar ao Fórum
+            <a href="{{ url_for('forum') }}" class="btn btn-outline-primary mb-2">
+                <i class="fas fa-arrow-left me-2"></i> Voltar ao Fórum
             </a>
             <h1 class="h2 text-primary mb-0" id="tituloTopico">Carregando...</h1>
         </div>
     </div>
 
     <!-- Post Principal -->
-    <div class="card mb-4" id="postPrincipal">
+    <div class="card mb-4 rpg-card" id="postPrincipal">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center">
                     <div class="user-avatar me-3">
-                        <i class="fas fa-user"></i>
+                        <span id="avatarInicial">A</span>
                     </div>
                     <div>
-                        <h6 class="mb-0" id="autorTopico">Autor</h6>
-                        <small class="text-muted" id="dataTopico">Data </small>
+                        <h6 class="mb-0 fw-bold" id="autorTopico">Autor</h6>
+                        <small class="text-muted" id="dataTopico">Data</small>
                     </div>
                 </div>
-                <span class="badge-category" id="categoriaTopico">Categoria</span>
+                <span class="badge badge-category px-3 py-2" id="categoriaTopico">Categoria</span>
             </div>
-            <p class="card-text" id="conteudoTopico">Carregando conteúdo...</p>
+            <div class="rpg-divider my-3"></div>
+            <p class="card-text fs-6 lh-lg" id="conteudoTopico">Carregando conteúdo...</p>
+        </div>
+    </div>
+
+    <!-- Estatísticas do Tópico -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center p-3">
+                <div class="stat-number" id="totalRespostas">0</div>
+                <div class="stat-label">Respostas</div>
+                <div class="mt-2">
+                    <i class="fas fa-comments text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center p-3">
+                <div class="stat-number" id="visualizacoes">0</div>
+                <div class="stat-label">Visualizações</div>
+                <div class="mt-2">
+                    <i class="fas fa-eye text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center p-3">
+                <div class="stat-number" id="participantes">0</div>
+                <div class="stat-label">Participantes</div>
+                <div class="mt-2">
+                    <i class="fas fa-users text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center p-3">
+                <div class="stat-number" id="atividade">0</div>
+                <div class="stat-label">Dias Ativo</div>
+                <div class="mt-2">
+                    <i class="fas fa-calendar text-primary"></i>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -186,14 +78,15 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="h4 text-primary">
                 <i class="fas fa-reply me-2"></i> Respostas
+                <span class="badge bg-primary ms-2" id="contadorRespostas">0</span>
             </h3>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novaRespostaModal">
-                <i class="fas fa-plus me-1"></i> Nova Resposta
+                <i class="fas fa-plus me-2"></i> Nova Resposta
             </button>
         </div>
         
         <div id="listaRespostas">
-            <div class="text-center py-4">
+            <div class="text-center py-5">
                 <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">Carregando...</span>
                 </div>
@@ -205,7 +98,7 @@
 
 <!-- Modal para Nova Resposta -->
 <div class="modal fade" id="novaRespostaModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
@@ -216,18 +109,28 @@
             <div class="modal-body">
                 <form id="formNovaResposta">
                     <div class="mb-3">
-                        <label for="respostaAutor" class="form-label">Seu Nome</label>
-                        <input type="text" class="form-control" id="respostaAutor" required>
+                        <label for="respostaAutor" class="form-label fw-bold">
+                            <i class="fas fa-user me-2"></i>Seu Nome
+                        </label>
+                        <input type="text" class="form-control" id="respostaAutor" required 
+                               placeholder="Como devemos te chamar?">
                     </div>
                     <div class="mb-3">
-                        <label for="respostaConteudo" class="form-label">Sua Resposta</label>
-                        <textarea class="form-control" id="respostaConteudo" rows="4" required></textarea>
+                        <label for="respostaConteudo" class="form-label fw-bold">
+                            <i class="fas fa-edit me-2"></i>Sua Resposta
+                        </label>
+                        <textarea class="form-control" id="respostaConteudo" rows="6" required 
+                                  placeholder="Compartilhe seus pensamentos, experiências ou sugestões..."></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnEnviarResposta">Enviar Resposta</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" id="btnEnviarResposta">
+                    <i class="fas fa-paper-plane me-2"></i>Enviar Resposta
+                </button>
             </div>
         </div>
     </div>
@@ -246,6 +149,7 @@
         
         if (!topicoId) {
             document.getElementById('tituloTopico').textContent = 'Tópico não encontrado';
+            mostrarErro('ID do tópico não encontrado na URL.');
             return;
         }
         
@@ -261,20 +165,37 @@
             // Preencher dados do tópico
             document.getElementById('tituloTopico').textContent = topico.topico;
             document.getElementById('autorTopico').textContent = topico.autor;
-            document.getElementById('dataTopico').textContent = formatarData(topico.data_criacao);
+            document.getElementById('avatarInicial').textContent = topico.autor ? topico.autor.charAt(0).toUpperCase() : 'U';
+            document.getElementById('dataTopico').textContent = formatarData(topico.dataCriacao);
             document.getElementById('conteudoTopico').textContent = topico.conteudo;
             document.getElementById('categoriaTopico').textContent = getNomeCategoria(topico.categoria);
             
-            // Carregar respostas
-            carregarRespostas(topicoId);
+            // Carregar estatísticas e respostas
+            await carregarEstatisticas(topicoId);
+            await carregarRespostas(topicoId);
+            
         } catch (error) {
             console.error('Erro ao carregar tópico:', error);
             document.getElementById('tituloTopico').textContent = 'Erro ao carregar tópico';
-            document.getElementById('listaRespostas').innerHTML = `
-                <div class="alert alert-danger">
-                    ${error.message || 'Erro ao carregar tópico. Tente recarregar a página.'}
-                </div>
-            `;
+            mostrarErro(error.message || 'Erro ao carregar tópico. Tente recarregar a página.');
+        }
+    }
+    
+    // Carregar estatísticas do tópico
+    async function carregarEstatisticas(topicoId) {
+        try {
+            const response = await fetch(`/api/topicos/${topicoId}/estatisticas`);
+            
+            if (response.ok) {
+                const stats = await response.json();
+                document.getElementById('totalRespostas').textContent = stats.totalRespostas || 0;
+                document.getElementById('visualizacoes').textContent = stats.visualizacoes || 0;
+                document.getElementById('participantes').textContent = stats.participantes || 0;
+                document.getElementById('atividade').textContent = stats.diasAtivo || 0;
+                document.getElementById('contadorRespostas').textContent = stats.totalRespostas || 0;
+            }
+        } catch (error) {
+            console.error('Erro ao carregar estatísticas:', error);
         }
     }
     
@@ -291,11 +212,7 @@
             renderizarRespostas(respostas);
         } catch (error) {
             console.error('Erro ao carregar respostas:', error);
-            document.getElementById('listaRespostas').innerHTML = `
-                <div class="alert alert-danger">
-                    Erro ao carregar respostas. Tente recarregar a página.
-                </div>
-            `;
+            mostrarErro('Erro ao carregar respostas. Tente recarregar a página.');
         }
     }
     
@@ -305,30 +222,35 @@
         
         if (respostas.length === 0) {
             listaRespostas.innerHTML = `
-                <div class="text-center py-4">
+                <div class="text-center py-5">
                     <i class="fas fa-comments fa-3x text-muted mb-3"></i>
                     <h4 class="text-muted">Nenhuma resposta ainda</h4>
-                    <p class="text-muted">Seja o primeiro a responder!</p>
+                    <p class="text-muted">Seja o primeiro a contribuir com a discussão!</p>
+                    <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#novaRespostaModal">
+                        <i class="fas fa-plus-circle me-2"></i> Escrever Primeira Resposta
+                    </button>
                 </div>
             `;
             return;
         }
         
         let html = '';
-        respostas.forEach(resposta => {
+        respostas.forEach((resposta, index) => {
             html += `
-            <div class="card mb-3 resposta-card">
+            <div class="card mb-3 resposta-card" style="animation-delay: ${index * 0.1}s">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
                         <div class="user-avatar me-3">
-                            <i class="fas fa-user"></i>
+                            ${resposta.autor ? resposta.autor.charAt(0).toUpperCase() : 'U'}
                         </div>
-                        <div>
-                            <h6 class="mb-0">${resposta.autor}</h6>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0 fw-bold">${resposta.autor}</h6>
                             <small class="text-muted">${formatarData(resposta.dataCriacao)}</small>
                         </div>
+                        <span class="badge bg-primary-light small">#${index + 1}</span>
                     </div>
-                    <p class="card-text">${resposta.conteudo}</p>
+                    <div class="rpg-divider my-2"></div>
+                    <p class="card-text lh-lg mb-0">${resposta.conteudo}</p>
                 </div>
             </div>
             `;
@@ -340,13 +262,13 @@
     // Função para obter o nome amigável da categoria
     function getNomeCategoria(categoria) {
         const categorias = {
-            'duvida': 'Dúvida',
-            'procurando': 'Procurando Jogo',
-            'sugestao': 'Sugestões',
-            'discussao': 'Discussão',
-            'depressao': 'Depressão',
-            'ansiedade': 'Ansiedade',
-            'autoajuda': 'Autoajuda'
+            'duvida': '❓ Dúvida',
+            'procurando': '🎯 Procurando Jogo',
+            'sugestao': '💡 Sugestões',
+            'discussao': '💬 Discussão',
+            'depressao': '🧠 Depressão',
+            'ansiedade': '🌪️ Ansiedade',
+            'autoajuda': '🤝 Autoajuda'
         };
         
         return categorias[categoria] || categoria;
@@ -381,9 +303,7 @@
                 return data.toLocaleDateString('pt-BR', {
                     day: '2-digit',
                     month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
+                    year: 'numeric'
                 });
             }
         } catch (error) {
@@ -392,48 +312,102 @@
         }
     }
     
+    // Função para mostrar erro
+    function mostrarErro(mensagem) {
+        document.getElementById('listaRespostas').innerHTML = `
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                ${mensagem}
+            </div>
+        `;
+    }
+    
+    // Função para mostrar notificação de sucesso
+    function mostrarSucesso(mensagem) {
+        const notificacao = document.createElement('div');
+        notificacao.className = 'alert alert-success alert-dismissible fade show position-fixed';
+        notificacao.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+        notificacao.innerHTML = `
+            <i class="fas fa-check-circle me-2"></i>
+            ${mensagem}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notificacao);
+        
+        setTimeout(() => {
+            if (notificacao.parentNode) {
+                notificacao.parentNode.removeChild(notificacao);
+            }
+        }, 5000);
+    }
+    
     // Evento para enviar nova resposta
     document.getElementById('btnEnviarResposta').addEventListener('click', async function() {
         const topicoId = obterParametroURL('id');
-        const autor = document.getElementById('respostaAutor').value;
-        const conteudo = document.getElementById('respostaConteudo').value;
+        const autor = document.getElementById('respostaAutor').value.trim();
+        const conteudo = document.getElementById('respostaConteudo').value.trim();
         
-        if (autor && conteudo) {
-            try {
-                const response = await fetch(`/api/topicos/${topicoId}/respostas`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        autor: autor,
-                        conteudo: conteudo
-                    })
-                });
+        if (!autor || !conteudo) {
+            mostrarErro('Por favor, preencha todos os campos!');
+            return;
+        }
+        
+        if (conteudo.length < 10) {
+            mostrarErro('A resposta deve ter pelo menos 10 caracteres.');
+            return;
+        }
+        
+        try {
+            const response = await fetch(`/api/topicos/${topicoId}/respostas`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    autor: autor,
+                    conteudo: conteudo
+                })
+            });
+            
+            if (response.ok) {
+                // Fechar o modal e resetar o formulário
+                const modal = bootstrap.Modal.getInstance(document.getElementById('novaRespostaModal'));
+                modal.hide();
+                document.getElementById('formNovaResposta').reset();
                 
-                if (response.ok) {
-                    // Fechar o modal e resetar o formulário
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('novaRespostaModal'));
-                    modal.hide();
-                    document.getElementById('formNovaResposta').reset();
-                    
-                    // Recarregar respostas
-                    await carregarRespostas(topicoId);
-                } else {
-                    alert('Erro ao enviar resposta. Tente novamente.');
-                }
-            } catch (error) {
-                console.error('Erro ao enviar resposta:', error);
-                alert('Erro ao enviar resposta. Verifique sua conexão.');
+                // Recarregar respostas e estatísticas
+                await carregarRespostas(topicoId);
+                await carregarEstatisticas(topicoId);
+                
+                mostrarSucesso('Resposta enviada com sucesso!');
+                
+            } else {
+                throw new Error('Erro ao enviar resposta');
             }
-        } else {
-            alert('Por favor, preencha todos os campos!');
+        } catch (error) {
+            console.error('Erro ao enviar resposta:', error);
+            mostrarErro('Erro ao enviar resposta. Verifique sua conexão.');
+        }
+    });
+    
+    // Permitir enviar resposta com Ctrl+Enter
+    document.getElementById('respostaConteudo').addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            document.getElementById('btnEnviarResposta').click();
         }
     });
     
     // Inicializar a página
     document.addEventListener('DOMContentLoaded', function() {
         carregarTopico();
+        
+        // Adicionar animação aos elementos
+        setTimeout(() => {
+            document.querySelectorAll('.stat-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
+        }, 100);
     });
 </script>
-{% endblock content %}
+{% endblock content %}  

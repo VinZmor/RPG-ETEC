@@ -8,252 +8,1063 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-   <style>
-    /* Variáveis CSS para consistência - mantidas da home */
+<style>
+    /* ===== VARIÁVEIS CSS UNIFICADAS ===== */
     :root {
-      --primary: #2295d1;
-      --primary-dark: #1a7aac;
-      --primary-light: #93c5fd;
-      --secondary: #f9c74f;
-      --light: #f8f9fa;
-      --dark: #212529;
-      --success: #43aa8b;
-      --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
-      --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%);
-      --text-color: #444;
-      --bg-color: #f8fafc;
-      --sidebar-bg: #ffffff;
-      --card-bg: #ffffff;
-      --border-color: #e2e8f0;
-      --transition: all 0.3s ease;
+        /* Cores principais */
+        --primary: #2295d1;
+        --primary-dark: #1a7aac;
+        --primary-light: rgba(34, 149, 209, 0.15);
+        --secondary: #f9c74f;
+        --secondary-dark: #f8961e;
+        --tertiary: #90be6d;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --success: #43aa8b;
+        
+        /* Cores temáticas RPG */
+        --rpg-brown: #8a6d3b;
+        --rpg-parchment: #f6eee3;
+        --rpg-dark: #1a2830;
+        
+        /* Gradientes */
+        --gradient-primary: linear-gradient(135deg, #2295d1 0%, #1a7aac 100%);
+        --gradient-secondary: linear-gradient(135deg, #f9c74f 0%, #f8961e 100%);
+        --gradient-hero: linear-gradient(135deg, rgba(34, 149, 209, 0.9) 0%, rgba(25, 130, 196, 0.85) 100%);
+        
+        /* Cores de interface */
+        --text-color: #444;
+        --bg-color: #f8fafc;
+        --sidebar-bg: #ffffff;
+        --card-bg: #ffffff;
+        --border-color: #e2e8f0;
+        
+        /* Transições */
+        --transition: all 0.3s ease;
     }
-    
+
     [data-theme="dark"] {
-      --primary: #3a86ff;
-      --primary-dark: #2563eb;
-      --primary-light: #93c5fd;
-      --secondary: #f59e0b;
-      --text-color: #e6e6e6;
-      --bg-color: #1a2830;
-      --sidebar-bg: #1e2a35;
-      --card-bg: #243240;
-      --border-color: #334155;
-      --gradient-primary: linear-gradient(135deg, #3a86ff 0%, #2563eb 100%);
-      --gradient-hero: linear-gradient(135deg, rgba(58, 134, 255, 0.9) 0%, rgba(37, 99, 235, 0.85) 100%);
+        
+        
+        --primary-light: rgba(58, 134, 255, 0.15);
+        --secondary: #f59e0b;
+        --text-color: #e6e6e6;
+        --bg-color: #1a2830;
+        --sidebar-bg: #1e2a35;
+        --card-bg: #243240;
+        --border-color: #334155;
+        --rpg-parchment: #2c3e50;
+        
+        
     }
-    
+
+    /* ===== ESTILOS GLOBAIS UNIFICADOS ===== */
     body {
-      font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: var(--transition);
-      line-height: 1.6;
+        font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        transition: var(--transition);
+        line-height: 1.6;
     }
-    
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+    }
+
+    .container.py-4 {
+        max-width: 1200px;
+    }
+
+    /* ===== NAVBAR/HEADER ===== */
     .navbar {
-      background: var(--gradient-primary) !important;
-      padding: 12px 0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background: var(--gradient-primary) !important;
+        padding: 12px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    
+
     .navbar-brand {
-      font-weight: 700;
-      color: white !important;
-      font-size: 1.4rem;
+        font-weight: 700;
+        color: white !important;
+        font-size: 1.4rem;
     }
-    
+
     .nav-link {
-      font-weight: 500;
-      padding: 12px 20px !important;
-      transition: var(--transition);
-      border-left: 3px solid transparent;
+        font-weight: 500;
+        padding: 12px 20px !important;
+        transition: var(--transition);
+        border-left: 3px solid transparent;
+        color: rgba(73, 70, 70, 0.9) !important;
     }
-    
+
     .nav-link:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border-left: 3px solid white;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white !important;
+        border-left: 3px solid white;
     }
-    
+
     .offcanvas-header {
-      background: var(--gradient-primary);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        background: var(--gradient-primary);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
-    
+
     .offcanvas-title {
-      color: white !important;
-      font-weight: 600;
-      font-size: 1.4rem;
+        color: white !important;
+        font-weight: 600;
+        font-size: 1.4rem;
     }
-    
+
     .sidebar {
-      background-color: var(--sidebar-bg) !important;
+        background-color: var(--sidebar-bg) !important;
     }
-    
+
     header {
-      padding: 40px 0;
-      background: var(--gradient-hero);
-      margin-bottom: 30px;
-      border-bottom: 1px solid var(--border-color);
+        padding: 40px 0;
+        background: var(--gradient-hero);
+        margin-bottom: 30px;
+        border-bottom: 1px solid var(--border-color);
     }
-    
+
     h1.display-4 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
-    
+
     footer {
-      padding: 20px 0;
-      background: var(--gradient-primary);
-      border-top: 1px solid var(--border-color);
-      margin-top: 40px;
-      color: white;
+        padding: 20px 0;
+        background: var(--gradient-primary);
+        border-top: 1px solid var(--border-color);
+        margin-top: 40px;
+        color: white;
     }
-    
-    /* Cards - mantido do estilo original */
-    .rpg-card {
-      border-radius: 15px;
-      transition: var(--transition);
-      background-color: var(--card-bg);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      border: none;
+
+    /* ===== CARDS UNIFICADOS ===== */
+    .stat-card, .rpg-card, .card, .bestiario-card, .info-card, .team-card, .rpg-feature-card {
+        transition: var(--transition);
+        border-radius: 15px;
+        background-color: var(--card-bg);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: none;
+        width: auto;
+        height: auto;
     }
-    
-    .rpg-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-primary);
     }
-    
-    /* Ícones - mantido do estilo original */
-    .rpg-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--gradient-primary);
-      color: white;
-      font-size: 2rem;
+
+    .stat-card:hover, .rpg-card:hover, .bestiario-card:hover, .info-card:hover, .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
-    
-    .feature-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background-color: rgba(34, 149, 209, 0.1);
-      color: var(--primary);
-      font-size: 1.8rem;
+
+    .rpg-card:hover, .rpg-feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
-    
-    /* Botões */
+
+    .card-body {
+        padding: 1.5rem;
+        background-color: var(--card-bg);
+        border-radius: 0 0 15px 15px;
+    }
+
+    .card-header, .bestiario-header {
+        background: var(--gradient-primary) !important;
+        color: white;
+        border: none;
+        font-weight: 600;
+        border-radius: 15px 15px 0 0 !important;
+    }
+
+    /* ===== ELEMENTOS DO FÓRUM ===== */
+    .forum-item, .resposta-card {
+        transition: var(--transition);
+        border-radius: 10px;
+        margin-bottom: 8px;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .forum-item:hover, .resposta-card:hover {
+        background-color: rgba(34, 149, 209, 0.05) !important;
+        border-color: var(--primary);
+        transform: translateX(5px);
+    }
+
+    .resposta-card {
+        border-left: 4px solid var(--primary);
+    }
+
+    .resposta-card:hover {
+        border-left: 4px solid var(--primary-dark);
+    }
+
+    .badge-category {
+        font-size: 0.75em;
+        padding: 0.35em 0.65em;
+        background: var(--gradient-primary);
+        color: white;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .author-avatar, .user-avatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .avatar-img, .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .forum-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: white;
+    }
+
+    .topic-form {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        border: 1px solid var(--border-color);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        font-family: 'Georgia', serif;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--text-color);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* ===== FORMULÁRIOS ===== */
+    .form-control, .form-select {
+        border-radius: 10px;
+        border: 1px ;
+        padding: 0.75rem 1rem;
+        transition: var(--transition);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(34, 149, 209, 0.25);
+    }
+
+    /* ===== BOTÕES UNIFICADOS ===== */
     .btn-primary {
-      background: var(--gradient-primary);
-      border: none;
-      border-radius: 50px;
-      padding: 12px 30px;
-      font-weight: 600;
-      transition: var(--transition);
+        background: var(--gradient-primary);
+        border: none;
+        border-radius: 50px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: var(--transition);
     }
-    
+
     .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(34, 149, 209, 0.3);
     }
-    
-    /* Switch personalizado */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 24px;
+
+    .btn-outline-primary {
+        border-color: var(--primary);
+        color: var(--primary);
+        border-radius: 50px;
+        padding: 10px 25px;
+        font-weight: 600;
+        transition: var(--transition);
     }
-    
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
+
+   
+    .btn-outline-primary:hover {
+        background: var(--gradient-primary);
+        color: white;
+        transform: translateY(-3px);
     }
-    
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: var(--primary-light) !important;
-      transition: .4s;
-      border-radius: 34px;
+
+    /* ===== MODAL ===== */
+    .modal-content {
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        background-color: var(--card-bg);
     }
-    
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white !important;
-      transition: .4s;
-      border-radius: 50%;
+
+    .modal-header {
+        background: var(--gradient-primary);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        border: none;
     }
-    
-    input:checked + .slider {
-      background-color: var(--primary-dark);
+
+    .modal-title {
+        font-weight: 600;
     }
-    
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-    
-    .container.text-center {
-      position: relative;
-    }
-    
-    .container.text-center:after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: white;
-      margin: 15px auto;
-      opacity: 0.6;
-    }
-    
+
     .btn-close {
-      filter: invert(1);
+        filter: invert(1);
     }
-    
-    /* Text colors */
+
+    /* ===== CORES DE TEXTO HARMONIZADAS ===== */
     .text-primary {
-      color: var(--primary) !important;
+        color: var(--primary) !important;
     }
-    
-    /* Estilo para o botão de alternância de tema */
+
+    [data-theme="dark"] .text-decoration-none,
+    [data-theme="dark"] .d-block,
+    [data-theme="dark"] .text-muted {
+        color: var(--text-color) !important;
+    }
+
+    /* ===== ELEMENTOS TEMÁTICOS RPG ===== */
+    .rpg-divider {
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: 3px;
+        margin: 1.5rem 0;
+    }
+
+    .rpg-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .rpg-header-icon {
+        margin-right: 15px;
+        font-size: 2rem;
+        color: var(--primary);
+    }
+
+    /* Ícones RPG unificados */
+    .rpg-icon, .feature-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        font-size: 1.8rem;
+    }
+
+    .rpg-icon {
+        background: var(--gradient-primary);
+        color: white;
+        font-size: 2rem;
+    }
+
+    .rpg-icon.sm {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .feature-icon {
+        background-color: rgba(34, 149, 209, 0.1);
+        color: var(--primary);
+    }
+
+    /* Badges */
+    .badge {
+        background: var(--gradient-primary);
+        color: white;
+        font-weight: 500;
+    }
+
+    .bg-primary-light {
+        background-color: var(--primary-light) !important;
+        color: var(--primary);
+    }
+
+    /* Ícones de categoria */
+    .category-icon {
+        margin-right: 8px;
+        width: 24px;
+        text-align: center;
+    }
+
+    /* ===== SWITCH DE TEMA ===== */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        background-color: var(--primary) !important;
+        right: 0;
+        bottom: 0;
+        background-color: var(--primary-light);
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+        [data-theme="dark"] .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        background-color: var(--primary) !important;
+        right: 0;
+        bottom: 0;
+        background-color: var(--primary-light);
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: var(--primary-dark);
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
     .theme-toggle-container {
-      display: flex;
-      align-items: center;
-      margin-left: 15px;
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
     }
-    
+
     .theme-label {
-      color: white;
-      margin-right: 10px;
-      font-size: 0.9rem;
+        color: white;
+        margin-right: 10px;
+        font-size: 0.9rem;
     }
-    
-    /* Ajustes para o ícone do sol/lua */
+
     .theme-icon {
-      margin-left: 8px;
-      font-size: 1.2rem;
+        margin-left: 8px;
+        font-size: 1.2rem;
     }
-  </style>
+
+    .container.text-center {
+        position: relative;
+    }
+
+    .container.text-center:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 3px;
+        background: white;
+        margin: 15px auto;
+        opacity: 0.6;
+    }
+
+    /* ===== SISTEMA DE PÁGINAS ===== */
+    #fundo {
+        min-height: calc(100vh - 150px);
+        position: relative;
+        background-color: var(--bg-color);
+    }
+
+    /* Sidebar de Navegação */
+    #sidebar {
+        width: 280px;
+        background-color: var(--sidebar-bg);
+        border-right: 1px solid var(--border-color);
+        padding: 1.5rem 1rem;
+        overflow-y: auto;
+        transition: var(--transition);
+        height: calc(100vh - 76px);
+        position: sticky;
+        top: 76px;
+        border-radius: 0 15px 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    #sidebar .h5 {
+        color: var(--primary);
+        font-weight: 700;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--primary-light);
+    }
+
+    #sidebar .nav-item {
+        margin-bottom: 0.25rem;
+    }
+
+    #sidebar .nav-link {
+        color: var(--text-color);
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    #sidebar .nav-link:hover {
+        background-color: rgba(34, 149, 209, 0.1);
+        color: var(--primary);
+    }
+
+    #sidebar .nav-link.active {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #sidebar .nav-link i {
+        margin-right: 0.75rem;
+        font-size: 0.9rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    #sidebar .nav-link::after {
+        content: '\f107';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    #sidebar .nav-link[aria-expanded="true"]::after {
+        transform: rotate(180deg);
+    }
+
+    #sidebar .nav.flex-column.ms-3 {
+        border-left: 2px solid rgba(34, 149, 209, 0.3);
+        padding-left: 0.5rem;
+        margin-left: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #sidebar .nav.flex-column.ms-3 .nav-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Conteúdo Principal */
+    #content {
+        padding: 2rem;
+        width: calc(100% - 280px);
+        background-color: var(--bg-color);
+        transition: var(--transition);
+    }
+
+    .content-section {
+        animation: fadeIn 0.3s ease;
+    }
+
+    /* Sistema de Filtros */
+    .filter-container {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--primary);
+    }
+
+    .filter-group {
+        margin-bottom: 1rem;
+    }
+
+    .filter-group label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary-dark);
+    }
+
+    .filter-badge {
+        cursor: pointer;
+        margin: 0.25rem;
+        transition: var(--transition);
+    }
+
+    .filter-badge:hover {
+        transform: translateY(-2px);
+    }
+
+    .card-body {
+        background-color: rgb(239, 241, 241) !important;
+    }
+
+    [data-theme="dark"] .card-body {
+        background-color: rgb(53, 60, 77) !important;
+    }
+
+    /* Cards para conteúdo */
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .info-card {
+        border-left: 4px solid var(--primary);
+        height: 100%;
+    }
+
+    .info-card h4 {
+        color: var(--primary-dark);
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        border-bottom: 2px solid rgba(34, 149, 209, 0.3);
+        padding-bottom: 0.5rem;
+    }
+
+    .info-card .card-text {
+        line-height: 1.6;
+    }
+
+     .nav-link {
+      color: black;
+    }
+
+    [data-theme="dark"] .nav-link {
+      color: white !important;
+    }
+
+     h3 {
+      color: black !important;
+    }
+
+      h4 {
+      color: black !important;
+    }
+
+     [data-theme="dark"] p {
+      color: white;
+    }
+
+    [data-theme="dark"] h3 {
+      color: white !important;
+    }
+
+        [data-theme="dark"] h4 {
+      color: white !important;
+    }
+
+    .info-card .card-meta {
+        font-size: 0.9rem;
+        color: #64748b;
+        margin-top: 1rem;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        grid-column: 1 / -1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ===== BESTIÁRIO ===== */
+    .bestiario-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .stat-item {
+        background-color: var(--card-bg);
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .bestiario-description {
+        background-color: var(--card-bg);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .description-label {
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 8px;
+    }
+
+    .nd-badge {
+        background-color: var(--secondary);
+        color: var(--dark);
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+
+    /* ===== ELEMENTOS RPG ESPECÍFICOS ===== */
+    .rpg-hero {
+        background: var(--gradient-hero);
+        border-radius: 20px;
+        margin-top: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        max-width: 700px;
+    }
+
+    .hero-dice {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.2);
+        z-index: 1;
+    }
+
+    .rpg-border {
+        border-left: 5px solid var(--primary) !important;
+        background-color: var(--rpg-parchment);
+    }
+
+    .rpg-illustration {
+        font-size: 8rem;
+        color: var(--primary);
+        opacity: 0.8;
+    }
+
+    /* Pré-visualização de recursos */
+    .rpg-map-placeholder {
+        position: relative;
+        height: 200px;
+        background-color: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 2px solid var(--rpg-brown);
+    }
+
+    .grid-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+
+    .character-marker {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(-50%, -50%);
+    }
+
+    .rpg-sheet-placeholder {
+        padding: 15px;
+        background-color: var(--rpg-parchment);
+        border: 2px solid var(--rpg-brown);
+        border-radius: 10px;
+        font-family: 'Courier New', monospace;
+    }
+
+    .sheet-header {
+        border-bottom: 2px solid var(--rpg-brown);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .input-group-text {
+        background-color: white;
+        border-color: white;
+    }
+    .character-name {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .sheet-stats {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .stat {
+        text-align: center;
+    }
+
+    .stat span {
+        display: block;
+        font-size: 0.8rem;
+    }
+
+    /* Avatar de personagens */
+    .character-avatar.mage {
+        background: linear-gradient(135deg, #6f42c1 0%, #4a2d82 100%);
+    }
+
+    .character-avatar.warrior {
+        background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);
+    }
+
+    .character-avatar.rogue {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    }
+
+    /* Níveis */
+    .depression-level {
+        padding-left: 15px;
+        border-left: 3px solid var(--primary);
+    }
+
+    .level-indicator {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+    }
+
+    .level-mild {
+        background-color: var(--tertiary);
+    }
+
+    .level-moderate {
+        background-color: var(--secondary);
+    }
+
+    .level-severe {
+        background-color: #f94144;
+    }
+
+    /* Links de fonte */
+    .source-link {
+        color: var(--primary) !important;
+        transition: all 0.2s ease;
+        font-weight: 500;
+    }
+
+    .source-link:hover {
+        color: var(--primary-dark) !important;
+        text-decoration: underline !important;
+    }
+
+    /* Seção CTA */
+    .rpg-cta-section {
+        background-color: rgba(34, 149, 209, 0.05);
+        border-radius: 15px;
+    }
+
+    /* Classes de utilidade */
+    .impot {
+        font-weight: bold !important;
+    }
+
+    /* ===== ANIMAÇÕES ===== */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    .forum-item, .stat-card, .rpg-card, .bestiario-card, .info-card, .content-section {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .floating {
+        animation: float 5s ease-in-out infinite;
+    }
+
+    .pulse {
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ===== SCROLL PERSONALIZADO ===== */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-color);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-dark);
+    }
+
+    /* ===== RESPONSIVIDADE UNIFICADA ===== */
+    @media (max-width: 992px) {
+        #fundo {
+            flex-direction: column;
+        }
+        
+        #sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+            top: 0;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0 0 15px 15px;
+        }
+        
+        #content {
+            width: 100%;
+        }
+
+        .card-container {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        .bestiario-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .d-flex.justify-content-between.align-items-center.mb-4 {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .d-flex.justify-content-between.align-items-center.mb-4 .btn {
+            margin-top: 1rem;
+        }
+        
+        .card-header .row > div,
+        .forum-item .row > div {
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-avatar {
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        .avatar-img {
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+        
+        .display-5 {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .card-body.p-5 {
+            padding: 2rem !important;
+        }
+        
+        .rpg-icon, .feature-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 1.5rem;
+        }
+
+        .rpg-illustration {
+            font-size: 5rem;
+        }
+
+        .sheet-stats {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        #content {
+            padding: 1rem;
+        }
+        
+        .card-container {
+            grid-template-columns: 1fr;
+        }
+        
+        .filter-container {
+            padding: 1rem;
+        }
+    }
+</style>
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
