@@ -177,7 +177,7 @@ Habilidade: Algo específico da criatura.</p>
             <div class="card-container" id="antepassados-content">
                 {% for antepassado in rpg_antepassado %}
                 <div class="info-card" data-name="{{ antepassado.nome|lower }}">
-                    <h4>{{ antepassado.nome }}</h4>
+                    <h4> {{ antepassado.nome }}</h4>
                     <p class="card-text">{{ antepassado.descricao }}</p>
                     <div class="card-meta">
                         <span class="badge bg-success">Perícias: {{ antepassado.pericia }}</span>
@@ -220,7 +220,7 @@ Celular e Veículos
             <div class="card-container" id="habilidades-content">
                 {% for habilidade in rpg_habilidade %}
                 <div class="info-card" data-name="{{ habilidade.nome|lower }}">
-                    <h4>{{ habilidade.nome }}</h4>
+                    <h4 class="p-1">{{ habilidade.nome }}</h4>
                     <p class="card-text">{{ habilidade.descricao }}</p>
                     <div class="card-meta">
                         <span class="badge bg-warning text-dark">Condição: {{ habilidade.condicao }}</span>
@@ -602,11 +602,14 @@ Caso o poder não seja passivo (sempre ativo).
         
         <!-- Seções de conteúdo individual -->
         {% for bestiario in rpg_bestiario %}
+        
 <div class="content-section d-none" data-content="bestiario-{{ bestiario.id }}">
+   
     <div class="bestiario-card">
         <div class="bestiario-header d-flex justify-content-between align-items-center">
             <h3 class="mb-0">{{ bestiario.nome }}</h3>
             <span class="nd-badge">ND {{ bestiario.nd }}</span>
+            
         </div>
         
         <div class="bestiario-body">
