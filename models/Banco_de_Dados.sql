@@ -13,12 +13,10 @@
 
 
 -- Copiando estrutura do banco de dados para etec_rpg
-DROP DATABASE IF EXISTS `etec_rpg`;
 CREATE DATABASE IF NOT EXISTS `etec_rpg` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `etec_rpg`;
 
 -- Copiando estrutura para tabela etec_rpg.antepassados
-DROP TABLE IF EXISTS `antepassados`;
 CREATE TABLE IF NOT EXISTS `antepassados` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
@@ -29,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `antepassados` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.antepassados: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela etec_rpg.antepassados: ~37 rows (aproximadamente)
 /*!40000 ALTER TABLE `antepassados` DISABLE KEYS */;
 INSERT IGNORE INTO `antepassados` (`id`, `nome`, `descricao`, `pericia`, `equipamento`, `credito`) VALUES
 	(1, 'Estudante', 'Você é um estudante no ensino médio ou faculdade.', 'Atualidades: +2, Análise +1', 'Bolsa Larga', '0'),
@@ -72,7 +70,6 @@ INSERT IGNORE INTO `antepassados` (`id`, `nome`, `descricao`, `pericia`, `equipa
 /*!40000 ALTER TABLE `antepassados` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela etec_rpg.bestiario
-DROP TABLE IF EXISTS `bestiario`;
 CREATE TABLE IF NOT EXISTS `bestiario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
@@ -87,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `bestiario` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.bestiario: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela etec_rpg.bestiario: ~6 rows (aproximadamente)
 /*!40000 ALTER TABLE `bestiario` DISABLE KEYS */;
 INSERT IGNORE INTO `bestiario` (`id`, `nome`, `descricao`, `nd`, `atributos`, `pericias`, `velocidade`, `vida`, `mental`, `energia`) VALUES
 	(1, 'Cachorro', 'Um cachorro de grande porte.', ' 1/2', 'FOR 2, AGI 2, CON 2, INT 0, PER 4', 'Procurar 3, Furtividade 2', 8, 10, 6, 0),
@@ -99,7 +96,6 @@ INSERT IGNORE INTO `bestiario` (`id`, `nome`, `descricao`, `nd`, `atributos`, `p
 /*!40000 ALTER TABLE `bestiario` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela etec_rpg.equipamentos
-DROP TABLE IF EXISTS `equipamentos`;
 CREATE TABLE IF NOT EXISTS `equipamentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
@@ -109,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `equipamentos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.equipamentos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela etec_rpg.equipamentos: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `equipamentos` DISABLE KEYS */;
 INSERT IGNORE INTO `equipamentos` (`id`, `nome`, `custo`, `volume`, `descricao`) VALUES
 	(1, 'Pé de Cabra', '2C', '1', 'Adicione +1 em testes de força onde sua alavanca pode ser utilizada. Serve como um bastão curto.'),
@@ -117,7 +113,6 @@ INSERT IGNORE INTO `equipamentos` (`id`, `nome`, `custo`, `volume`, `descricao`)
 /*!40000 ALTER TABLE `equipamentos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela etec_rpg.habilidades
-DROP TABLE IF EXISTS `habilidades`;
 CREATE TABLE IF NOT EXISTS `habilidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
@@ -126,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `habilidades` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.habilidades: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela etec_rpg.habilidades: ~32 rows (aproximadamente)
 /*!40000 ALTER TABLE `habilidades` DISABLE KEYS */;
 INSERT IGNORE INTO `habilidades` (`id`, `nome`, `condicao`, `descricao`) VALUES
 	(1, 'Treino', 'Nenhuma', 'Você ganha 2+INT pontos de perícia. '),
@@ -164,7 +159,6 @@ INSERT IGNORE INTO `habilidades` (`id`, `nome`, `condicao`, `descricao`) VALUES
 /*!40000 ALTER TABLE `habilidades` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela etec_rpg.poderes
-DROP TABLE IF EXISTS `poderes`;
 CREATE TABLE IF NOT EXISTS `poderes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
@@ -175,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `poderes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.poderes: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela etec_rpg.poderes: ~9 rows (aproximadamente)
 /*!40000 ALTER TABLE `poderes` DISABLE KEYS */;
 INSERT IGNORE INTO `poderes` (`id`, `nome`, `requisito`, `custo`, `uso`, `descricao`) VALUES
 	(1, 'Invisibilidade', 'Nenhum', '1 Energia por rodada.', ' 1 Ação principal', 'Você encosta em uma criatura ou objeto, os tornando invisíveis. O efeito dura até ser cancelado por você ou pela criatura. Caso o alvo seja um objeto, o custo diminui para 1 energia por minuto.'),
@@ -190,7 +184,6 @@ INSERT IGNORE INTO `poderes` (`id`, `nome`, `requisito`, `custo`, `uso`, `descri
 /*!40000 ALTER TABLE `poderes` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela etec_rpg.respostas
-DROP TABLE IF EXISTS `respostas`;
 CREATE TABLE IF NOT EXISTS `respostas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `autor` varchar(100) NOT NULL,
@@ -200,14 +193,20 @@ CREATE TABLE IF NOT EXISTS `respostas` (
   PRIMARY KEY (`id`),
   KEY `topico_id` (`topico_id`),
   CONSTRAINT `respostas_ibfk_1` FOREIGN KEY (`topico_id`) REFERENCES `topicos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.respostas: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela etec_rpg.respostas: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `respostas` DISABLE KEYS */;
+INSERT IGNORE INTO `respostas` (`id`, `autor`, `conteudo`, `data_criacao`, `topico_id`) VALUES
+	(1, 'a', 'kakapa\n', '2025-09-05 04:39:02', 4),
+	(2, 'Leme', 'O kenzo\n', '2025-09-05 14:40:53', 3),
+	(3, 'Kenzo', 'Não, ele é só apreciador da esposa do irmão (e suas reencarnações)', '2025-09-05 14:46:58', 2),
+	(4, 'Kleber', 'A', '2025-09-05 16:29:57', 4),
+	(5, 'a', '@a a', '2025-09-19 16:39:10', 4),
+	(6, 'sss', 'aaaaaaaaaaaaaaaaaaaaa', '2025-09-22 17:36:40', 4);
 /*!40000 ALTER TABLE `respostas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela etec_rpg.topicos
-DROP TABLE IF EXISTS `topicos`;
 CREATE TABLE IF NOT EXISTS `topicos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `autor` varchar(100) NOT NULL,
@@ -217,10 +216,15 @@ CREATE TABLE IF NOT EXISTS `topicos` (
   `data_criacao` datetime DEFAULT NULL,
   `data_atualizacao` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela etec_rpg.topicos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela etec_rpg.topicos: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `topicos` DISABLE KEYS */;
+INSERT IGNORE INTO `topicos` (`id`, `autor`, `topico`, `categoria`, `conteudo`, `data_criacao`, `data_atualizacao`) VALUES
+	(1, 'Zeliz', 'Alberan Tarie será reencarnado na próxima temporada?', 'duvida', 'a', '2025-09-04 12:50:16', '2025-09-04 12:50:16'),
+	(2, 'Zeliz', 'Strahd é talarico', 'discussao', 'a', '2025-09-04 12:51:23', '2025-09-04 12:51:23'),
+	(3, 'Zeliz', 'Quem tá afim de participar de uma campanha em Deepwater?', 'procurando', 'a', '2025-09-04 12:52:24', '2025-09-04 12:52:24'),
+	(4, 'Zeliz', 'Que tal um personagem que é uma tartaruga azul com um martelo enorme?', 'sugestao', 'a', '2025-09-04 12:53:47', '2025-09-04 12:53:47');
 /*!40000 ALTER TABLE `topicos` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
