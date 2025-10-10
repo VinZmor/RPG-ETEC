@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `topicos` (
 /*!40000 ALTER TABLE `topicos` DISABLE KEYS */;
 INSERT IGNORE INTO `topicos` (`id`, `autor`, `topico`, `categoria`, `conteudo`, `data_criacao`, `data_atualizacao`) VALUES
 	(1, 'Zeliz', 'Alberan Tarie será reencarnado na próxima temporada?', 'duvida', 'a', '2025-09-04 12:50:16', '2025-09-04 12:50:16'),
-	(2, 'Zeliz', 'Strahd é talarico', 'discussao', 'a', '2025-09-04 12:51:23', '2025-09-04 12:51:23'),
+	(2, 'Zeliz', 'Strahd é realmente mau?', 'discussao', 'a', '2025-09-04 12:51:23', '2025-09-04 12:51:23'),
 	(3, 'Zeliz', 'Quem tá afim de participar de uma campanha em Deepwater?', 'procurando', 'a', '2025-09-04 12:52:24', '2025-09-04 12:52:24'),
 	(4, 'Zeliz', 'Que tal um personagem que é uma tartaruga azul com um martelo enorme?', 'sugestao', 'a', '2025-09-04 12:53:47', '2025-09-04 12:53:47');
 /*!40000 ALTER TABLE `topicos` ENABLE KEYS */;

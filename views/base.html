@@ -67,6 +67,16 @@
         line-height: 1.6;
     }
 
+     [data-theme="dark"] input::placeholder {
+        color: white !important;
+        
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
     }
@@ -82,6 +92,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
+ 
     .navbar-brand {
         font-weight: 700;
         color: white !important;
@@ -113,14 +124,21 @@
         font-size: 1.4rem;
     }
 
+.logo {
+    filter: brightness(0) invert(1);
+    width: 90px;
+    height: auto;
+    padding-right: 10px;
+}
+
     .sidebar {
         background-color: var(--sidebar-bg) !important;
     }
 
     header {
-        padding: 40px 0;
+        
         background: var(--gradient-hero);
-        margin-bottom: 30px;
+        
         border-bottom: 1px solid var(--border-color);
     }
 
@@ -282,6 +300,10 @@
         box-shadow: 0 0 0 0.25rem rgba(34, 149, 209, 0.25);
     }
 
+    .campoBusca {
+        color: red !important
+    }
+
     /* ===== BOTÕES UNIFICADOS ===== */
     .btn-primary {
         background: var(--gradient-primary);
@@ -343,8 +365,17 @@
 
     [data-theme="dark"] .text-decoration-none,
     [data-theme="dark"] .d-block,
-    [data-theme="dark"] .text-muted {
+    c .text-muted {
         color: var(--text-color) !important;
+    }
+
+  [data-theme="dark"] 
+    small {
+        color: white !important;
+    }
+
+    .fa-filter {
+        color: var(--primary) !important;
     }
 
     /* ===== ELEMENTOS TEMÁTICOS RPG ===== */
@@ -646,10 +677,7 @@
         padding: 2%;
     }
 
-    img {
-        width: 100px;
-        height: 100px;
-    }
+   
 
     .card-body {
         background-color: rgb(239, 241, 241) !important;
@@ -693,7 +721,7 @@
     }
 
      h3 {
-      color: black !important;
+      color: white !important;
     }
 
       h4 {
@@ -735,6 +763,17 @@
         margin-bottom: 15px;
     }
 
+    .a {
+        width: auto;
+        height: auto;
+        align-items: center;
+    }
+
+    .b {
+        width: auto;
+        height: 500px;
+        
+    }
     .stat-item {
         background-color: var(--card-bg);
         padding: 12px;
@@ -849,8 +888,8 @@
 
     .sheet-header {
         border-bottom: 2px solid var(--rpg-brown);
-        padding-bottom: 10px;
-        margin-bottom: 15px;
+       
+        
     }
 
     .input-group-text {
@@ -876,18 +915,18 @@
         font-size: 0.8rem;
     }
 
+    [data-theme="dark"] .text-muted {
+        color: white !important;
+    }
+
+    [data-theme="dark"] #filtroCategoria {
+
+        border-style: 100px;
+      
+        border-color: red;
+    }
+
     /* Avatar de personagens */
-    .character-avatar.mage {
-        background: linear-gradient(135deg, #6f42c1 0%, #4a2d82 100%);
-    }
-
-    .character-avatar.warrior {
-        background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);
-    }
-
-    .character-avatar.rogue {
-        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-    }
 
     /* Níveis */
     .depression-level {
@@ -1023,10 +1062,7 @@
             margin-top: 1rem;
         }
         
-        .card-header .row > div,
-        .forum-item .row > div {
-            margin-bottom: 0.5rem;
-        }
+       
         
         .author-avatar {
             flex-direction: row;
@@ -1048,6 +1084,7 @@
         
         .card-body.p-5 {
             padding: 2rem !important;
+            
         }
         
         .rpg-icon, .feature-icon {
@@ -1090,7 +1127,7 @@
     <div id="nav" class="container d-flex align-items-center">
       <!-- Logo -->
       <a href="{{url_for('home')}}" class="navbar-brand d-flex align-items-center">
-        <i class="fa-solid fa-dice-d6 me-2"></i> RPG ETEC
+        <img src="/static/img/logo.png" alt="Logo" class="logo"> Vale Místico
       </a>
       <div class="ms-auto d-flex align-items-center gap-2">
         <!-- Botão das Rotas -->
@@ -1117,22 +1154,37 @@
         <a href="/" class="nav-link"><i class="fa-solid fa-home me-2"></i> Ínicio</a> 
         <a href="/wiki" class="nav-link"><i class="fa-solid fa-book-open me-2"></i> Wiki</a>
         <a href="/forum" class="nav-link"><i class="fa-solid fa-comments me-2"></i> Fórum</a>
+        <div class="sidebar-section">
+        {% if 'user_id' not in session %}
+        <a href="{{url_for('login')}}" class="nav-link sidebar-link">
+          <i class="fa-solid fa-right-to-bracket me-2"></i>Login / Cadastro
+        </a>
+        {% else %}
+        <div class="user-section p-3 border-top border-bottom">
+          <div class="d-flex align-items-center">
+            <i class="fa-solid fa-circle-user me-2 text-primary"></i>
+            <span class="small">Olá, {{ session.get('email', 'Usuário') }}</span>
+          </div>
+        </div>
+        <a href="{{url_for('logout')}}" class="nav-link sidebar-link text-danger">
+          <i class="fa-solid fa-right-from-bracket me-2"></i>Sair
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+</div>  
       </nav>
     </div>
   </div>
     
 
   <!-- Header -->
-  <header>
-    <div class="container text-center">
-      <h1 class="display-4 fw-bold">Vale Místico</h1>
-      
-      <!-- Talvez por coisas-->
-      <p class="lead text-light mx-auto" style="max-width: 600px;">
-        
-      </p>
-    </div>
-  </header>
+  <header style="position: relative; height: 250px; overflow: hidden;">
+  <img src="/static/img/Rpg-de-Mesa.png" alt="" 
+       style="width: 100%; height: 100%; object-fit: cover;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary-dark); opacity: 0.6;"></div>
+</header>
 
   <main class="container my-4 flex-grow-1">
     {% block content %}

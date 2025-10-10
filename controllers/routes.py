@@ -1,7 +1,8 @@
 from datetime import datetime
 import json
-from flask import render_template, request, jsonify
-from models.database import Bestiario, Antepassado, Habilidade, Poder, Resposta, Equipamento, Topico, db
+from flask import render_template, request, jsonify, url_for,  redirect, flash, session
+from models.database import Bestiario, Antepassado, Habilidade, Poder, Resposta, Equipamento, Topico, Usuario, db
+from werkzeug.security import generate_password_hash, check_password_hash 
 
 def init_app(app):
     # Configuração do JSON Encoder para datas
@@ -40,6 +41,58 @@ def init_app(app):
     def forum():
         topicos = Topico.query.order_by(Topico.data_criacao.desc()).all()
         return render_template('forum.html', topicos=topicos)
+    
+    @app.route('/login')
+    def login():
+        if request.method == 'POST':
+                nome =request.form['nome']
+                senha =request.form['senha']
+                user = Usuario.query.filter_by(nome=nome).first()
+                if user and check_password_hash(user.senha, senha):
+                    session['user_id'] = user.id
+                    session['nome'] = user.nome
+                    flash(f'Login realizado com sucesso! Ben-vindo {user.nome}!', 'success')
+                    return redirect(url_for('home'))
+                else:
+                    flash("Falha no login! verifique nome do usuário e senha")
+                    return redirect(url_for('login'))
+            
+        return render_template('login.html')
+    
+    
+    @app.route('/logout', methods=['GET', 'POST'])
+    def logout():
+            session.clear()
+            flash("Você se desconectou", "warning")
+            return redirect(url_for('home'))
+        
+    @app.route('/caduser', methods=['POST']) 
+    def caduser():
+        # Recebe os dados do formulário
+        nome = request.form['nome']
+        senha = request.form['senha']
+        confirmar_senha = request.form['confirmar_senha']
+
+        # Verifica se o usuário já existe
+        usuario_existente = Usuario.query.filter_by(nome=nome).first()
+        if usuario_existente:
+            flash('Nome de usuário já está em uso.', 'danger')
+            return redirect(url_for('login'))
+
+        # Criptografa a senha antes de armazenar
+        senha_hash = generate_password_hash(senha).decode('utf-8')
+
+        # Cria um novo usuário
+        novo_usuario = Usuario(nome=nome, senha=senha_hash)
+
+        # Adiciona e commita no banco de dados
+        db.session.add(novo_usuario)
+        db.session.commit()
+
+        flash('Cadastro realizado com sucesso! Você já pode fazer login.', 'success')
+        return redirect(url_for('login'))
+        
+        return render_template('login.html')
     
     @app.route('/respostas')
     def respostas():

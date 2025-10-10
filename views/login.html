@@ -1,0 +1,419 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages%}
+    <div class="alert alert-{{category}}">
+        {{message}}
+    </div>
+{% endfor%}
+{% endwith %}
+
+<div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 py-5">
+    <div class="row w-100 justify-content-center">
+        <div class="col-xl-6 col-lg-8 col-md-10">
+            <div class="login-container rpg-card">
+                <!-- Header do Login -->
+                <div class="login-header text-center p-4">
+                   
+                    <h1 class="display-6 fw-bold text-white mb-2">Bem-vindo </h1>
+             
+                </div>
+
+                <!-- Corpo do Login -->
+                <div class="login-body p-4 p-md-5">
+                    <!-- Abas de Navegação -->
+                    <div class="form-tabs mb-4">
+                        <div class="form-tab active" data-tab="login">
+                            <i class="fas fa-sign-in-alt me-2"></i>Entrar em uma conta
+                        </div>
+                        <div class="form-tab" data-tab="register">
+                            <i class="fas fa-user-plus me-2"></i>Criar Conta
+                        </div>
+                    </div>
+                    
+                    <!-- Painel de Login -->
+                    <div class="form-panel active" id="login-panel">
+                        <form id="login-form" action="{{url_for('login')}}" method="POST">
+                            <div class="form-group mb-4">
+                                <label class="form-label fw-bold" for="login-username">
+                                    <i class="fas fa-user me-2 text-primary"></i> Nome de usuário
+                                </label>
+
+                                <input name="nome" type="text" class="form-control form-control-lg" id="login-username" 
+                                       placeholder="Digite seu nome de usuário" required>
+                           
+                                    </div>
+                            
+                            <div class="form-group mb-4">
+                                <label class="form-label fw-bold" for="login-password">
+                                    <i class="fas fa-key me-2 text-primary"></i> Senha 
+                                </label>
+
+                                <input type="password" name="senha" class="form-control form-control-lg" id="login-password" 
+                                       placeholder="Digite sua senha" required>
+                          
+                                    </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100 py-3 mb-3">
+                                <i class="fas fa-play me-2"></i>Entrar
+                            </button>
+
+                            
+                        </form>
+                    </div>
+                    
+                    <!-- Painel de Registro -->
+                    <div class="form-panel" id="register-panel">
+                        <form id="register-form" action="{{url_for('caduser')}}" method="POST">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group mb-4">
+                                        <label class="form-label fw-bold" for="register-username">
+                                            <i class="fas fa-user-plus me-2 text-primary"></i> Nome de usuário
+                                        </label>
+                                        <input type="text" class="form-control form-control-lg" name="nome" id="register-username" 
+                                               placeholder="Escolha um nome de usuário" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label class="form-label fw-bold" for="register-password">
+                                            <i class="fas fa-lock me-2 text-primary"></i> Senha 
+                                        </label>
+                                        <input type="password" name="senha" class="form-control form-control-lg" id="register-password" 
+                                               placeholder="Digite sua senha" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label class="form-label fw-bold" for="register-confirm">
+                                            <i class="fas fa-lock me-2 text-primary"></i> Confirmar Senha
+                                        </label>
+                                        <input type="password" class="form-control form-control-lg" id="register-confirm" 
+                                               placeholder="Digite novamente" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100 py-3 mb-3">
+                                <i class="fas fa-plus-circle me-2"></i>Criar Personagem
+                            </button>
+
+                            <div class="text-center">
+                               
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .min-vh-100 {
+        min-height: 100vh;
+    }
+
+    .login-container {
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin: 0 auto;
+        border: 1px solid var(--border-color);
+    }
+
+    .login-header {
+        background: var(--gradient-hero);
+        padding: 3rem 2rem;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-header h1 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-header .lead {
+        opacity: 0.9;
+        font-size: 1.2rem;
+    }
+
+    .login-body {
+        padding: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .login-body {
+            padding: 3rem;
+        }
+    }
+
+    .form-tabs {
+        display: flex;
+        margin-bottom: 2rem;
+        border-bottom: 3px solid var(--border-color);
+        background: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 0.5rem;
+    }
+
+    .form-tab {
+        flex: 1;
+        text-align: center;
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-color);
+        transition: var(--transition);
+        border-radius: 10px;
+        margin: 0 0.25rem;
+    }
+
+    .form-tab.active {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: 0 4px 8px rgba(34, 149, 209, 0.3);
+    }
+
+    .form-tab:hover:not(.active) {
+        background: var(--primary-light);
+        color: var(--primary);
+    }
+
+    .form-panel {
+        display: none;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .form-panel.active {
+        display: block;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .form-control {
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+        transition: var(--transition);
+        background: var(--card-bg);
+        color: var(--text-color);
+    }
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.2rem rgba(34, 149, 209, 0.25);
+        background: var(--card-bg);
+    }
+
+    .form-control-lg {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .btn-lg {
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: var(--transition);
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .form-check-label {
+        color: var(--text-color);
+    }
+
+    .text-muted {
+        color: var(--text-color) !important;
+        opacity: 0.7;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .form-tabs {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-tab {
+            margin: 0;
+        }
+        
+        .login-header {
+            padding: 2rem 1rem;
+        }
+        
+        .login-header h1 {
+            font-size: 2rem;
+        }
+        
+        .login-body {
+            padding: 1.5rem;
+        }
+    }
+
+    /* Dark theme adjustments */
+    [data-theme="dark"] .login-container {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="dark"] .form-control {
+        background: var(--card-bg);
+        border-color: var(--border-color);
+        color: var(--text-color);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elementos da DOM
+        const tabs = document.querySelectorAll('.form-tab');
+        const panels = document.querySelectorAll('.form-panel');
+        const switchLinks = document.querySelectorAll('.switch-tab');
+
+        // Alternar entre login e cadastro
+        function switchTab(tabName) {
+            // Atualizar tabs
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('data-tab') === tabName) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Atualizar panels
+            panels.forEach(panel => {
+                panel.classList.remove('active');
+                if (panel.id === `${tabName}-panel`) {
+                    panel.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners para tabs
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        // Event listeners para links de switch
+        switchLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                
+                const targetTab = this.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        // Validação do formulário de login
+      document.getElementById('login-form').addEventListener('submit', function(e) {
+    // Apenas validações básicas, SEM prevenir o envio
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    
+    if (!username || !password) {
+        alert('Por favor, preencha todos os campos!');
+        e.preventDefault(); // Só previne se houver erro
+        return;
+    }
+    
+    // O formulário será enviado normalmente para o Flask
+});
+
+       document.getElementById('register-form').addEventListener('submit', function(e) {
+    const username = document.getElementById('register-username').value.trim();
+    const password = document.getElementById('register-password').value;
+    const confirmPassword = document.getElementById('register-confirm').value;
+    
+    if (!username || !password || !confirmPassword) {
+        alert('Por favor, preencha todos os campos!');
+        e.preventDefault();
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        alert('As senhas não coincidem!');
+        e.preventDefault();
+        return;
+    }
+    
+    // Remove a simulação de registro e permite envio normal
+});
+            // Simular loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Criando...';
+            submitBtn.disabled = true;
+            
+            // Simular requisição de registro
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                showNotification('Personagem criado com sucesso! Bem-vindo ao Vale Místico!', 'success');
+                
+                // Switch para login após 2 segundos
+                setTimeout(() => {
+                    switchTab('login');
+                    document.getElementById('login-username').value = username;
+                }, 2000);
+            }, 1500);
+        });
+
+        // Função para mostrar notificação
+        function showNotification(message, type) {
+            // Criar elemento de notificação
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'success' ? 'success' : type === 'warning' ? 'warning' : 'danger'} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 1060; min-width: 300px;';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'exclamation-circle'} me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover após 5 segundos
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 5000);
+        }
+    });
+</script>
+{% endblock content %}

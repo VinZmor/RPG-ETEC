@@ -98,3 +98,14 @@ class Bestiario(db.Model):
     vida = db.Column(db.Integer)
     mental = db.Column(db.Integer)
     energia = db.Column(db.Integer)
+    
+class Usuario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150), nullable=False)
+    senha = db.Column(db.String(250), nullable=False)
+    
+    def __init__(self, nome, senha):
+        self.nome = nome
+        self.senha = senha
+
+    
