@@ -1,11 +1,10 @@
 from datetime import datetime
 import json
-from flask import render_template, request, jsonify, url_for,  redirect, flash, session
+from flask import render_template, request, jsonify, url_for, redirect, flash, session
 from models.database import Bestiario, Antepassado, Habilidade, Poder, Resposta, Equipamento, Topico, Usuario, db
-from werkzeug.security import generate_password_hash, check_password_hash 
+from werkzeug.security import generate_password_hash, check_password_hash
 
 def init_app(app):
-    # Configuração do JSON Encoder para datas
     class CustomJSONEncoder(json.JSONEncoder):
         def default(self, obj):
             if isinstance(obj, datetime):
@@ -21,11 +20,11 @@ def init_app(app):
     
     @app.route('/wiki', methods=['GET', 'POST'])
     @app.route('/wiki/<int:id>', methods=['GET', 'POST'])
-    def wiki(id=None):  
+    def wiki(id=None):
         rpg_bestiario = Bestiario.query.all()
         rpg_antepassado = Antepassado.query.all()
         rpg_habilidade = Habilidade.query.all()
-        rpg_poder = Poder.query.all()
+        rrog_poder = Poder.query.all()
         rpg_equipamento = Equipamento.query.all()
         
         return render_template(
@@ -33,7 +32,7 @@ def init_app(app):
             rpg_bestiario=rpg_bestiario,
             rpg_antepassado=rpg_antepassado,
             rpg_habilidade=rpg_habilidade,
-            rpg_poder=rpg_poder,
+            rrog_poder=rrog_poder,
             rpg_equipamento=rpg_equipamento
         )
     
@@ -42,58 +41,57 @@ def init_app(app):
         topicos = Topico.query.order_by(Topico.data_criacao.desc()).all()
         return render_template('forum.html', topicos=topicos)
     
-    @app.route('/login')
+    @app.route('/login', methods=['GET', 'POST'])
     def login():
         if request.method == 'POST':
-                nome =request.form['nome']
-                senha =request.form['senha']
-                user = Usuario.query.filter_by(nome=nome).first()
-                if user and check_password_hash(user.senha, senha):
-                    session['user_id'] = user.id
-                    session['nome'] = user.nome
-                    flash(f'Login realizado com sucesso! Ben-vindo {user.nome}!', 'success')
-                    return redirect(url_for('home'))
-                else:
-                    flash("Falha no login! verifique nome do usuário e senha")
-                    return redirect(url_for('login'))
+            nome = request.form['nome']
+            senha = request.form['senha']
             
+            usuario = Usuario.query.filter_by(nome=nome).first()
+            
+            if usuario and check_password_hash(usuario.senha, senha):
+                session['usuario_id'] = usuario.id
+                session['usuario_nome'] = usuario.nome
+                flash('Login realizado com sucesso!', 'success')
+                return redirect(url_for('home'))
+            else:
+                flash('Nome de usuário ou senha incorretos.', 'danger')
+                
         return render_template('login.html')
     
+   
     
-    @app.route('/logout', methods=['GET', 'POST'])
+    @app.route('/logout')
     def logout():
-            session.clear()
-            flash("Você se desconectou", "warning")
-            return redirect(url_for('home'))
-        
-    @app.route('/caduser', methods=['POST']) 
+        session.clear()
+        flash("Você se desconectou", "warning")
+        return redirect(url_for('home'))
+    
+    @app.route('/caduser', methods=['POST'])
     def caduser():
-        # Recebe os dados do formulário
         nome = request.form['nome']
         senha = request.form['senha']
         confirmar_senha = request.form['confirmar_senha']
 
-        # Verifica se o usuário já existe
+        if senha != confirmar_senha:
+            flash('As senhas não coincidem.', 'danger')
+            return redirect(url_for('login'))
+
         usuario_existente = Usuario.query.filter_by(nome=nome).first()
         if usuario_existente:
             flash('Nome de usuário já está em uso.', 'danger')
             return redirect(url_for('login'))
 
-        # Criptografa a senha antes de armazenar
-        senha_hash = generate_password_hash(senha).decode('utf-8')
-
-        # Cria um novo usuário
+        # CORREÇÃO: Remova o .decode('utf-8')
+        senha_hash = generate_password_hash(senha)  # ← Linha corrigida
         novo_usuario = Usuario(nome=nome, senha=senha_hash)
 
-        # Adiciona e commita no banco de dados
         db.session.add(novo_usuario)
         db.session.commit()
 
         flash('Cadastro realizado com sucesso! Você já pode fazer login.', 'success')
         return redirect(url_for('login'))
-        
-        return render_template('login.html')
-    
+
     @app.route('/respostas')
     def respostas():
         return render_template('respostas.html')
@@ -142,9 +140,8 @@ def init_app(app):
     @app.route('/api/estatisticas')
     def api_estatisticas():
         total_topicos = Topico.query.count()
-        total_respostas = db.session.query(db.func.count(Resposta.id)).scalar()
+        total_respostas = Resposta.query.count()
         
-        # Calcular usuários únicos
         autores_topicos = db.session.query(Topico.autor).distinct()
         autores_respostas = db.session.query(Resposta.autor).distinct()
         usuarios_unicos = set([autor[0] for autor in autores_topicos] + [autor[0] for autor in autores_respostas])

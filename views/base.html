@@ -1116,6 +1116,194 @@
             padding: 1rem;
         }
     }
+
+    .offcanvas.sidebar {
+    background-color: var(--sidebar-bg) !important;
+    color: var(--text-color);
+}
+
+.offcanvas.sidebar .offcanvas-header {
+    background: var(--gradient-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.offcanvas.sidebar .offcanvas-title {
+    color: white !important;
+    font-weight: 600;
+}
+
+.offcanvas.sidebar .btn-close {
+    filter: invert(1);
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.sidebar-section {
+    margin-bottom: 1rem;
+}
+
+.sidebar-section-header {
+    padding: 0.5rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-section-header small {
+    color: var(--text-color) !important;
+    opacity: 0.7;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    border: none;
+    background: transparent;
+}
+
+.sidebar-link:hover {
+    color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.1);
+    border-left: 3px solid var(--primary);
+}
+
+.sidebar-icon {
+    width: 24px;
+    text-align: center;
+    margin-right: 1rem;
+    font-size: 1.1em;
+    color: inherit;
+}
+
+.sidebar-text {
+    font-weight: 500;
+    flex-grow: 1;
+    color: inherit;
+}
+
+.sidebar-hover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.sidebar-link:hover .sidebar-hover {
+    opacity: 1;
+}
+
+/* User Section */
+.user-section {
+    background: rgba(var(--primary-rgb), 0.05);
+    margin: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .user-section {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.avatar-initial {
+    width: 32px;
+    height: 32px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.online-indicator {
+    position: relative;
+}
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    background: #28a745;
+    border-radius: 50%;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    border: 2px solid var(--sidebar-bg);
+}
+
+/* Login/Logout Links */
+.login-link {
+    color: var(--success) !important;
+}
+
+.login-link:hover {
+    color: var(--success) !important;
+    background: rgba(var(--success-rgb), 0.1);
+}
+
+.logout-link {
+    color: var(--danger) !important;
+}
+
+.logout-link:hover {
+    color: var(--danger) !important;
+    background: rgba(var(--danger-rgb), 0.1);
+}
+
+/* Text Colors for Light/Dark Themes */
+[data-theme="light"] .sidebar-link,
+[data-theme="light"] .user-section .text-white,
+[data-theme="light"] .user-section .text-muted {
+    color: var(--text-color) !important;
+}
+
+[data-theme="light"] .user-section .text-muted {
+    opacity: 0.7;
+}
+
+[data-theme="dark"] .sidebar-link,
+[data-theme="dark"] .user-section .text-white,
+[data-theme="dark"] .user-section .text-muted {
+    color: white !important;
+}
+
+[data-theme="dark"] .user-section .text-muted {
+    opacity: 0.8;
+}
+
+:root {
+    /* ... outras variáveis ... */
+    
+    /* RGB values for opacity */
+    --primary-rgb: 34, 149, 209;
+    --success-rgb: 67, 170, 139;
+    --danger-rgb: 220, 53, 69;
+    
+    /* ... resto das variáveis ... */
+}
+
+[data-theme="dark"] {
+    /* ... outras variáveis dark ... */
+    
+    /* RGB values for dark theme */
+    --primary-rgb: 58, 134, 255;
+    --success-rgb: 72, 187, 120;
+    --danger-rgb: 245, 101, 101;
+    
+    /* ... resto das variáveis dark ... */
+}
 </style>
 
 </head>
@@ -1125,6 +1313,7 @@
   <!-- Navbar superior -->
   <nav class="navbar navbar-light shadow-sm sticky-top">
     <div id="nav" class="container d-flex align-items-center">
+
       <!-- Logo -->
       <a href="{{url_for('home')}}" class="navbar-brand d-flex align-items-center">
         <img src="/static/img/logo.png" alt="Logo" class="logo"> Vale Místico
@@ -1144,40 +1333,87 @@
   </nav>
 
   <!-- Sidebar das rotas -->
-    <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title">Vale Místico</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body p-0">
-      <nav class="nav flex-column">
-        <a href="/" class="nav-link"><i class="fa-solid fa-home me-2"></i> Ínicio</a> 
-        <a href="/wiki" class="nav-link"><i class="fa-solid fa-book-open me-2"></i> Wiki</a>
-        <a href="/forum" class="nav-link"><i class="fa-solid fa-comments me-2"></i> Fórum</a>
-        <div class="sidebar-section">
-        {% if 'user_id' not in session %}
-        <a href="{{url_for('login')}}" class="nav-link sidebar-link">
-          <i class="fa-solid fa-right-to-bracket me-2"></i>Login / Cadastro
-        </a>
-        {% else %}
-        <div class="user-section p-3 border-top border-bottom">
-          <div class="d-flex align-items-center">
-            <i class="fa-solid fa-circle-user me-2 text-primary"></i>
-            <span class="small">Olá, {{ session.get('email', 'Usuário') }}</span>
-          </div>
+  <div class="offcanvas offcanvas-start sidebar" id="sidebarOffcanvas">
+    <div class="offcanvas-header border-bottom">
+        <div class="d-flex align-items-center w-100">
+            <div class="flex-grow-1">
+                <h5 class="offcanvas-title mb-0 fw-bold">Vale Místico</h5>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
-        <a href="{{url_for('logout')}}" class="nav-link sidebar-link text-danger">
-          <i class="fa-solid fa-right-from-bracket me-2"></i>Sair
-        </a>
-        {% endif %}
-      </div>
-    </nav>
-  </div>
-</div>  
-      </nav>
     </div>
-  </div>
     
+    <div class="offcanvas-body p-0">
+        <nav class="nav flex-column sidebar-nav">
+            <!-- Área do Usuário -->
+            <div class="sidebar-section px-3 py-2 mt-3">
+                <small class="text-uppercase fw-bold small px-2 sidebar-section-header">Conta</small>
+            </div>
+
+            {% if 'usuario_id' not in session %}
+            <a href="{{url_for('login')}}" class="nav-link sidebar-link login-link">
+                <div class="sidebar-icon">
+                    <i class="fas fa-right-to-bracket"></i>
+                </div>
+                <span class="sidebar-text">Login / Cadastro</span>
+                <div class="sidebar-hover"></div>
+            </a>
+            {% else %}
+            <div class="user-section p-3">
+                <div class="d-flex align-items-center">
+                    <div class="user-avatar me-3">
+                        <span class="avatar-initial">{{ session.get('usuario_nome', 'Aventureiro')[0].upper() }}</span>
+                    </div>
+                    <div class="flex-grow-1">
+                        <span class="d-block fw-semibold">Bem-vindo</span>
+                        <span class="small">{{ session.get('usuario_nome', 'Aventureiro') }}</span>
+                    </div>
+                    <div class="online-indicator">
+                        <div class="online-dot"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{url_for('logout')}}" class="nav-link sidebar-link logout-link">
+                <div class="sidebar-icon">
+                    <i class="fas fa-right-from-bracket"></i>
+                </div>
+                <span class="sidebar-text">Sair</span>
+                <div class="sidebar-hover"></div>
+            </a>
+            {% endif %}
+
+            <!-- Menu Principal -->
+            <div class="sidebar-section px-3 py-2">
+                <small class="text-uppercase fw-bold small px-2 sidebar-section-header">Navegação</small>
+            </div>
+            
+            <a href="/" class="nav-link sidebar-link">
+                <div class="sidebar-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span class="sidebar-text">Início</span>
+                <div class="sidebar-hover"></div>
+            </a>
+            
+            <a href="/wiki" class="nav-link sidebar-link">
+                <div class="sidebar-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <span class="sidebar-text">Wiki</span>
+                <div class="sidebar-hover"></div>
+            </a>
+            
+            <a href="/forum" class="nav-link sidebar-link">
+                <div class="sidebar-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <span class="sidebar-text">Fórum</span>
+                <div class="sidebar-hover"></div>
+            </a>
+        </nav>
+    </div>
+</div>
+</div>
 
   <!-- Header -->
   <header style="position: relative; height: 250px; overflow: hidden;">

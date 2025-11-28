@@ -8,9 +8,15 @@
                 <i class="fas fa-dice-d20 me-2"></i>Dados do Fórum
             </button>
         </div>
+        {% if 'usuario_id' in session %}
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novoTopicoModal">
             <i class="fas fa-feather-alt me-2"></i> Novo Tópico
         </button>
+        {% else %}
+        <button class="btn btn-secondary" onclick="mostrarNotificacao('Você precisa estar logado para criar um tópico!', 'warning')">
+            <i class="fas fa-feather-alt me-2"></i> Novo Tópico
+        </button>
+        {% endif %}
     </div>
 
     <!-- Estatísticas da Comunidade -->
@@ -55,18 +61,17 @@
                         <span class="me-2 text-muted"><i class="fas fa-filter"></i> Filtrar por:</span>
                         <select class="form-select form-select-sm" id="filtroCategoria" style="width: auto;">
                             <option value="todos" selected>Todos os temas</option>
-                            <option value="duvida"><span class="category-icon"><i class="fas fa-question-circle"></i></span> Dúvida</option>
-                            <option value="procurando"><span class="category-icon"><i class="fas fa-search"></i></span> Procurando Jogo</option>
-                            <option value="sugestao"><span class="category-icon"><i class="fas fa-lightbulb"></i></span> Sugestões</option>
-                            <option value="discussao"><span class="category-icon"><i class="fas fa-comments"></i></span> Discussão</option>
-
+                            <option value="duvida">Dúvida</option>
+                            <option value="procurando">Procurando Jogo</option>
+                            <option value="sugestao">Sugestões</option>
+                            <option value="discussao">Discussão</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        <input type="text" class="form-control" id="campoBusca" >
+                        <input type="text" class="form-control" id="campoBusca">
                         <button class="btn btn-primary" type="button" id="btnBuscar">
                             Buscar
                         </button>
@@ -96,54 +101,52 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal para Novo Tópico -->
-<div class="modal fade" id="novoTopicoModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fas fa-feather-alt me-2"></i> Criar Novo Tópico</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formNovoTopico">
-                    <div class="mb-3">
-                        <label for="autor" class="form-label">Seu Nome</label>
-                        <input type="text" class="form-control" id="autor" required placeholder="Como devemos te chamar?">
+    <!-- Modal para Novo Tópico -->
+    {% if 'usuario_id' in session %}
+    <div class="modal fade" id="novoTopicoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-feather-alt me-2"></i> Criar Novo Tópico</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info d-flex align-items-center mb-3">
+                        <i class="fas fa-user me-2"></i>
+                        <span>Postando como: <strong>{{ session['usuario_nome'] }}</strong></span>
                     </div>
-                    <div class="mb-3">
-                        <label for="topico" class="form-label">Título do Tópico</label>
-                        <input type="text" class="form-control" id="topico" required placeholder="Dê um título claro ao seu tópico">
-                    </div>
-                    <div class="mb-3">
-                        <label for="categoria" class="form-label">Categoria</label>
-                        <select class="form-select" id="categoria" required>
-                            <option value="" selected disabled>Selecione uma categoria</option>
-                            <option value="duvida"><i class="fas fa-question-circle me-2"></i> Dúvida</option>
-                            <option value="procurando"><i class="fas fa-search me-2"></i> Procurando Jogo</option>
-                            <option value="sugestao"><i class="fas fa-lightbulb me-2"></i> Sugestões</option>
-                            <option value="discussao"><i class="fas fa-comments me-2"></i> Discussão</option>
-                            <option value="depressao"><i class="fas fa-brain me-2"></i> Depressão</option>
-                            <option value="ansiedade"><i class="fas fa-wind me-2"></i> Ansiedade</option>
-                            <option value="autoajuda"><i class="fas fa-hands-helping me-2"></i> Autoajuda</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="conteudo" class="form-label">Conteúdo</label>
-                        <textarea class="form-control" id="conteudo" rows="5" required placeholder="Descreva sua dúvida, sugestão ou experiência..."></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnCriarTopico">
-                    <i class="fas fa-plus-circle me-2"></i>Criar Tópico
-                </button>
+                    <form id="formNovoTopico">
+                        <div class="mb-3">
+                            <label for="topico" class="form-label">Título do Tópico</label>
+                            <input type="text" class="form-control" id="topico" required placeholder="Dê um título claro ao seu tópico">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoria</label>
+                            <select class="form-select" id="categoria" required>
+                                <option value="" selected disabled>Selecione uma categoria</option>
+                                <option value="duvida">Dúvida</option>
+                                <option value="procurando">Procurando Jogo</option>
+                                <option value="sugestao">Sugestões</option>
+                                <option value="discussao">Discussão</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conteudo" class="form-label">Conteúdo</label>
+                            <textarea class="form-control" id="conteudo" rows="5" required placeholder="Descreva sua dúvida, sugestão ou experiência..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-primary" id="btnCriarTopico">
+                        <i class="fas fa-plus-circle me-2"></i>Criar Tópico
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    {% endif %}
 
 <script>
     // Elementos da DOM
@@ -154,6 +157,10 @@
     const btnBuscar = document.getElementById('btnBuscar');
     const btnDadosForum = document.getElementById('btnDadosForum');
     
+    // Verificar se usuário está logado
+    const usuarioLogado = {{ 'true' if 'usuario_id' in session else 'false' }};
+    const nomeUsuario = "{{ session.get('usuario_nome', '') }}";
+
     // Função para carregar tópicos da API
     async function carregarTopicos(filtro = 'todos', termoBusca = '') {
         try {
@@ -205,11 +212,8 @@
             let html = '';
             
             topicos.forEach((topico, index) => {
-                // Determinar badge com base no número de posts do autor
-               
-                
                 html += `
-                <div class="forum-item p-3">
+                <div class="forum-item p-3 }">
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="d-flex align-items-center">
@@ -221,7 +225,7 @@
                                         <a href="{{ url_for('respostas') }}?id=${topico.id}" class="text-decoration-none text-dark">${topico.topico}</a>
                                     </h5>
                                     <small class="text-muted">
-                                        
+                                        <span class="badge bg-secondary">${getNomeCategoria(topico.categoria)}</span>
                                         • Iniciado por ${topico.autor}
                                     </small>
                                 </div>
@@ -229,11 +233,8 @@
                         </div>
                         <div class="col-md-2 text-center">
                             <div class="author-avatar">
-                                <div class="avatar-img">${topico.autor ? topico.autor.charAt(0).toUpperCase() : 'U'}</div>
-                                <div>
-                                    <span class="d-block small">${topico.autor}</span>
-                                 
-                                </div>
+                                <div class="avatar-img small">${topico.autor ? topico.autor.charAt(0).toUpperCase() : 'U'}</div>
+                                <span class="d-block small fw-bold mt-1">${topico.autor}</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-center">
@@ -254,9 +255,15 @@
                 <i class="fas fa-comments fa-3x text-muted mb-3"></i>
                 <h4 class="text-muted">Nenhum tópico encontrado</h4>
                 <p class="text-muted">Seja o primeiro a iniciar uma discussão!</p>
+                ${usuarioLogado ? `
                 <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#novoTopicoModal">
                     <i class="fas fa-plus-circle me-2"></i> Criar Primeiro Tópico
                 </button>
+                ` : `
+                <button class="btn btn-primary mt-2" onclick="mostrarNotificacao('Faça login para criar um tópico!', 'warning')">
+                    <i class="fas fa-plus-circle me-2"></i> Criar Primeiro Tópico
+                </button>
+                `}
             </div>
             `;
         }
@@ -268,10 +275,7 @@
             'duvida': 'Dúvida',
             'procurando': 'Procurando Jogo',
             'sugestao': 'Sugestões',
-            'discussao': 'Discussão',
-            'depressao': 'Depressão',
-            'ansiedade': 'Ansiedade',
-            'autoajuda': 'Autoajuda'
+            'discussao': 'Discussão'
         };
         
         return categorias[categoria] || categoria;
@@ -283,16 +287,11 @@
             'duvida': 'fa-question-circle',
             'procurando': 'fa-search',
             'sugestao': 'fa-lightbulb',
-            'discussao': 'fa-comments',
-            'depressao': 'fa-brain',
-            'ansiedade': 'fa-wind',
-            'autoajuda': 'fa-hands-helping'
+            'discussao': 'fa-comments'
         };
         
         return icones[categoria] || 'fa-file-alt';
     }
-    
-
     
     // Função para formatar data
     function formatarData(dataString) {
@@ -324,50 +323,51 @@
     }
     
     // Evento para criar novo tópico
-    btnCriarTopico.addEventListener('click', async function() {
-        const autor = document.getElementById('autor').value;
-        const topico = document.getElementById('topico').value;
-        const categoria = document.getElementById('categoria').value;
-        const conteudo = document.getElementById('conteudo').value;
-        
-        if (autor && topico && categoria && conteudo) {
-            try {
-                const response = await fetch('/api/topicos', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        autor: autor,
-                        topico: topico,
-                        categoria: categoria,
-                        conteudo: conteudo
-                    })
-                });
-                
-                if (response.ok) {
-                    // Fechar o modal e resetar o formulário
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('novoTopicoModal'));
-                    modal.hide();
-                    document.getElementById('formNovoTopico').reset();
+    if (btnCriarTopico) {
+        btnCriarTopico.addEventListener('click', async function() {
+            const topico = document.getElementById('topico').value;
+            const categoria = document.getElementById('categoria').value;
+            const conteudo = document.getElementById('conteudo').value;
+            
+            if (topico && categoria && conteudo) {
+                try {
+                    const response = await fetch('/api/topicos', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            autor: nomeUsuario, // Usa o nome da sessão automaticamente
+                            topico: topico,
+                            categoria: categoria,
+                            conteudo: conteudo
+                        })
+                    });
                     
-                    // Recarregar tópicos e estatísticas
-                    await carregarTopicos(filtroCategoria.value, campoBusca.value);
-                    await carregarEstatisticas();
-                    
-                    // Feedback visual
-                    mostrarNotificacao('Tópico criado com sucesso!', 'success');
-                } else {
-                    mostrarNotificacao('Erro ao criar tópico. Tente novamente.', 'error');
+                    if (response.ok) {
+                        // Fechar o modal e resetar o formulário
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('novoTopicoModal'));
+                        modal.hide();
+                        document.getElementById('formNovoTopico').reset();
+                        
+                        // Recarregar tópicos e estatísticas
+                        await carregarTopicos(filtroCategoria.value, campoBusca.value);
+                        await carregarEstatisticas();
+                        
+                        // Feedback visual
+                        mostrarNotificacao('Tópico criado com sucesso!', 'success');
+                    } else {
+                        mostrarNotificacao('Erro ao criar tópico. Tente novamente.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Erro ao criar tópico:', error);
+                    mostrarNotificacao('Erro ao criar tópico. Verifique sua conexão.', 'error');
                 }
-            } catch (error) {
-                console.error('Erro ao criar tópico:', error);
-                mostrarNotificacao('Erro ao criar tópico. Verifique sua conexão.', 'error');
+            } else {
+                mostrarNotificacao('Por favor, preencha todos os campos!', 'warning');
             }
-        } else {
-            mostrarNotificacao('Por favor, preencha todos os campos!', 'warning');
-        }
-    });
+        });
+    }
     
     // Função para mostrar notificação
     function mostrarNotificacao(mensagem, tipo) {
@@ -426,4 +426,6 @@
         }, 100);
     });
 </script>
+
+
 {% endblock content %}

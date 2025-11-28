@@ -25,7 +25,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:@localhost/{DB_NAME}'
 app.config['SECRET_KEY'] = 'segredo'
 
 #Definir tempo limite de sessão
-app.config['PERMANENT-SESSION-LIFETIME'] = 800
+app.config['PERMANENT-SESSION-LIFETIME'] = 3600
 
 # Iniciando o servidor no localhost, porta 5000, modo de depuração ativado
 if __name__ == '__main__':

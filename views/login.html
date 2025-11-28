@@ -16,9 +16,7 @@
             <div class="login-container rpg-card">
                 <!-- Header do Login -->
                 <div class="login-header text-center p-4">
-                   
-                    <h1 class="display-6 fw-bold text-white mb-2">Bem-vindo </h1>
-             
+                    <h1 class="display-6 fw-bold text-white mb-2">Bem-vindo</h1>
                 </div>
 
                 <!-- Corpo do Login -->
@@ -40,27 +38,21 @@
                                 <label class="form-label fw-bold" for="login-username">
                                     <i class="fas fa-user me-2 text-primary"></i> Nome de usuário
                                 </label>
-
                                 <input name="nome" type="text" class="form-control form-control-lg" id="login-username" 
                                        placeholder="Digite seu nome de usuário" required>
-                           
-                                    </div>
+                            </div>
                             
                             <div class="form-group mb-4">
                                 <label class="form-label fw-bold" for="login-password">
                                     <i class="fas fa-key me-2 text-primary"></i> Senha 
                                 </label>
-
                                 <input type="password" name="senha" class="form-control form-control-lg" id="login-password" 
                                        placeholder="Digite sua senha" required>
-                          
-                                    </div>
+                            </div>
                             
                             <button type="submit" class="btn btn-primary btn-lg w-100 py-3 mb-3">
                                 <i class="fas fa-play me-2"></i>Entrar
                             </button>
-
-                            
                         </form>
                     </div>
                     
@@ -94,21 +86,15 @@
                                         <label class="form-label fw-bold" for="register-confirm">
                                             <i class="fas fa-lock me-2 text-primary"></i> Confirmar Senha
                                         </label>
-                                        <input type="password" class="form-control form-control-lg" id="register-confirm" 
+                                        <input type="password" name="confirmar_senha" class="form-control form-control-lg" id="register-confirm" 
                                                placeholder="Digite novamente" required>
                                     </div>
                                 </div>
                             </div>
-
-                
                             
                             <button type="submit" class="btn btn-primary btn-lg w-100 py-3 mb-3">
-                                <i class="fas fa-plus-circle me-2"></i>Criar Personagem
+                                <i class="fas fa-plus-circle me-2"></i>Criar Conta
                             </button>
-
-                            <div class="text-center">
-                               
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -301,7 +287,6 @@
         // Elementos da DOM
         const tabs = document.querySelectorAll('.form-tab');
         const panels = document.querySelectorAll('.form-panel');
-        const switchLinks = document.querySelectorAll('.switch-tab');
 
         // Alternar entre login e cadastro
         function switchTab(tabName) {
@@ -330,90 +315,42 @@
             });
         });
 
-        // Event listeners para links de switch
-        switchLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                
-                const targetTab = this.getAttribute('data-tab');
-                switchTab(targetTab);
-            });
-        });
-
         // Validação do formulário de login
-      document.getElementById('login-form').addEventListener('submit', function(e) {
-    // Apenas validações básicas, SEM prevenir o envio
-    const username = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value;
-    
-    if (!username || !password) {
-        alert('Por favor, preencha todos os campos!');
-        e.preventDefault(); // Só previne se houver erro
-        return;
-    }
-    
-    // O formulário será enviado normalmente para o Flask
-});
-
-       document.getElementById('register-form').addEventListener('submit', function(e) {
-    const username = document.getElementById('register-username').value.trim();
-    const password = document.getElementById('register-password').value;
-    const confirmPassword = document.getElementById('register-confirm').value;
-    
-    if (!username || !password || !confirmPassword) {
-        alert('Por favor, preencha todos os campos!');
-        e.preventDefault();
-        return;
-    }
-    
-    if (password !== confirmPassword) {
-        alert('As senhas não coincidem!');
-        e.preventDefault();
-        return;
-    }
-    
-    // Remove a simulação de registro e permite envio normal
-});
-            // Simular loading
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Criando...';
-            submitBtn.disabled = true;
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
             
-            // Simular requisição de registro
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                showNotification('Personagem criado com sucesso! Bem-vindo ao Vale Místico!', 'success');
-                
-                // Switch para login após 2 segundos
-                setTimeout(() => {
-                    switchTab('login');
-                    document.getElementById('login-username').value = username;
-                }, 2000);
-            }, 1500);
+            if (!username || !password) {
+                alert('Por favor, preencha todos os campos!');
+                e.preventDefault();
+                return;
+            }
         });
 
-        // Função para mostrar notificação
-        function showNotification(message, type) {
-            // Criar elemento de notificação
-            const notification = document.createElement('div');
-            notification.className = `alert alert-${type === 'success' ? 'success' : type === 'warning' ? 'warning' : 'danger'} alert-dismissible fade show position-fixed`;
-            notification.style.cssText = 'top: 20px; right: 20px; z-index: 1060; min-width: 300px;';
-            notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'exclamation-circle'} me-2"></i>
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
+        // Validação do formulário de registro
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            const username = document.getElementById('register-username').value.trim();
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm').value;
             
-            document.body.appendChild(notification);
+            if (!username || !password || !confirmPassword) {
+                alert('Por favor, preencha todos os campos!');
+                e.preventDefault();
+                return;
+            }
             
-            // Remover após 5 segundos
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 5000);
-        }
+            if (password !== confirmPassword) {
+                alert('As senhas não coincidem!');
+                e.preventDefault();
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('A senha deve ter pelo menos 6 caracteres!');
+                e.preventDefault();
+                return;
+            }
+        });
     });
 </script>
 {% endblock content %}
